@@ -12,6 +12,11 @@
 		770CAC6E26B6DC610070BB62 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6D26B6DC610070BB62 /* ViewController.swift */; };
 		770CAC7326B6DC620070BB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770CAC7226B6DC620070BB62 /* Assets.xcassets */; };
 		770CAC7626B6DC620070BB62 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */; };
+		770CAC7E26B6E9E60070BB62 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC7D26B6E9E60070BB62 /* FeedViewController.swift */; };
+		770CAC8026B6E9F60070BB62 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC7F26B6E9F60070BB62 /* ProfileViewController.swift */; };
+		770CACA626B866100070BB62 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CACA526B866100070BB62 /* PostViewController.swift */; };
+		770CACA826B882240070BB62 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CACA726B882240070BB62 /* Post.swift */; };
+		770CACAA26B9A87A0070BB62 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CACA926B9A87A0070BB62 /* InfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +27,11 @@
 		770CAC7226B6DC620070BB62 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		770CAC7526B6DC620070BB62 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		770CAC7726B6DC620070BB62 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		770CAC7D26B6E9E60070BB62 /* FeedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		770CAC7F26B6E9F60070BB62 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		770CACA526B866100070BB62 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
+		770CACA726B882240070BB62 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		770CACA926B9A87A0070BB62 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,9 +66,14 @@
 			children = (
 				770CAC6926B6DC610070BB62 /* AppDelegate.swift */,
 				770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */,
+				770CAC7D26B6E9E60070BB62 /* FeedViewController.swift */,
 				770CAC6D26B6DC610070BB62 /* ViewController.swift */,
 				770CAC7226B6DC620070BB62 /* Assets.xcassets */,
+				770CACA726B882240070BB62 /* Post.swift */,
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
+				770CACA526B866100070BB62 /* PostViewController.swift */,
+				770CACA926B9A87A0070BB62 /* InfoViewController.swift */,
+				770CAC7F26B6E9F60070BB62 /* ProfileViewController.swift */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
 			);
 			path = Navigation;
@@ -133,8 +148,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				770CACA626B866100070BB62 /* PostViewController.swift in Sources */,
 				770CAC6E26B6DC610070BB62 /* ViewController.swift in Sources */,
 				770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */,
+				770CAC8026B6E9F60070BB62 /* ProfileViewController.swift in Sources */,
+				770CAC7E26B6E9E60070BB62 /* FeedViewController.swift in Sources */,
+				770CACA826B882240070BB62 /* Post.swift in Sources */,
+				770CACAA26B9A87A0070BB62 /* InfoViewController.swift in Sources */,
 				770CAC6C26B6DC610070BB62 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
