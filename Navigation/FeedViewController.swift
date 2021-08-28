@@ -16,7 +16,8 @@ class FeedViewController: UIViewController {
         self.title = "Лента"
         self.view.backgroundColor = .systemBlue
                 
-        let button = UIButton(frame: CGRect(x: 100, y: 200, width: 200, height: 50))
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
+        button.center = self.view.center
         button.setTitle(post1.title, for: .normal)
         button.addTarget(self, action: #selector(tap), for: .touchUpInside)
         view.addSubview(button)

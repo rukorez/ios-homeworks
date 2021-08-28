@@ -12,12 +12,11 @@ class InfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let buttonDelete = UIButton(frame: CGRect(x: 100, y: 400, width: 200, height: 50))
+        let buttonDelete = UIButton(frame: CGRect(x: 100, y: 350, width: 200, height: 50))
         buttonDelete.setTitle("Удалить все", for: .normal)
         buttonDelete.addTarget(self, action: #selector(tap), for: .touchUpInside)
         view.addSubview(buttonDelete)
 
-        // Do any additional setup after loading the view.
     }
     
     @objc func tap() {
@@ -28,14 +27,6 @@ class InfoViewController: UIViewController {
         alertVC.addAction(actionNo)
         self.present(alertVC, animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
