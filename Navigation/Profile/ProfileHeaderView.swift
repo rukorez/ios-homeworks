@@ -69,7 +69,7 @@ class ProfileHeaderView: UIView {
     
     func statusLabelLayout() {
         [
-            self.statusLabel.topAnchor.constraint(equalTo: self.fullNameLabel.bottomAnchor, constant: 15),
+            self.statusLabel.topAnchor.constraint(equalTo: self.fullNameLabel.bottomAnchor, constant: 10),
             self.statusLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50),
             self.statusLabel.widthAnchor.constraint(equalToConstant: 200),
             self.statusLabel.heightAnchor.constraint(equalToConstant: 25)
@@ -91,7 +91,7 @@ class ProfileHeaderView: UIView {
     
     func statusTextFieldLayout() {
         [
-            self.statusTextField.topAnchor.constraint(equalTo: self.statusLabel.bottomAnchor),
+            self.statusTextField.topAnchor.constraint(equalTo: self.statusLabel.bottomAnchor, constant: 5),
             self.statusTextField.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 50),
             self.statusTextField.widthAnchor.constraint(equalToConstant: 200),
             self.statusTextField.heightAnchor.constraint(equalToConstant: 40)
@@ -145,14 +145,6 @@ class ProfileHeaderView: UIView {
         self.addSubview(statusLabel)
         self.addSubview(statusTextField)
         self.addSubview(setStatusButton)
-    }
-    
-    override func layoutSubviews() {
-        self.avatarLayout()
-        self.fullNameLabelLayout()
-        self.statusLabelLayout()
-        self.statusTextFieldLayout()
-        self.setStatusButtonLayout()
     }
     
     @objc func buttonPressed() {
