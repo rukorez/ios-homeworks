@@ -10,17 +10,41 @@ import UIKit
 class FeedViewController: UIViewController {
 
     var post1 = Post(title: "Пост 1")
-
-        override func viewDidLoad() {
+    
+    var button1:UIButton = {
+        let button = UIButton()
+        button.setTitle("Кнопка 1", for: .normal)
+        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        return button
+    }()
+    
+    var button2: UIButton = {
+        let button = UIButton()
+        button.setTitle("Кнопка 2", for: .normal)
+        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        return button
+    }()
+    
+    override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Лента"
         self.view.backgroundColor = .systemBlue
-                
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 200, height: 50))
-        button.center = self.view.center
-        button.setTitle(post1.title, for: .normal)
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
-        view.addSubview(button)
+        
+        let stackView = UIStackView(arrangedSubviews: [
+            self.button1,
+            self.button2
+        ])
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.spacing = 10
+        self.view.addSubview(stackView)
+        [
+            stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+        ].forEach {
+            $0.isActive = true
+        }
+        
     }
     
     @objc func tap() {
