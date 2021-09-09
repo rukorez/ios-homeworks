@@ -24,29 +24,30 @@ class ProfileViewController: UIViewController {
 
         self.view.addSubview(self.profileView)
         self.view.addSubview(self.button)
-        
-        self.profileView.avatarLayout()
-        self.profileView.fullNameLabelLayout()
-        self.profileView.statusLabelLayout()
-        self.profileView.statusTextFieldLayout()
-        self.profileView.setStatusButtonLayout()
-        
+        self.profileView.setConstraintsPHV()
         self.profileView.translatesAutoresizingMaskIntoConstraints = false
-        [
-            self.profileView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            self.profileView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            self.profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            self.profileView.heightAnchor.constraint(equalToConstant: 220),
-            self.button.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            self.button.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
-        ]
-        .forEach {
-            $0.isActive = true
-        }
+        self.setConstraintsPVC()
+        self.hideKeyboard()
         
         super.viewDidLoad()
-
     }
     
+}
+
+// MARK: Констрейнты
+
+extension ProfileViewController {
+    func setConstraintsPVC() {
+        let constraintsPVC = [
+        self.profileView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+        self.profileView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+        self.profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+        self.profileView.heightAnchor.constraint(equalToConstant: 220),
+        
+        self.button.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+        self.button.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+        self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ]
+        NSLayoutConstraint.activate(constraintsPVC)
+    }
 }

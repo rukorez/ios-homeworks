@@ -38,12 +38,11 @@ class FeedViewController: UIViewController {
         stackView.axis = .vertical
         stackView.spacing = 10
         self.view.addSubview(stackView)
-        [
+        let constraintsFVC = [
             stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
-        ].forEach {
-            $0.isActive = true
-        }
+        ]
+        NSLayoutConstraint.activate(constraintsFVC)
         
     }
     

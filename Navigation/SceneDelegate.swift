@@ -25,9 +25,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let feedNC = UINavigationController(rootViewController: feedVC)
         feedNC.tabBarItem = UITabBarItem(title: "Лента", image: imageFeed, tag: 0)
         
-        let profileVC = ProfileViewController()
-        let profileNC = UINavigationController(rootViewController: profileVC)
+        let logInVC = LogInViewController()
+        let profileNC = UINavigationController(rootViewController: logInVC)
         profileNC.tabBarItem = UITabBarItem(title: "Профиль", image: imageProfile, tag: 1)
+        profileNC.navigationBar.isHidden = true
         
         tabBarController.viewControllers = [feedNC, profileNC]
         
