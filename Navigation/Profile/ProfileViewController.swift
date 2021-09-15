@@ -8,28 +8,60 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
-
-    var profileView = ProfileHeaderView()
     
-    var button: UIButton = {
-        let button = UIButton()
-        button.setTitle("Press Me!", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
+    var posts: [Posts] = [post1, post2, post3, post4]
+    
+    var tableView = UITableView(frame: .zero, style: .grouped)
+    
+    var cellID = "cellID"
     
     override func viewDidLoad() {
-        self.title = "Профиль"
-        self.view.backgroundColor = .lightGray
-
-        self.view.addSubview(self.profileView)
-        self.view.addSubview(self.button)
-        self.profileView.setConstraintsPHV()
-        self.profileView.translatesAutoresizingMaskIntoConstraints = false
+        self.setupTableView()
         self.setConstraintsPVC()
-        self.hideKeyboard()
         
         super.viewDidLoad()
+    }
+    
+    func setupTableView() {
+        self.view.backgroundColor = .lightGray
+        self.view.addSubview(tableView)
+        self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.dataSource = self
+        self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellID)
+        self.tableView.delegate = self
+    }
+    
+}
+
+extension ProfileViewController: UITableViewDelegate{
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = ProfileTableHeaderView()
+        return headerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+extension ProfileViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return posts.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PostTableViewCell
+        cell.cell = posts[indexPath.row]
+        return cell
     }
     
 }
@@ -39,14 +71,11 @@ class ProfileViewController: UIViewController {
 extension ProfileViewController {
     func setConstraintsPVC() {
         let constraintsPVC = [
-        self.profileView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-        self.profileView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-        self.profileView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-        self.profileView.heightAnchor.constraint(equalToConstant: 220),
-        
-        self.button.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-        self.button.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-        self.button.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            self.tableView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            self.tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+
         ]
         NSLayoutConstraint.activate(constraintsPVC)
     }

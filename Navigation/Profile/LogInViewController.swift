@@ -62,12 +62,6 @@ class LogInViewController: UIViewController {
         self.setConstraints()
         
     }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
 
 }
 
@@ -118,7 +112,6 @@ extension LogInViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -146,7 +139,6 @@ extension LogInViewController {
     
     @objc func loginTapped() {
         let profileVC = ProfileViewController()
-        profileVC.navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(profileVC, animated: true)
     }
 }
