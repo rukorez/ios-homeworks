@@ -26,9 +26,9 @@ class ProfileViewController: UIViewController {
         self.view.backgroundColor = .lightGray
         self.view.addSubview(tableView)
         self.tableView.translatesAutoresizingMaskIntoConstraints = false
+        self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellID)
-        self.tableView.delegate = self
     }
     
 }
@@ -49,10 +49,6 @@ extension ProfileViewController: UITableViewDelegate{
 }
 
 extension ProfileViewController: UITableViewDataSource {
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count

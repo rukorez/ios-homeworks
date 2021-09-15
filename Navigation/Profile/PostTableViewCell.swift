@@ -82,20 +82,19 @@ class PostTableViewCell: UITableViewCell {
 }
 
 extension PostTableViewCell {
-    func setViews() {
+    private func setViews() {
         contentView.addSubview(author)
         contentView.addSubview(image)
         contentView.addSubview(text)
         contentView.addSubview(likes)
         contentView.addSubview(views)
-        
-        likes.setContentHuggingPriority(.required, for: .vertical)
-        views.setContentHuggingPriority(.required, for: .vertical)
     }
 }
 
+// MARK: Констрейнты
+
 extension PostTableViewCell {
-    func setConstraint() {
+    private func setConstraint() {
         let constraintsPTVC = [
             self.author.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             self.author.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -105,19 +104,19 @@ extension PostTableViewCell {
             self.image.heightAnchor.constraint(equalTo: image.widthAnchor),
             self.image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             self.image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            self.image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -16),
             
             self.text.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
             self.text.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            self.text.widthAnchor.constraint(equalTo: contentView.widthAnchor),
             self.text.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
             self.likes.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
             self.likes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            self.likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16),
+            self.likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
             self.views.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
             self.views.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            self.views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 16)
+            self.views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ]
         NSLayoutConstraint.activate(constraintsPTVC)
     }
