@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 struct Posts {
+    
     var author: String
     
     var description: String

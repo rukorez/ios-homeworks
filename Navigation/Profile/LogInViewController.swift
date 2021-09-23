@@ -12,14 +12,14 @@ class LogInViewController: UIViewController {
     var scrollView = UIScrollView()
     var contentView = UIView()
     
-    var logo: UIImageView = {
+    lazy var logo: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "logo")
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
-    var logInView: LogInView = {
+    lazy var logInView: LogInView = {
         let loginview = LogInView()
         loginview.translatesAutoresizingMaskIntoConstraints = false
         loginview.layer.borderWidth = 0.5
@@ -29,7 +29,7 @@ class LogInViewController: UIViewController {
         return loginview
     }()
     
-    var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         var button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10

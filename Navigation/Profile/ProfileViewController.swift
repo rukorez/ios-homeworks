@@ -14,6 +14,7 @@ class ProfileViewController: UIViewController {
     var tableView = UITableView(frame: .zero, style: .grouped)
     
     var cellID = "cellID"
+    var cellID2 = "cellID2"
     
     override func viewDidLoad() {
         self.setupTableView()
@@ -21,7 +22,7 @@ class ProfileViewController: UIViewController {
         
         super.viewDidLoad()
     }
-    
+        
     func setupTableView() {
         self.view.backgroundColor = .lightGray
         self.view.addSubview(tableView)
@@ -29,35 +30,49 @@ class ProfileViewController: UIViewController {
         self.tableView.delegate = self
         self.tableView.dataSource = self
         self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellID)
+        self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: cellID2)
     }
-    
+        
 }
 
 extension ProfileViewController: UITableViewDelegate{
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 0  {
+            let photosVC = PhotosViewController()
+            self.navigationController?.pushViewController(photosVC, animated: true)
+        }
+    }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = ProfileTableHeaderView()
-        return headerView
+        if section == 0  { return headerView }
+        else { return nil }
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 220
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
 }
 
 extension ProfileViewController: UITableViewDataSource {
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return posts.count
+        if section == 0  { return 1 }
+        else { return posts.count }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PostTableViewCell
-        cell.cell = posts[indexPath.row]
-        return cell
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! PhotosTableViewCell
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PostTableViewCell
+            cell.cell = posts[indexPath.row]
+            return cell
+        }
     }
     
 }
