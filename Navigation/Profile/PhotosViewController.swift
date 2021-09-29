@@ -9,7 +9,14 @@ import UIKit
 
 class PhotosViewController: UIViewController {
     
-    var photos = [photo1, photo2, photo3, photo4, photo5, photo6, photo7, photo8, photo9, photo10,photo11,photo12,photo13,photo14,photo15,photo16,photo17,photo18,photo19,photo20]
+    var photos: [Photo] = {
+        var array: [Photo] = []
+        for number in 1...20 {
+            guard let image = UIImage(named: String(number)) else { continue }
+            array.append(Photo(photo: image))
+        }
+        return array
+    }()
     
     var photoID = "photoID"
 
@@ -36,10 +43,14 @@ class PhotosViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+        
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        
+        super.viewWillDisappear(animated)
     }
     
 
@@ -82,10 +93,10 @@ extension PhotosViewController: UICollectionViewDataSource {
 extension PhotosViewController {
     private func setConstraints() {
         let constraintsPVC = [
-            collection.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collection.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collection.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            collection.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
+            collection.topAnchor.constraint(equalTo: view.topAnchor),
+            collection.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            collection.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            collection.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ]
         NSLayoutConstraint.activate(constraintsPVC)
     }
