@@ -6,17 +6,18 @@
 //
 
 import UIKit
+import StorageDevice
 
 class PhotosViewController: UIViewController {
     
-    var photos: [Photo] = {
-        var array: [Photo] = []
-        for number in 1...20 {
-            guard let image = UIImage(named: String(number)) else { continue }
-            array.append(Photo(photo: image))
-        }
-        return array
-    }()
+//    public var photos: [Photo] = {
+//        var array: [Photo] = []
+//        for number in 1...20 {
+//            guard let image = UIImage(named: String(number)) else { continue }
+//            array.append(Photo(photo: image))
+//        }
+//        return array
+//    }()
     
     var photoID = "photoID"
 

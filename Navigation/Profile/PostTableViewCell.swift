@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import StorageDevice
 
 class PostTableViewCell: UITableViewCell {
 

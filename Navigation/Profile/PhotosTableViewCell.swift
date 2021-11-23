@@ -6,9 +6,12 @@
 //
 
 import UIKit
+import StorageDevice
 
 class PhotosTableViewCell: UITableViewCell {
 
+    var photo = "photo"
+    
     var sectionLabel:UILabel = {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -18,42 +21,6 @@ class PhotosTableViewCell: UITableViewCell {
         return label
     }()
     
-    var image1: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "1")
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-    
-    var image2: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "2")
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-    
-    var image3: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "3")
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-    
-    var image4: UIImageView = {
-        let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
-        image.image = UIImage(named: "4")
-        image.clipsToBounds = true
-        image.layer.cornerRadius = 6
-        return image
-    }()
-    
     var arrow: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
@@ -61,11 +28,24 @@ class PhotosTableViewCell: UITableViewCell {
         return image
     }()
     
+    var photoCollection: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let photoCollection = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        photoCollection.translatesAutoresizingMaskIntoConstraints = false
+        photoCollection.backgroundColor = .white
+        photoCollection.showsHorizontalScrollIndicator = false
+        return photoCollection
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        self.setViews()
-        self.setConstraints()
+        photoCollection.delegate = self
+        photoCollection.dataSource = self
+        photoCollection.register(PhotoPreviewCollectionViewCell.self, forCellWithReuseIdentifier: photo)
+        setViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -77,50 +57,59 @@ class PhotosTableViewCell: UITableViewCell {
 extension PhotosTableViewCell {
     private func setViews() {
         contentView.addSubview(sectionLabel)
-        contentView.addSubview(image1)
-        contentView.addSubview(image2)
-        contentView.addSubview(image3)
-        contentView.addSubview(image4)
         contentView.addSubview(arrow)
+        contentView.addSubview(photoCollection)
     }
 }
 
 // MARK: Констрейнты
-
 extension PhotosTableViewCell {
     private func setConstraints() {
         let constarintsPTVC = [
             sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -110),
             
             arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
             arrow.centerYAnchor.constraint(equalTo: sectionLabel.centerYAnchor),
             
-            image1.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor, constant: 12),
-            image1.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            image1.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            image1.heightAnchor.constraint(equalToConstant: (contentView.bounds.width-48)/4),
-            image1.widthAnchor.constraint(equalTo: image1.heightAnchor),
+            photoCollection.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor),
+            photoCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            photoCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            photoCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            image2.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor, constant: 12),
-            image2.leadingAnchor.constraint(equalTo: image1.trailingAnchor, constant: 8),
-            image2.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            image2.heightAnchor.constraint(equalToConstant: (contentView.bounds.width-48)/4),
-            image2.widthAnchor.constraint(equalTo: image1.heightAnchor),
-            
-            image3.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor, constant: 12),
-            image3.leadingAnchor.constraint(equalTo: image2.trailingAnchor, constant: 8),
-            image3.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            image3.heightAnchor.constraint(equalToConstant: (contentView.bounds.width-48)/4),
-            image3.widthAnchor.constraint(equalTo: image1.heightAnchor),
-            
-            image4.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor, constant: 12),
-            image4.leadingAnchor.constraint(equalTo: image3.trailingAnchor, constant: 8),
-            image4.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            image4.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            image4.heightAnchor.constraint(equalToConstant: (contentView.bounds.width-48)/4),
-            image4.widthAnchor.constraint(equalTo: image1.heightAnchor),
         ]
         NSLayoutConstraint.activate(constarintsPTVC)
     }
+}
+
+// MARK: Настройка коллекции
+extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photos.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: photo, for: indexPath) as! PhotoPreviewCollectionViewCell
+        cell.cell = photos[indexPath.row]
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 8
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: (bounds.width - 44) / 4, height: (bounds.width - 44) / 4)
+    }
+    
 }

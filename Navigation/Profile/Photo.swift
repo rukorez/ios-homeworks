@@ -8,7 +8,21 @@
 import Foundation
 import UIKit
 
-struct Photo {
-    var photo: UIImage
+public struct Photo {
+    
+    public var photo: UIImage
+    
+    public init(photo: UIImage) {
+            self.photo = photo
+        }
+    
 }
 
+public var photos: [Photo] = {
+    var array: [Photo] = []
+    for number in 1...20 {
+        guard let image = UIImage(named: String(number)) else { continue }
+        array.append(Photo(photo: image))
+    }
+    return array
+}()
