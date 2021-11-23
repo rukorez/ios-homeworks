@@ -95,16 +95,16 @@ extension PostTableViewCell {
 
 extension PostTableViewCell {
     private func setConstraint() {
-        let constraintsPTVC = [
+        let constraintsPostTVC = [
             self.author.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             self.author.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
             self.image.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 12),
-            self.image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            self.image.heightAnchor.constraint(equalTo: image.widthAnchor),
             self.image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             self.image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             self.image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -16),
+            self.image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            self.image.heightAnchor.constraint(equalTo: image.widthAnchor),
             
             self.text.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
             self.text.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -118,6 +118,6 @@ extension PostTableViewCell {
             self.views.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             self.views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ]
-        NSLayoutConstraint.activate(constraintsPTVC)
+        NSLayoutConstraint.activate(constraintsPostTVC)
     }
 }

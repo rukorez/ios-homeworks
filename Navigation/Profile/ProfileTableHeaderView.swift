@@ -35,8 +35,8 @@ extension ProfileTableHeaderView {
         let constraintsPTHV = [
             self.profileView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
             self.profileView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
-            self.profileView.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            
+            self.profileView.topAnchor.constraint(equalTo: self.topAnchor),
+            self.profileView.bottomAnchor.constraint(equalTo: self.bottomAnchor)
         ]
         NSLayoutConstraint.activate(constraintsPTHV)
     }

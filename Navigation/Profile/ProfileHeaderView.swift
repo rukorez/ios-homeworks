@@ -9,7 +9,7 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    var avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "Ava")
         avatar.translatesAutoresizingMaskIntoConstraints = false
@@ -21,7 +21,7 @@ class ProfileHeaderView: UIView {
         return avatar
     }()
     
-    var fullNameLabel: UILabel = {
+    lazy var fullNameLabel: UILabel = {
         let name = UILabel()
         name.text = "Alco Dog"
         name.textColor = .black
@@ -30,7 +30,7 @@ class ProfileHeaderView: UIView {
         return name
     }()
     
-    var statusLabel: UITextView = {
+    lazy var statusLabel: UITextView = {
         let status = UITextView()
         status.text = "Waiting for drink..."
         status.textColor = .gray
@@ -40,7 +40,7 @@ class ProfileHeaderView: UIView {
         return status
     }()
     
-    var statusTextField: UITextField = {
+    lazy var statusTextField: UITextField = {
         let statusEdit = UITextField()
         statusEdit.backgroundColor = .white
         statusEdit.textColor = .black
@@ -53,7 +53,7 @@ class ProfileHeaderView: UIView {
         return statusEdit
     }()
     
-    var setStatusButton: UIButton = {
+    lazy var setStatusButton: UIButton = {
         let statusButton = UIButton()
         statusButton.backgroundColor = .systemBlue
         statusButton.setTitle("Show Status", for: .normal)
@@ -79,12 +79,30 @@ class ProfileHeaderView: UIView {
         self.addSubview(statusLabel)
         self.addSubview(statusTextField)
         self.addSubview(setStatusButton)
+        self.hideKeyboard()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+//MARK: Скрытие клавиатуры по нажатию на UIView
+
+extension ProfileHeaderView {
+    func hideKeyboard() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(
+            target: self,
+            action: #selector(UIViewController.dismissKeyboard))
+
+        self.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
+    }
+}
+
 
 // MARK: Кнопки
 
@@ -94,6 +112,7 @@ extension ProfileHeaderView {
         if let currentStatus = self.statusLabel.text {
             print(currentStatus)
         }
+        self.dismissKeyboard()
     }
     
     @objc func statusTextChanged(_ textField: UITextField) {
@@ -134,7 +153,8 @@ extension ProfileHeaderView {
             self.setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
             self.setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
             self.setStatusButton.topAnchor.constraint(equalTo: self.avatarImageView.bottomAnchor, constant: 16),
-            self.setStatusButton.heightAnchor.constraint(equalToConstant: 50)
+            self.setStatusButton.heightAnchor.constraint(equalToConstant: 50),
+            self.setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -12)
         ]
         NSLayoutConstraint.activate(constraintsPHV)
     }
