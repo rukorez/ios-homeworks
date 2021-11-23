@@ -11,12 +11,41 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
-        // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
-        // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
-        guard let _ = (scene as? UIWindowScene) else { return }
+        guard let scene = (scene as? UIWindowScene) else { return }
+        window = UIWindow(windowScene: scene)
+        window?.makeKeyAndVisible()
+        
+//        if #available(iOS 15, *) {
+//
+//            let navBarAppearance = UINavigationBarAppearance()
+//            navBarAppearance.configureWithOpaqueBackground()
+//            UINavigationBar.appearance().standardAppearance = navBarAppearance
+//            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+//
+//            let tabBarAppearance = UITabBarAppearance()
+//            tabBarAppearance.configureWithOpaqueBackground()
+//            UITabBar.appearance().standardAppearance = tabBarAppearance
+//            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+//        }
+        
+        let tabBarController = UITabBarController()
+        let imageFeed = UIImage(systemName: "scroll")
+        let imageProfile = UIImage(systemName: "person")
+        
+        let feedVC = FeedViewController()
+        let feedNC = UINavigationController(rootViewController: feedVC)
+        feedNC.tabBarItem = UITabBarItem(title: "Лента", image: imageFeed, tag: 0)
+        
+        let logInVC = LogInViewController()
+        let profileNC = UINavigationController(rootViewController: logInVC)
+        profileNC.tabBarItem = UITabBarItem(title: "Профиль", image: imageProfile, tag: 1)
+        profileNC.navigationBar.isHidden = true
+        profileNC.title = "Профиль"
+        
+        tabBarController.viewControllers = [feedNC, profileNC]
+        
+        window?.rootViewController = tabBarController
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

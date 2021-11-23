@@ -1,0 +1,21 @@
+{
+  "images" : [
+    {
+      "filename" : "548px-Le_Jupiter_Olympien_ou_l'art_de_la_sculpture_antique.jpg",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
