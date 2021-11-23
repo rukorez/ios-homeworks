@@ -33,7 +33,7 @@ class PhotosTableViewCell: UITableViewCell {
         layout.scrollDirection = .horizontal
         let photoCollection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         photoCollection.translatesAutoresizingMaskIntoConstraints = false
-        photoCollection.backgroundColor = .white
+        photoCollection.backgroundColor = .clear
         photoCollection.showsHorizontalScrollIndicator = false
         return photoCollection
     }()
