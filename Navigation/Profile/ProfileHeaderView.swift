@@ -9,14 +9,14 @@ import UIKit
 
 class ProfileHeaderView: UIView {
     
-    lazy var avatarImageView: UIImageView = {
+    var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "Ava")
         avatar.translatesAutoresizingMaskIntoConstraints = false
+        avatar.isUserInteractionEnabled = true
         avatar.layer.borderWidth = CGFloat(3)
         avatar.layer.masksToBounds = false
         avatar.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 10)
-        avatar.layer.cornerRadius = 50
         avatar.clipsToBounds = true
         return avatar
     }()
@@ -74,12 +74,18 @@ class ProfileHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        self.addSubview(avatarImageView)
         self.addSubview(fullNameLabel)
         self.addSubview(statusLabel)
         self.addSubview(statusTextField)
         self.addSubview(setStatusButton)
+        self.addSubview(avatarImageView)
         self.hideKeyboard()
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        self.avatarImageView.layer.cornerRadius = avatarImageView.frame.size.height / 2
     }
     
     required init?(coder: NSCoder) {

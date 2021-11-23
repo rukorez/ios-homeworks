@@ -10,8 +10,20 @@ import UIKit
 class ProfileViewController: UIViewController {
     
     var posts: [Posts] = [post1, post2, post3, post4]
-    
+
     var tableView = UITableView(frame: .zero, style: .grouped)
+    
+    let headerView = ProfileTableHeaderView()
+    
+    let closeButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "multiply"), for: .normal)
+        button.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
+        return button
+    }()
+    
+    var whiteView = UIView()
     
     var cellID = "cellID"
     var cellID2 = "cellID2"
@@ -32,8 +44,53 @@ class ProfileViewController: UIViewController {
         self.tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellID)
         self.tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: cellID2)
     }
+    
+    @objc func avatarTapped() {
+        self.view.addSubview(whiteView)
+        self.whiteView.addSubview(self.headerView.profileView.avatarImageView)
+        self.view.addSubview(closeButton)
+        self.headerView.profileView.avatarImageView.translatesAutoresizingMaskIntoConstraints = true
+        self.headerView.profileView.avatarImageView.frame = CGRect(x: 16, y: self.view.safeAreaInsets.top + 16, width: 110, height: 110)
+        self.whiteView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
+        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 1, animations: {
+                self.headerView.profileView.avatarImageView.center = self.view.center
+                let scaleFactor = self.view.bounds.width / self.headerView.profileView.avatarImageView.bounds.width
+                self.headerView.profileView.avatarImageView.transform = self.headerView.profileView.avatarImageView.transform.scaledBy(x: scaleFactor, y: scaleFactor)
+                self.viewDidLayoutSubviews()
+            })
+            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 1, animations: {
+                self.whiteView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+            })
+        }, completion: { _ in
+            NSLayoutConstraint.activate([self.closeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
+                                         self.closeButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)])
+            
+        })
+    }
+    
+    @objc func closeAvatar() {
+        UIView.animate(withDuration: 0.5, animations: {
+            self.whiteView.removeFromSuperview()
+            self.closeButton.removeFromSuperview()
+            self.headerView.profileView.avatarImageView.transform = .identity
+            self.headerView.profileView.avatarImageView.frame = CGRect(x: 16, y: 16, width: 110, height: 110)
+            self.headerView.profileView.addSubview(self.headerView.profileView.avatarImageView)
+            self.headerView.profileView.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
+            self.headerView.profileView.setConstraintsPHV()
+            self.headerView.profileView.setNeedsLayout()
+        })
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.headerView.profileView.avatarImageView.layer.cornerRadius = 0
+    }
 }
+
+// MARK: Таблица
 
 extension ProfileViewController: UITableViewDelegate{
     
@@ -46,7 +103,8 @@ extension ProfileViewController: UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = ProfileTableHeaderView()
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+        headerView.profileView.avatarImageView.addGestureRecognizer(gesture)
         if section == 0  { return headerView }
         else { return nil }
     }
@@ -74,7 +132,6 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         }
     }
-    
 }
 
 // MARK: Констрейнты
@@ -86,8 +143,8 @@ extension ProfileViewController {
             self.tableView.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
             self.tableView.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             self.tableView.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-
         ]
         NSLayoutConstraint.activate(constraintsPVC)
     }
 }
+
