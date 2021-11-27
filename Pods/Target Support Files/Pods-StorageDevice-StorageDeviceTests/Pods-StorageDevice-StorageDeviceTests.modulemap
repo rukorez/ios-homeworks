@@ -1,0 +1,6 @@
+framework module Pods_StorageDevice_StorageDeviceTests {
+  umbrella header "Pods-StorageDevice-StorageDeviceTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
