@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import iOSIntPackage
 
 public struct Photo {
     

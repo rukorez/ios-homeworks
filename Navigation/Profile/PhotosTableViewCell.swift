@@ -7,6 +7,7 @@
 
 import UIKit
 import StorageDevice
+import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
 
@@ -14,7 +15,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     var sectionLabel:UILabel = {
         var label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.text = "Photos"
@@ -23,7 +24,7 @@ class PhotosTableViewCell: UITableViewCell {
     
     var arrow: UIImageView = {
         let image = UIImageView()
-        image.translatesAutoresizingMaskIntoConstraints = false
+//        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "arrow.right")
         return image
     }()
@@ -32,7 +33,7 @@ class PhotosTableViewCell: UITableViewCell {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let photoCollection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        photoCollection.translatesAutoresizingMaskIntoConstraints = false
+//        photoCollection.translatesAutoresizingMaskIntoConstraints = false
         photoCollection.backgroundColor = .clear
         photoCollection.showsHorizontalScrollIndicator = false
         return photoCollection
@@ -65,21 +66,38 @@ extension PhotosTableViewCell {
 // MARK: Констрейнты
 extension PhotosTableViewCell {
     private func setConstraints() {
-        let constarintsPTVC = [
-            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -110),
-            
-            arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-            arrow.centerYAnchor.constraint(equalTo: sectionLabel.centerYAnchor),
-            
-            photoCollection.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor),
-            photoCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            photoCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            photoCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-        ]
-        NSLayoutConstraint.activate(constarintsPTVC)
+        
+        sectionLabel.snp.makeConstraints { (maker) in
+            maker.top.left.equalTo(12)
+        }
+        
+        arrow.snp.makeConstraints { (maker) in
+            maker.right.equalTo(-12)
+            maker.centerY.equalTo(sectionLabel.snp.centerY)
+        }
+        
+        photoCollection.snp.makeConstraints { (maker) in
+            maker.left.right.bottom.equalToSuperview()
+            maker.top.equalTo(sectionLabel.snp.bottom)
+            maker.height.equalTo(110)
+        }
+        
+        
+//        let constarintsPTVC = [
+//            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
+//            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
+//            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -110),
+//
+//            arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
+//            arrow.centerYAnchor.constraint(equalTo: sectionLabel.centerYAnchor),
+//
+//            photoCollection.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor),
+//            photoCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            photoCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            photoCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+//
+//        ]
+//        NSLayoutConstraint.activate(constarintsPTVC)
     }
 }
 
@@ -109,7 +127,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (bounds.width - 44) / 4, height: (bounds.width - 44) / 4)
+        return CGSize(width: (collectionView.bounds.width - 44) / 4, height: (collectionView.bounds.width - 44) / 4)
     }
     
 }

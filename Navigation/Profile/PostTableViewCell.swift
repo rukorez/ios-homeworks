@@ -7,13 +7,17 @@
 
 import UIKit
 import StorageDevice
+import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
     var cell: Posts? {
         didSet {
             author.text = cell?.author
-            image.image = cell?.image
+            let processor = ImageProcessor()
+            processor.processImage(sourceImage: cell!.image, filter: .colorInvert) { image in
+                self.image.image = image
+            }
             text.text = cell?.description
             if let stingLikes = cell?.likes {
                 likes.text = "Likes: \(stingLikes)"
@@ -23,7 +27,7 @@ class PostTableViewCell: UITableViewCell {
             }
         }
     }
-    
+        
     var author: UILabel = {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
