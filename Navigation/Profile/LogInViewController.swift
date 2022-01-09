@@ -43,6 +43,16 @@ class LogInViewController: UIViewController {
         return button
     }()
     
+    var currentUser: CurrentUserService = {
+        var user = CurrentUserService()
+        user.user.fullName = "Ivan Ivanov"
+        user.user.avatar = UIImage(systemName: "person.fill")
+        user.user.status = "Offline"
+        return user
+    }()
+    
+    var testUser = TestUserService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
@@ -138,8 +148,13 @@ extension LogInViewController {
     }
     
     @objc func loginTapped() {
-        let profileVC = ProfileViewController()
+        #if DEBUG
+        let profileVC = ProfileViewController(userService: testUser, name: testUser.user.fullName!)
         self.navigationController?.pushViewController(profileVC, animated: true)
+        #else
+        let profileVC = ProfileViewController(userService: currentUser, name: currentUser.user.fullName!)
+        self.navigationController?.pushViewController(profileVC, animated: true)
+        #endif
     }
 }
 

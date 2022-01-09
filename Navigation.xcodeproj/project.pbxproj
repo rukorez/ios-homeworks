@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		6360077860874446C32932A0 /* Pods_StorageDevice_StorageDeviceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4868C6FD36484632B3A9604B /* Pods_StorageDevice_StorageDeviceTests.framework */; };
 		770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6926B6DC610070BB62 /* AppDelegate.swift */; };
 		770CAC6C26B6DC610070BB62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */; };
 		770CAC7326B6DC620070BB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770CAC7226B6DC620070BB62 /* Assets.xcassets */; };
@@ -33,12 +32,11 @@
 		771B750626E692B100B6F44F /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771B750526E692B100B6F44F /* LogInViewController.swift */; };
 		771B750826E7ABE400B6F44F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771B750726E7ABE400B6F44F /* LogInView.swift */; };
 		771C784026D7E3D7007FA02C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */; };
+		774069582770CC1E00892E49 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774069572770CC1E00892E49 /* UserData.swift */; };
 		77B0301526F111E300950011 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0301426F111E300950011 /* PostTableViewCell.swift */; };
 		77DD121226F90297009DFCAE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121126F90297009DFCAE /* PhotosTableViewCell.swift */; };
 		77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121326FB9575009DFCAE /* PhotosViewController.swift */; };
 		77DD121626FBAA42009DFCAE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121526FBAA42009DFCAE /* PhotosCollectionViewCell.swift */; };
-		7ED31751E362928FA5BAEC88 /* Pods_StorageDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F99B275489FF0F4F8A92B5B /* Pods_StorageDevice.framework */; };
-		953321D3409B4A83749349F9 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 88BD773734CB0C46D6214A86 /* Pods_Navigation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,8 +81,6 @@
 		24186FE7D5AF7CB05C282E39 /* Pods-StorageDevice.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice.debug.xcconfig"; path = "Target Support Files/Pods-StorageDevice/Pods-StorageDevice.debug.xcconfig"; sourceTree = "<group>"; };
 		36B6AEDC7F1D18E249D9DC70 /* Pods-StorageDevice-StorageDeviceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice-StorageDeviceTests.release.xcconfig"; path = "Target Support Files/Pods-StorageDevice-StorageDeviceTests/Pods-StorageDevice-StorageDeviceTests.release.xcconfig"; sourceTree = "<group>"; };
 		43A77D084E80FE2725290DAE /* Pods-StorageDevice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice.release.xcconfig"; path = "Target Support Files/Pods-StorageDevice/Pods-StorageDevice.release.xcconfig"; sourceTree = "<group>"; };
-		4868C6FD36484632B3A9604B /* Pods_StorageDevice_StorageDeviceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageDevice_StorageDeviceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4F99B275489FF0F4F8A92B5B /* Pods_StorageDevice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageDevice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59058BA8AC539420EF7D4098 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		770CAC6626B6DC610070BB62 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		770CAC6926B6DC610070BB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -108,6 +104,7 @@
 		771B750526E692B100B6F44F /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		771B750726E7ABE400B6F44F /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		774069572770CC1E00892E49 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
 		77B0301226EE4BF300950011 /* Posts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
 		77B0301426F111E300950011 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		77DD121126F90297009DFCAE /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -115,7 +112,6 @@
 		77DD121526FBAA42009DFCAE /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		77DD121726FBAA89009DFCAE /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
 		86BD0F4CC4EE3417203EC9F6 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
-		88BD773734CB0C46D6214A86 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A87D827C6F0C44A84EE3D410 /* Pods-StorageDevice-StorageDeviceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice-StorageDeviceTests.debug.xcconfig"; path = "Target Support Files/Pods-StorageDevice-StorageDeviceTests/Pods-StorageDevice-StorageDeviceTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -126,7 +122,6 @@
 			files = (
 				771AE99427526B8A00F8F432 /* iOSIntPackage in Frameworks */,
 				771AE983274CFF4300F8F432 /* StorageDevice.framework in Frameworks */,
-				953321D3409B4A83749349F9 /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -134,7 +129,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7ED31751E362928FA5BAEC88 /* Pods_StorageDevice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,7 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				771AE977274CFF4300F8F432 /* StorageDevice.framework in Frameworks */,
-				6360077860874446C32932A0 /* Pods_StorageDevice_StorageDeviceTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -182,6 +175,7 @@
 				770CACA726B882240070BB62 /* Post.swift */,
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
 				770CACA526B866100070BB62 /* PostViewController.swift */,
+				774069572770CC1E00892E49 /* UserData.swift */,
 				770CACA926B9A87A0070BB62 /* InfoViewController.swift */,
 				771C783E26D7E367007FA02C /* Profile */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
@@ -242,9 +236,6 @@
 		F251B1259178AA60A859372C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				88BD773734CB0C46D6214A86 /* Pods_Navigation.framework */,
-				4F99B275489FF0F4F8A92B5B /* Pods_StorageDevice.framework */,
-				4868C6FD36484632B3A9604B /* Pods_StorageDevice_StorageDeviceTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -489,6 +480,7 @@
 			files = (
 				77DD121226F90297009DFCAE /* PhotosTableViewCell.swift in Sources */,
 				77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */,
+				774069582770CC1E00892E49 /* UserData.swift in Sources */,
 				770CACA626B866100070BB62 /* PostViewController.swift in Sources */,
 				770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */,
 				770CAC8026B6E9F60070BB62 /* ProfileViewController.swift in Sources */,
