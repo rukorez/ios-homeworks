@@ -12,6 +12,8 @@ class LogInViewController: UIViewController {
     var scrollView = UIScrollView()
     var contentView = UIView()
     
+    var delegate: LoginViewControllerDelegate?
+    
     lazy var logo: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "logo")
@@ -148,13 +150,18 @@ extension LogInViewController {
     }
     
     @objc func loginTapped() {
-        #if DEBUG
-        let profileVC = ProfileViewController(userService: testUser, name: testUser.user.fullName!)
-        self.navigationController?.pushViewController(profileVC, animated: true)
-        #else
-        let profileVC = ProfileViewController(userService: currentUser, name: currentUser.user.fullName!)
-        self.navigationController?.pushViewController(profileVC, animated: true)
-        #endif
+        guard let correctLogin = logInView.login.text else { return }
+        guard let correctPassword = logInView.password.text else { return }
+        guard let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword) else { return }
+        if checkLogin {
+            #if DEBUG
+            let profileVC = ProfileViewController(userService: testUser, name: testUser.user.fullName!)
+            self.navigationController?.pushViewController(profileVC, animated: true)
+            #else
+            let profileVC = ProfileViewController(userService: currentUser, name: currentUser.user.fullName!)
+            self.navigationController?.pushViewController(profileVC, animated: true)
+            #endif
+        }
     }
 }
 
