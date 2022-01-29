@@ -20,7 +20,7 @@ class User {
 
 protocol UserService {
     
-    func userName(name: String) -> User?
+    func userName(name: String) -> User
     
 }
 
@@ -28,12 +28,9 @@ class CurrentUserService: UserService {
     
     var user = User()
     
-    func userName(name: String) -> User? {
-        if name == user.fullName {
-            return user
-        } else {
-            return nil
-        }
+    func userName(name: String) -> User {
+        guard name == user.fullName else { return User() }
+        return user
     }
     
 }
@@ -48,11 +45,8 @@ class TestUserService: UserService {
         return user
     }()
     
-    func userName(name: String) -> User? {
-        if name == user.fullName {
-            return user
-        } else {
-            return nil
-        }
+    func userName(name: String) -> User {
+        guard name == user.fullName else { return User() }
+        return user
     }
 }

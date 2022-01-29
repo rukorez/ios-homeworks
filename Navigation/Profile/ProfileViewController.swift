@@ -10,10 +10,10 @@ import StorageDevice
 
 class ProfileViewController: UIViewController {
     
-    var tableView = UITableView(frame: .zero, style: .grouped)
+    lazy var tableView = UITableView(frame: .zero, style: .grouped)
     
-    var cellID = "cellID"
-    var cellID2 = "cellID2"
+    private var cellID = "cellID"
+    private var cellID2 = "cellID2"
     
     var userService: UserService
     
@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController {
     
     init(userService: UserService, name: String) {
         self.userService = userService
-        self.user = userService.userName(name: name)!
+        self.user = userService.userName(name: name)
         super.init(nibName: nil, bundle: nil)
     }
     

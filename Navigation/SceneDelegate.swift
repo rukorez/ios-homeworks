@@ -38,7 +38,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         feedNC.tabBarItem = UITabBarItem(title: "Лента", image: imageFeed, tag: 0)
         
         let logInVC = LogInViewController()
-        logInVC.delegate = LoginInspector()
+        let factory = MyLoginFactory()
+        logInVC.delegate = factory.create()
         let profileNC = UINavigationController(rootViewController: logInVC)
         profileNC.tabBarItem = UITabBarItem(title: "Профиль", image: imageProfile, tag: 1)
         profileNC.navigationBar.isHidden = true

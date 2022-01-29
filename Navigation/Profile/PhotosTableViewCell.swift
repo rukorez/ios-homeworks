@@ -11,29 +11,26 @@ import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
 
-    var photo = "photo"
+    private var photo = "photo"
     
-    var sectionLabel:UILabel = {
+    lazy var sectionLabel:UILabel = {
         var label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.text = "Photos"
         return label
     }()
     
-    var arrow: UIImageView = {
+    lazy var arrow: UIImageView = {
         let image = UIImageView()
-//        image.translatesAutoresizingMaskIntoConstraints = false
         image.image = UIImage(systemName: "arrow.right")
         return image
     }()
     
-    var photoCollection: UICollectionView = {
+    lazy var photoCollection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let photoCollection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        photoCollection.translatesAutoresizingMaskIntoConstraints = false
         photoCollection.backgroundColor = .clear
         photoCollection.showsHorizontalScrollIndicator = false
         return photoCollection
@@ -81,23 +78,6 @@ extension PhotosTableViewCell {
             maker.top.equalTo(sectionLabel.snp.bottom)
             maker.height.equalTo(110)
         }
-        
-        
-//        let constarintsPTVC = [
-//            sectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
-//            sectionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-//            sectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -110),
-//
-//            arrow.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -12),
-//            arrow.centerYAnchor.constraint(equalTo: sectionLabel.centerYAnchor),
-//
-//            photoCollection.topAnchor.constraint(equalTo: sectionLabel.bottomAnchor),
-//            photoCollection.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            photoCollection.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            photoCollection.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-//
-//        ]
-//        NSLayoutConstraint.activate(constarintsPTVC)
     }
 }
 

@@ -15,8 +15,10 @@ class PostTableViewCell: UITableViewCell {
         didSet {
             author.text = cell?.author
             let processor = ImageProcessor()
-            processor.processImage(sourceImage: cell!.image, filter: .colorInvert) { image in
-                self.image.image = image
+            if let image = cell?.image {
+                processor.processImage(sourceImage: image, filter: .chrome) { image in
+                    self.image.image = image
+                }
             }
             text.text = cell?.description
             if let stingLikes = cell?.likes {
@@ -28,7 +30,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
         
-    var author: UILabel = {
+    lazy var author: UILabel = {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 20, weight: .bold)
@@ -37,7 +39,7 @@ class PostTableViewCell: UITableViewCell {
         return author
     }()
     
-    var image: UIImageView = {
+    lazy var image: UIImageView = {
         let image = UIImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
         image.backgroundColor = .black
@@ -45,7 +47,7 @@ class PostTableViewCell: UITableViewCell {
         return image
     }()
     
-    var text: UILabel = {
+    lazy var text: UILabel = {
         let text = UILabel()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.font = UIFont.systemFont(ofSize: 14, weight: .regular)
@@ -54,7 +56,7 @@ class PostTableViewCell: UITableViewCell {
         return text
     }()
     
-    var likes: UILabel = {
+    lazy var likes: UILabel = {
         var likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = UIFont.systemFont(ofSize: 16, weight: .regular)
@@ -62,7 +64,7 @@ class PostTableViewCell: UITableViewCell {
         return likes
     }()
     
-    var views: UILabel = {
+    lazy var views: UILabel = {
         var views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = UIFont.systemFont(ofSize: 16, weight: .regular)

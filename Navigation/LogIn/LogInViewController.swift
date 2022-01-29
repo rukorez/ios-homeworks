@@ -150,8 +150,8 @@ extension LogInViewController {
     }
     
     @objc func loginTapped() {
-        guard let correctLogin = logInView.login.text else { return }
-        guard let correctPassword = logInView.password.text else { return }
+        guard let correctLogin = logInView.login.text?.hash else { return }
+        guard let correctPassword = logInView.password.text?.hash else { return }
         guard let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword) else { return }
         if checkLogin {
             #if DEBUG
