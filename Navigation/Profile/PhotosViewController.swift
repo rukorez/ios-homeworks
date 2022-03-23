@@ -7,11 +7,15 @@
 
 import UIKit
 import StorageDevice
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
         
     var photoID = "photoID"
-
+    
+    var images: [UIImage] = []
+    
+    var imagePublisherFacade = ImagePublisherFacade()
     
     var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -26,6 +30,8 @@ class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         navigationItem.title = "Photo Gallery"
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 0.1, repeat: 20, userImages: nil)
         view.addSubview(collection)
         self.setConstraints()
         collection.dataSource = self
@@ -41,6 +47,7 @@ class PhotosViewController: UIViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = true
+        imagePublisherFacade.removeSubscription(for: self)
         
         super.viewWillDisappear(animated)
     }
@@ -69,18 +76,29 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return photos.count
+        return images.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier: photoID, for: indexPath) as! PhotosCollectionViewCell
-        cell.cell = photos[indexPath.row]
+        cell.cell = images[indexPath.item]
         return cell
     }
     
 }
 
-// MARk: Констрейнты
+// MARK: Реализаци Facade, Observer
+
+extension PhotosViewController: ImageLibrarySubscriber {
+    
+    func receive(images: [UIImage]) {
+        self.images = images
+        self.collection.reloadData()
+    }
+    
+}
+
+// MARK: Констрейнты
 
 extension PhotosViewController {
     private func setConstraints() {
