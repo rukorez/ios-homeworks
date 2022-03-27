@@ -54,12 +54,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return statusEdit
     }()
     
-    lazy var setStatusButton: UIButton = {
-        let statusButton = UIButton()
-        statusButton.backgroundColor = .systemBlue
-        statusButton.setTitle("Show Status", for: .normal)
-        statusButton.setTitleColor(UIColor.white, for: .normal)
-        statusButton.addTarget(self, action: #selector(buttonPressed), for: .touchUpInside)
+    lazy var setStatusButton: CustomButton = {
+        let statusButton = CustomButton(title: "Show Status", titleColor: .white, backgroundColor: .systemBlue)
 //        statusButton.translatesAutoresizingMaskIntoConstraints = false
         return statusButton
     }()
@@ -76,6 +72,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         addSubview(setStatusButton)
         setConstraintsPHV()
         hideKeyboard()
+        setStatusButton.onTap = {
+            self.buttonPressed()
+        }
 
     }
     
@@ -118,7 +117,7 @@ extension UIView {
 
 // MARK: Кнопки
 extension ProfileHeaderView {
-    @objc func buttonPressed() {
+    private func buttonPressed() {
         statusLabel.text = statusText
         dismissKeyboard()
     }

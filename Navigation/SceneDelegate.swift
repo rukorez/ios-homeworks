@@ -16,18 +16,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window = UIWindow(windowScene: scene)
         window?.makeKeyAndVisible()
         
-//        if #available(iOS 15, *) {
-//
-//            let navBarAppearance = UINavigationBarAppearance()
-//            navBarAppearance.configureWithOpaqueBackground()
-//            UINavigationBar.appearance().standardAppearance = navBarAppearance
-//            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
-//
-//            let tabBarAppearance = UITabBarAppearance()
-//            tabBarAppearance.configureWithOpaqueBackground()
-//            UITabBar.appearance().standardAppearance = tabBarAppearance
-//            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
-//        }
+        if #available(iOS 15, *) {
+
+            let navBarAppearance = UINavigationBarAppearance()
+            navBarAppearance.configureWithOpaqueBackground()
+            UINavigationBar.appearance().standardAppearance = navBarAppearance
+            UINavigationBar.appearance().scrollEdgeAppearance = navBarAppearance
+
+            let tabBarAppearance = UITabBarAppearance()
+            tabBarAppearance.configureWithOpaqueBackground()
+            UITabBar.appearance().standardAppearance = tabBarAppearance
+            UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
+        }
         
         let tabBarController = UITabBarController()
         let imageFeed = UIImage(systemName: "scroll")

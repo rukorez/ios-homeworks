@@ -31,7 +31,7 @@ class PhotosViewController: UIViewController {
         
         navigationItem.title = "Photo Gallery"
         imagePublisherFacade.subscribe(self)
-        imagePublisherFacade.addImagesWithTimer(time: 0.1, repeat: 20, userImages: nil)
+        imagePublisherFacade.addImagesWithTimer(time: 0.1, repeat: 20, userImages: photos)
         view.addSubview(collection)
         self.setConstraints()
         collection.dataSource = self

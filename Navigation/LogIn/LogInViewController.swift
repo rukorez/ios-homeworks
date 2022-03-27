@@ -31,8 +31,8 @@ class LogInViewController: UIViewController {
         return loginview
     }()
     
-    lazy var loginButton: UIButton = {
-        var button = UIButton()
+    lazy var loginButton: CustomButton = {
+        var button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -40,8 +40,6 @@ class LogInViewController: UIViewController {
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .selected)
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .highlighted)
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .disabled)
-        button.setTitle("Log In", for: .normal)
-        button.addTarget(self, action: #selector(loginTapped), for: .touchUpInside)
         return button
     }()
     
@@ -60,6 +58,9 @@ class LogInViewController: UIViewController {
         self.view.backgroundColor = .white
         self.view.addSubview(scrollView)
         self.scrollView.addSubview(contentView)
+        loginButton.onTap = {
+            self.loginTapped()
+        }
         
         self.scrollView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.translatesAutoresizingMaskIntoConstraints = false
@@ -149,7 +150,7 @@ extension LogInViewController {
         scrollView.verticalScrollIndicatorInsets = .zero
     }
     
-    @objc func loginTapped() {
+    private func loginTapped() {
         guard let correctLogin = logInView.login.text?.hash else { return }
         guard let correctPassword = logInView.password.text?.hash else { return }
         guard let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword) else { return }

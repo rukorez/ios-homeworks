@@ -90,7 +90,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = photoCollection.dequeueReusableCell(withReuseIdentifier: photo, for: indexPath) as! PhotoPreviewCollectionViewCell
-        cell.cell = photos[indexPath.row]
+        cell.image = photos[indexPath.row]
         return cell
     }
     

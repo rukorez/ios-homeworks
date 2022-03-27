@@ -12,17 +12,13 @@ class FeedViewController: UIViewController {
 
     var post1 = Post(title: "Пост 1")
     
-    var button1:UIButton = {
-        let button = UIButton()
-        button.setTitle("Кнопка 1", for: .normal)
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+    var button1: CustomButton = {
+        let button = CustomButton(title: "Кнопка 1", titleColor: .black, backgroundColor: .clear)
         return button
     }()
     
-    var button2: UIButton = {
-        let button = UIButton()
-        button.setTitle("Кнопка 2", for: .normal)
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+    var button2: CustomButton = {
+        let button = CustomButton(title: "Кнопка 2", titleColor: .white, backgroundColor: .clear)
         return button
     }()
     
@@ -45,9 +41,16 @@ class FeedViewController: UIViewController {
         ]
         NSLayoutConstraint.activate(constraintsFVC)
         
+        button1.onTap = {
+            self.tap()
+        }
+        button2.onTap = {
+            self.tap()
+        }
+        
     }
     
-    @objc func tap() {
+    private func tap() {
         let postVC = PostViewController()
         postVC.title = post1.title
         navigationController?.pushViewController(postVC, animated: true)
