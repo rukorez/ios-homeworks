@@ -10,9 +10,9 @@ import StorageDevice
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
-    var cell: UIImage? {
+    var image: UIImage? {
         didSet {
-            photo.image = cell
+            photo.image = image
         }
     }
     

@@ -11,20 +11,20 @@ import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
-    var cell: Posts? {
+    var post: Posts? {
         didSet {
-            author.text = cell?.author
+            author.text = post?.author
             let processor = ImageProcessor()
-            if let image = cell?.image {
+            if let image = post?.image {
                 processor.processImage(sourceImage: image, filter: .chrome) { image in
                     self.image.image = image
                 }
             }
-            text.text = cell?.description
-            if let stingLikes = cell?.likes {
+            text.text = post?.description
+            if let stingLikes = post?.likes {
                 likes.text = "Likes: \(stingLikes)"
             }
-            if let stringViews = cell?.views {
+            if let stringViews = post?.views {
                 views.text = "Views: \(stringViews)"
             }
         }

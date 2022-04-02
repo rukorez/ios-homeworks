@@ -12,10 +12,26 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "Ava")
+//        let gesture = UITapGestureRecognizer(target: self, action: #selector(animation))
+//        avatar.addGestureRecognizer(gesture)
 //        avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.isUserInteractionEnabled = true
         avatar.clipsToBounds = true
         return avatar
+    }()
+    
+    lazy var whiteView: UIView = {
+        var whiteView = UIView(frame: CGRect(x: 0, y: 0, width: UIWindow().bounds.width, height: UIWindow().bounds.height))
+        whiteView.backgroundColor = UIColor(white: 1, alpha: 0)
+        return whiteView
+    }()
+    
+    
+    lazy var closeButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: UIWindow().bounds.width - 40, y: 40, width: 30, height: 30))
+        button.setBackgroundImage(UIImage(systemName: "multiply"), for: .normal)
+        button.addTarget(self, action: #selector(close), for: .touchUpInside)
+        return button
     }()
     
     lazy var fullNameLabel: UILabel = {
@@ -33,12 +49,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         status.text = "Waiting for something..."
         status.font = UIFont.italicSystemFont(ofSize: 15)
         status.isScrollEnabled = false
+        status.isEditable = false
+        status.backgroundColor = .clear
         #if DEBUG
         status.textColor = .gray
-        status.backgroundColor = .systemGray5
         #else
         status.textColor = .white
-        status.backgroundColor = UIColor(named: "VKBlue")
         #endif
 //        status.translatesAutoresizingMaskIntoConstraints = false
         return status
@@ -65,27 +81,37 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        addSubview(avatarImageView)
-        addSubview(fullNameLabel)
-        addSubview(statusLabel)
-        addSubview(statusTextField)
-        addSubview(setStatusButton)
-        setConstraintsPHV()
-        hideKeyboard()
+        contentView.addSubview(fullNameLabel)
+        contentView.addSubview(statusLabel)
+        contentView.addSubview(statusTextField)
+        contentView.addSubview(setStatusButton)
+        contentView.addSubview(avatarImageView)
         setStatusButton.onTap = {
             self.buttonPressed()
         }
-
+//        setConstraintsPHV()
+        hideKeyboard()
     }
     
     override func layoutSubviews() {
-//        avatarImageView.frame = CGRect(x: 16, y: 10, width: 120, height: 120)
+        super.layoutSubviews()
+        
+        avatarImageView.frame = CGRect(x: 16, y: 16, width: 110, height: 110)
+        fullNameLabel.frame = CGRect(x: 16 + avatarImageView.bounds.width + 20, y: 16, width: contentView.bounds.width - 36 - avatarImageView.bounds.width, height: 30)
+        statusLabel.frame = CGRect(x: 16 + avatarImageView.bounds.height + 17, y: 16 + fullNameLabel.bounds.height + 6, width: contentView.bounds.width - 36 - avatarImageView.bounds.width, height: 30)
+        statusTextField.frame = CGRect(x: 16 + avatarImageView.bounds.height + 17,
+                                       y: 16 + fullNameLabel.bounds.height + 6 + statusLabel.bounds.height + 10,
+                                       width: contentView.bounds.width - 52 - avatarImageView.bounds.width, height: 30)
+        setStatusButton.frame = CGRect(x: 16, y: 16 + avatarImageView.bounds.height + 16, width: contentView.bounds.width - 32, height: 40)
+        
         avatarImageView.layer.borderWidth = CGFloat(3)
         avatarImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 10)
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.height / 2
+        
         statusTextField.layer.borderWidth = CGFloat(1)
         statusTextField.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 10)
         statusTextField.layer.cornerRadius = 10
+        
         setStatusButton.layer.cornerRadius = 10
         setStatusButton.layer.shadowOffset.width = 4
         setStatusButton.layer.shadowOffset.height = 4
@@ -96,6 +122,35 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func animation() {
+        contentView.addSubview(whiteView)
+        contentView.bringSubviewToFront(avatarImageView)
+        self.avatarImageView.layer.borderWidth = 0
+        UIView.animate(withDuration: 1.0, delay: 0) {
+            self.avatarImageView.frame = CGRect(x: 0, y: 0, width: UIWindow().bounds.width, height: UIWindow().bounds.width)
+            self.avatarImageView.center = UIWindow().center
+            self.whiteView.backgroundColor = UIColor(white: 1, alpha: 0.8)
+        } completion: { _ in
+            self.avatarImageView.clipsToBounds = false
+            self.whiteView.addSubview(self.closeButton)
+        }
+    }
+    
+    @objc func close() {
+        UIView.animate(withDuration: 1.0, delay: 0) {
+            self.avatarImageView.frame = CGRect(x: 16, y: 16, width: 110, height: 110)
+            self.avatarImageView.layer.borderWidth = CGFloat(3)
+            self.avatarImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 10)
+            self.avatarImageView.layer.cornerRadius = self.avatarImageView.bounds.height / 2
+            self.avatarImageView.clipsToBounds = true
+            self.whiteView.backgroundColor = UIColor(white: 1, alpha: 0)
+        }
+        contentView.sendSubviewToBack(whiteView)
+        closeButton.removeFromSuperview()
+//        layoutIfNeeded()
+        print("Close")
     }
     
 }
@@ -129,75 +184,47 @@ extension ProfileHeaderView {
 }
 
 // MARK: Констрейнты
-extension ProfileHeaderView {
-    func setConstraintsPHV() {
-        
-        avatarImageView.snp.makeConstraints { (maker) in
-            maker.left.top.equalTo(16)
-            maker.width.height.equalTo(110)
-        }
-        
-        fullNameLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(16)
-            maker.left.equalTo(avatarImageView.snp.rightMargin).offset(20)
-            maker.right.equalTo(-16)
-        }
-        
-        statusLabel.snp.makeConstraints { (maker) in
-            maker.top.equalTo(fullNameLabel.snp.bottom).offset(6)
-            maker.left.equalTo(avatarImageView.snp.rightMargin).offset(20)
-            maker.right.equalTo(-16)
-
-        }
-
-        statusTextField.snp.makeConstraints { (maker) in
-            maker.top.equalTo(statusLabel.snp.bottom).offset(10)
-            maker.left.equalTo(avatarImageView.snp.rightMargin).offset(20)
-            maker.right.equalTo(-16)
-            maker.height.equalTo(30)
-        }
-
-        setStatusButton.snp.makeConstraints { (maker) in
-            maker.top.equalTo(statusTextField.snp.bottom).offset(20)
-            maker.left.equalTo(16)
-            maker.right.equalTo(-16)
-            maker.bottom.equalTo(-20)
-        }
-
-        
-//        fullNameLabel.setContentHuggingPriority(.required, for: .vertical)
-//        statusLabel.setContentHuggingPriority(.required, for: .vertical)
-//        statusTextField.setContentHuggingPriority(.required, for: .vertical)
-//        setStatusButton.setContentHuggingPriority(.required, for: .vertical)
+//extension ProfileHeaderView {
 //
-//        let constraintsPHV = [
+//    func setConstraintsPHV() {
 //
-//            fullNameLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
-//            fullNameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 150),
-//            fullNameLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-//            fullNameLabel.heightAnchor.constraint(equalToConstant: 30),
+//        avatarImageView.snp.makeConstraints { (maker) in
+//            maker.leading.top.equalToSuperview().offset(16)
+//            maker.bottom.equalToSuperview().offset(-16)
+//            maker.width.height.equalTo(110)
+//        }
 //
-//            statusLabel.topAnchor.constraint(equalTo: fullNameLabel.bottomAnchor),
-//            statusLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 145),
-//            statusLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-//            statusLabel.heightAnchor.constraint(equalToConstant: 30),
+//        fullNameLabel.snp.makeConstraints { (maker) in
+//            maker.top.equalToSuperview().offset(16)
+//            maker.leading.equalTo(avatarImageView.snp.trailing).offset(20)
+//            maker.trailing.equalToSuperview().offset(-16)
+//        }
 //
-//            statusTextField.topAnchor.constraint(equalTo: statusLabel.bottomAnchor, constant: 15),
-//            statusTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 145),
-//            statusTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-//            statusTextField.heightAnchor.constraint(equalToConstant: 30),
+//        statusLabel.snp.makeConstraints { (maker) in
+//            maker.top.equalTo(fullNameLabel.snp.bottom).offset(6)
+//            maker.leading.equalTo(avatarImageView.snp.trailing).offset(17)
+//            maker.trailing.equalToSuperview().offset(-16)
 //
-//            setStatusButton.topAnchor.constraint(equalTo: statusTextField.bottomAnchor, constant: 20),
-//            setStatusButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-//            setStatusButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -16),
-//            setStatusButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
+//        }
 //
-//            avatarImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16),
-//            avatarImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-//            avatarImageView.bottomAnchor.constraint(equalTo: setStatusButton.topAnchor, constant: -10),
-//            avatarImageView.trailingAnchor.constraint(equalTo: statusTextField.leadingAnchor, constant: -15),
-//            avatarImageView.widthAnchor.constraint(equalTo: avatarImageView.heightAnchor)
-//        ]
-//        NSLayoutConstraint.activate(constraintsPHV)
-    }
-}
+//        statusTextField.snp.makeConstraints { (maker) in
+//            maker.top.equalTo(statusLabel.snp.bottom).offset(10)
+//            maker.leading.equalTo(avatarImageView.snp.trailing).offset(20)
+//            maker.trailing.equalToSuperview().offset(-16)
+//            maker.bottom.equalTo(avatarImageView.snp.bottom)
+//            maker.height.equalTo(30)
+//        }
+//
+//        setStatusButton.snp.makeConstraints { (maker) in
+////            maker.top.equalTo(myView.snp.bottom)
+//            maker.leading.equalToSuperview().offset(16)
+//            maker.trailing.equalToSuperview().offset(-16)
+//            maker.bottom.equalToSuperview().offset(-20)
+//            maker.height.equalTo(40)
+//        }
+//
+//        layoutIfNeeded()
+//
+//    }
+//
+//}

@@ -12,6 +12,22 @@ class ProfileViewController: UIViewController {
     
     lazy var tableView = UITableView(frame: .zero, style: .grouped)
     
+    var headerView = ProfileHeaderView(reuseIdentifier: "header")
+    
+    lazy var whiteView: UIView = {
+        var whiteView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
+        whiteView.backgroundColor = UIColor(white: 1, alpha: 0)
+        return whiteView
+    }()
+    
+    
+    lazy var closeButton: UIButton = {
+        var button = UIButton(frame: CGRect(x: view.bounds.width - 50, y: 60, width: 30, height: 25))
+        button.setBackgroundImage(UIImage(systemName: "multiply"), for: .normal)
+        button.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
+        return button
+    }()
+    
     private var cellID = "cellID"
     private var cellID2 = "cellID2"
     
@@ -32,6 +48,7 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.addSubview(whiteView)
         setupTableView()
         setConstraintsPVC()
     }
@@ -68,9 +85,16 @@ extension ProfileViewController: UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! ProfileHeaderView
-            return header
+            headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! ProfileHeaderView
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
+            headerView.addGestureRecognizer(gesture)
+            return headerView
         } else { return nil }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if section == 0  { return 210 }
+        else { return 0 }
     }
     
 }
@@ -92,7 +116,7 @@ extension ProfileViewController: UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PostTableViewCell
-            cell.cell = posts[indexPath.row]
+            cell.post = posts[indexPath.row]
             return cell
         }
     }
@@ -116,40 +140,30 @@ extension ProfileViewController {
 extension ProfileViewController {
     
     @objc func avatarTapped() {
-        //        self.view.addSubview(whiteView)
-        //        self.whiteView.addSubview(self.headerView.profileView.avatarImageView)
-        //        self.view.addSubview(closeButton)
-        //        self.headerView.profileView.avatarImageView.translatesAutoresizingMaskIntoConstraints = true
-        //        self.headerView.profileView.avatarImageView.frame = CGRect(x: 16, y: self.view.safeAreaInsets.top + 16, width: 110, height: 110)
-        //        self.whiteView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.height)
-        //        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: [], animations: {
-        //            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 1, animations: {
-        //                self.headerView.profileView.avatarImageView.center = self.view.center
-        //                let scaleFactor = self.view.bounds.width / self.headerView.profileView.avatarImageView.bounds.width
-        //                self.headerView.profileView.avatarImageView.transform = self.headerView.profileView.avatarImageView.transform.scaledBy(x: scaleFactor, y: scaleFactor)
-        //                self.viewDidLayoutSubviews()
-        //            })
-        //            UIView.addKeyframe(withRelativeStartTime: 0.5, relativeDuration: 1, animations: {
-        //                self.whiteView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        //            })
-        //        }, completion: { _ in
-        //            NSLayoutConstraint.activate([self.closeButton.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 10),
-        //                                         self.closeButton.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -16)])
-        //
-        //        })
+        view.addSubview(whiteView)
+        whiteView.addSubview(headerView.avatarImageView)
+        headerView.avatarImageView.layer.borderWidth = 0
+        UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseOut) {
+            self.whiteView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+            self.headerView.avatarImageView.clipsToBounds = false
+            self.headerView.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width)
+            self.headerView.avatarImageView.center = self.tableView.center
+        } completion: { _ in
+            self.whiteView.addSubview(self.closeButton)
+        }
     }
     
     @objc func closeAvatar() {
-        //        UIView.animate(withDuration: 0.5, animations: {
-        //            self.whiteView.removeFromSuperview()
-        //            self.closeButton.removeFromSuperview()
-        //            self.headerView.profileView.avatarImageView.transform = .identity
-        //            self.headerView.profileView.avatarImageView.frame = CGRect(x: 16, y: 16, width: 110, height: 110)
-        //            self.headerView.profileView.addSubview(self.headerView.profileView.avatarImageView)
-        //            self.headerView.profileView.avatarImageView.translatesAutoresizingMaskIntoConstraints = false
-        //            self.headerView.profileView.setConstraintsPHV()
-        //            self.headerView.profileView.setNeedsLayout()
-        //        })
-        //
+        UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseIn) {
+            self.headerView.avatarImageView.frame = CGRect(x: 16, y: 16, width: 110, height: 110)
+            self.headerView.avatarImageView.layer.borderWidth = CGFloat(3)
+            self.headerView.avatarImageView.layer.borderColor = CGColor(red: 255, green: 255, blue: 255, alpha: 10)
+            self.headerView.avatarImageView.layer.cornerRadius = self.headerView.avatarImageView.bounds.height / 2
+            self.headerView.avatarImageView.clipsToBounds = true
+            self.whiteView.backgroundColor = UIColor(white: 1, alpha: 0)
+        }
+        whiteView.removeFromSuperview()
+        headerView.contentView.addSubview(headerView.avatarImageView)
+        closeButton.removeFromSuperview()
     }
 }
