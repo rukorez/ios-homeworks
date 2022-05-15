@@ -9,15 +9,19 @@ import UIKit
 import StorageDevice
 import iOSIntPackage
 
-class PhotosViewController: UIViewController {
-        
-    var photoID = "photoID"
+final class PhotosViewController: UIViewController {
     
-    var images: [UIImage] = []
+    weak var coordinator: ProfileCoordinator?
+            
+    private var images: [UIImage] = [] {
+        didSet {
+            self.collection.reloadData()
+        }
+    }
     
-    var imagePublisherFacade = ImagePublisherFacade()
+    private var imagePublisherFacade = ImagePublisherFacade()
     
-    var collection: UICollectionView = {
+    private var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -29,14 +33,8 @@ class PhotosViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Photo Gallery"
-        imagePublisherFacade.subscribe(self)
-        imagePublisherFacade.addImagesWithTimer(time: 0.1, repeat: 20, userImages: photos)
-        view.addSubview(collection)
-        self.setConstraints()
-        collection.dataSource = self
-        collection.delegate = self
-        collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: photoID)
+        setViews()
+        setImagePublisherFacade()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -52,8 +50,24 @@ class PhotosViewController: UIViewController {
         super.viewWillDisappear(animated)
     }
     
+    private func setViews() {
+        navigationItem.title = "Photo Gallery"
+        view.addSubview(collection)
+        setConstraints()
+        collection.dataSource = self
+        collection.delegate = self
+        collection.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: PhotosCollectionViewCell.photoID)
+    }
+    
+    private func setImagePublisherFacade() {
+        imagePublisherFacade.subscribe(self)
+        imagePublisherFacade.addImagesWithTimer(time: 0.1, repeat: 20, userImages: photos)
+    }
+    
 
 }
+
+// MARK: - Методы CollectionView
 
 extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -80,25 +94,24 @@ extension PhotosViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collection.dequeueReusableCell(withReuseIdentifier: photoID, for: indexPath) as! PhotosCollectionViewCell
+        let cell = collection.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.photoID, for: indexPath) as! PhotosCollectionViewCell
         cell.image = images[indexPath.item]
         return cell
     }
     
 }
 
-// MARK: Реализаци Facade, Observer
+// MARK: - Реализаци Facade, Observer
 
 extension PhotosViewController: ImageLibrarySubscriber {
     
     func receive(images: [UIImage]) {
         self.images = images
-        self.collection.reloadData()
     }
     
 }
 
-// MARK: Констрейнты
+// MARK: - Констрейнты
 
 extension PhotosViewController {
     private func setConstraints() {

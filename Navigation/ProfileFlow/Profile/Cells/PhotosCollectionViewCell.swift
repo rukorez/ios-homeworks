@@ -10,6 +10,8 @@ import StorageDevice
 
 class PhotosCollectionViewCell: UICollectionViewCell {
     
+    static let photoID = "photoID"
+    
     var image: UIImage? {
         didSet {
             photo.image = image

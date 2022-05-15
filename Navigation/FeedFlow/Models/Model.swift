@@ -9,11 +9,10 @@ import Foundation
 
 final class Model {
     
-    let password = "Password"
+    private let password = "Password"
 
-    func check(word: String?) {
-        guard let pass = word else { return }
-        if pass == password {
+    func check(word: String) {
+        if word == password {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "correct password") , object: nil)
         } else {
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "incorrect password"), object: nil)

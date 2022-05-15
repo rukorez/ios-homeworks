@@ -103,27 +103,27 @@ extension PostTableViewCell {
 extension PostTableViewCell {
     private func setConstraint() {
         let constraintsPostTVC = [
-            self.author.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
-            self.author.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            author.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            author.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            self.image.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 12),
-            self.image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            self.image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            self.image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -16),
-            self.image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            self.image.heightAnchor.constraint(equalTo: image.widthAnchor),
+            image.topAnchor.constraint(equalTo: author.bottomAnchor, constant: 12),
+            image.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            image.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            image.bottomAnchor.constraint(equalTo: text.topAnchor, constant: -16),
+            image.widthAnchor.constraint(equalTo: contentView.widthAnchor),
+            image.heightAnchor.constraint(equalTo: image.widthAnchor),
             
-            self.text.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
-            self.text.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            self.text.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            text.topAnchor.constraint(equalTo: image.bottomAnchor, constant: 16),
+            text.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            text.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             
-            self.likes.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
-            self.likes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            self.likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            likes.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
+            likes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            likes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
             
-            self.views.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
-            self.views.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
-            self.views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            views.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 16),
+            views.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            views.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
         ]
         NSLayoutConstraint.activate(constraintsPostTVC)
     }

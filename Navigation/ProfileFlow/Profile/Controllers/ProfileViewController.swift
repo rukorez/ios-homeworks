@@ -8,11 +8,35 @@
 import UIKit
 import StorageDevice
 
-class ProfileViewController: UIViewController {
+final class ProfileViewController: UIViewController {
     
-    lazy var tableView = UITableView(frame: .zero, style: .grouped)
+    weak var coordinator: ProfileCoordinator?
     
-    var headerView = ProfileHeaderView(reuseIdentifier: "header")
+    var statusBarFrame: CGRect
+    var statusBarView: UIView = {
+        var statusBar = UIView()
+        statusBar.backgroundColor = .white
+        statusBar.alpha = 0
+        return statusBar
+    }()
+    
+    lazy var tableView: UITableView = {
+        var tableView = UITableView(frame: .zero, style: .grouped)
+        #if DEBUG
+        tableView.backgroundColor = .systemGray5
+        #else
+        tableView.backgroundColor = UIColor(named: "VKBlue")
+        #endif
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: Identificators.cellID)
+        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Identificators.cellID2)
+        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: Identificators.header)
+        return tableView
+    }()
+    
+    var headerView = ProfileHeaderView(reuseIdentifier: Identificators.header)
     
     lazy var whiteView: UIView = {
         var whiteView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
@@ -28,16 +52,20 @@ class ProfileViewController: UIViewController {
         return button
     }()
     
-    private var cellID = "cellID"
-    private var cellID2 = "cellID2"
+    private enum Identificators {
+        static let cellID = "cellID"
+        static let cellID2 = "cellID2"
+        static let header = "header"
+    }
     
     var userService: UserService
     
     var user: User
     
-    init(userService: UserService, name: String) {
+    init(userService: UserService, name: String, statusBarFrame: CGRect) {
         self.userService = userService
         self.user = userService.userName(name: name)
+        self.statusBarFrame = statusBarFrame
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -48,46 +76,40 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.addSubview(whiteView)
-        setupTableView()
-        setConstraintsPVC()
+        setupViews()
     }
     
-    func setupTableView() {
+    private func setupViews() {
+        statusBarView.frame = statusBarFrame
+        view.addSubview(whiteView)
         view.addSubview(tableView)
-        
-        #if DEBUG
-        tableView.backgroundColor = .systemGray5
-        #else
-        tableView.backgroundColor = UIColor(named: "VKBlue")
-        #endif
-        
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.register(PostTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: cellID2)
-        tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: "header")
+        setConstraintsPVC()
+        view.addSubview(statusBarView)
     }
     
 }
 
-// MARK: Таблица
-extension ProfileViewController: UITableViewDelegate{
+// MARK: - Методы TableView
+
+extension ProfileViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if indexPath.section == 0  {
-            let photosVC = PhotosViewController()
-            navigationController?.pushViewController(photosVC, animated: true)
+            openPhotosCollectionVC()
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "header") as! ProfileHeaderView
+            headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: Identificators.header) as! ProfileHeaderView
             let gesture = UITapGestureRecognizer(target: self, action: #selector(avatarTapped))
-            headerView.addGestureRecognizer(gesture)
+            headerView.avatarImageView.addGestureRecognizer(gesture)
+            headerView.statusTextField.delegate = self
+            headerView.setStatusButton.onTap = {
+                self.headerButtonPressed()
+            }
+            headerView.statusTextField.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
             return headerView
         } else { return nil }
     }
@@ -112,17 +134,37 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! PhotosTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identificators.cellID2, for: indexPath) as! PhotosTableViewCell
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhotosCollectionVC))
+            cell.photoCollection.addGestureRecognizer(gesture)
             return cell
         } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! PostTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: Identificators.cellID, for: indexPath) as! PostTableViewCell
             cell.post = posts[indexPath.row]
             return cell
         }
     }
+    
+    @objc private func openPhotosCollectionVC() {
+        coordinator?.showPhotosCollectionModule()
+    }
+    
+// MARK: - Анимация StatusBar
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = -tableView.contentOffset.y
+        UIView.animate(withDuration: 0.1, delay: 0) {
+            if offsetY <= 14 {
+                self.statusBarView.alpha = 1
+            } else {
+                self.statusBarView.alpha = 0
+            }
+        }
+    }
+    
 }
 
-// MARK: Констрейнты
+// MARK: - Констрейнты
 extension ProfileViewController {
     func setConstraintsPVC() {
         let constraintsPVC = [
@@ -135,7 +177,29 @@ extension ProfileViewController {
     }
 }
 
-// MARK: Анимация
+// MARK: - Кнопки для Header
+
+extension ProfileViewController {
+    
+    private func headerButtonPressed() {
+        guard let text = headerView.statusText else { return headerView.dismissKeyboardInView() }
+        guard headerView.statusText != "" else { return headerView.dismissKeyboardInView() }
+        headerView.statusLabel.text = text
+        headerView.dismissKeyboardInView()
+    }
+    
+    override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.headerButtonPressed()
+        return true
+    }
+    
+    @objc func statusTextChanged(_ textField: UITextField) {
+        headerView.statusText = textField.text
+    }
+    
+}
+
+// MARK: - Анимация
 
 extension ProfileViewController {
     

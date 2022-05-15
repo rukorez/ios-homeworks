@@ -65,18 +65,18 @@ extension PhotosTableViewCell {
     private func setConstraints() {
         
         sectionLabel.snp.makeConstraints { (maker) in
-            maker.top.left.equalTo(12)
+            maker.top.leading.equalToSuperview().offset(12)
         }
         
         arrow.snp.makeConstraints { (maker) in
-            maker.right.equalTo(-12)
+            maker.trailing.equalToSuperview().offset(-12)
             maker.centerY.equalTo(sectionLabel.snp.centerY)
         }
         
         photoCollection.snp.makeConstraints { (maker) in
-            maker.left.right.bottom.equalToSuperview()
+            maker.leading.trailing.bottom.equalToSuperview()
             maker.top.equalTo(sectionLabel.snp.bottom)
-            maker.height.equalTo(110)
+            maker.height.equalTo(120)
         }
     }
 }
@@ -97,15 +97,7 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 8
-    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width - 44) / 4, height: (collectionView.bounds.width - 44) / 4)
     }
