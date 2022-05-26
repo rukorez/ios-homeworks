@@ -20,8 +20,8 @@ final class FeedPresenter: PresenterControllerOutput {
     }
     
     func sendData() {
-        input?.showNextModule(goTo: {
-            self.coordinator?.showPostModule(title: self.post1.title)
+        input?.showNextModule(goTo: { [ weak self ] in
+            self?.coordinator?.showPostModule(title: self?.post1.title ?? "")
         })
     }
     

@@ -40,8 +40,8 @@ final class FeedViewController: UIViewController {
     }
     
     func addTargetButton() {
-        feedView.tapCheckPass = { password in
-            self.output.passData(data: password)
+        feedView.tapCheckPass = { [ weak self ]password in
+            self?.output.passData(data: password)
         }
     }
     

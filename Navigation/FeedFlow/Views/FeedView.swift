@@ -31,8 +31,8 @@ final class FeedView: UIView {
     
     lazy var customButton: CustomButton = {
         var button = CustomButton(title: "Check password", titleColor: .black, backgroundColor: .clear)
-        button.onTap = {
-            self.tapCheckPass?(self.customTextField.text)
+        button.onTap = { [ weak self ] in
+            self?.tapCheckPass?(self?.customTextField.text)
         }
         return button
     }()

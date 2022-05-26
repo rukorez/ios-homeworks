@@ -26,8 +26,8 @@ final class InfoViewController: UIViewController {
     private func setViews() {
         view.addSubview(buttonDelete)
         view.backgroundColor = .systemGray
-        buttonDelete.onTap = {
-            self.tap()
+        buttonDelete.onTap = { [ weak self ] in
+            self?.tap()
         }
     }
     
