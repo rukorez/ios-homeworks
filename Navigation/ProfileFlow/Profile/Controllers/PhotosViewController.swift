@@ -21,6 +21,8 @@ final class PhotosViewController: UIViewController {
     
     private var imagePublisherFacade = ImagePublisherFacade()
     
+    var imageProcessor = ImageProcessor()
+    
     private var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
@@ -35,6 +37,9 @@ final class PhotosViewController: UIViewController {
         
         setViews()
         setImagePublisherFacade()
+        benchmarkBackgrpundQOS()
+        benchmarkDefaultQOS()
+        benchmarkUserInteractiveQOS()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -123,4 +128,67 @@ extension PhotosViewController {
         ]
         NSLayoutConstraint.activate(constraintsPVC)
     }
+}
+
+// MARK: - Измерение скорости потоков
+
+extension PhotosViewController {
+    
+    func benchmarkBackgrpundQOS() {
+        let startTime = Date()
+        imageProcessor.processImagesOnThread(sourceImages: images, filter: .fade, qos: .background) { [weak self] images in
+            print("backgroundQOS")
+            DispatchQueue.main.async {
+                var newImages: [UIImage] = []
+                images.forEach { image in
+                    guard let newImage = image else { return }
+                    newImages.append(UIImage(cgImage: newImage))
+                }
+                self?.images = newImages
+            }
+        }
+        let endTime = Date()
+        
+        let timeElapsed = endTime.timeIntervalSince(startTime)
+        print("Time elapsed: \(timeElapsed) s for backgroundQOS")
+    }
+    
+    func benchmarkDefaultQOS() {
+        let startTime = Date()
+        imageProcessor.processImagesOnThread(sourceImages: images, filter: .chrome, qos: .default) { [weak self] images in
+            print("defaultQOS")
+            DispatchQueue.main.async {
+                var newImages: [UIImage] = []
+                images.forEach { image in
+                    guard let newImage = image else { return }
+                    newImages.append(UIImage(cgImage: newImage))
+                }
+                self?.images = newImages
+            }
+        }
+        let endTime = Date()
+        
+        let timeElapsed = endTime.timeIntervalSince(startTime)
+        print("Time elapsed: \(timeElapsed) s for defaultQOS")
+        }
+    
+    func benchmarkUserInteractiveQOS() {
+        let startTime = Date()
+        imageProcessor.processImagesOnThread(sourceImages: images, filter: .sepia(intensity: 1), qos: .userInteractive) { [ weak self ] images in
+            print("userInteractiveQOS")
+            DispatchQueue.main.async {
+                var newImages: [UIImage] = []
+                images.forEach { image in
+                    guard let newImage = image else { return }
+                    newImages.append(UIImage(cgImage: newImage))
+                }
+                self?.images = newImages
+            }
+        }
+        let endTime = Date()
+        
+        let timeElapsed = endTime.timeIntervalSince(startTime)
+        print("Time elapsed: \(timeElapsed) s userInteractiveQOS")
+    }
+    
 }
