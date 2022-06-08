@@ -14,7 +14,7 @@ class LoginChecker {
     
     private let login = "Filipp"
     
-    private let password = "123456"
+    public let password = "123456"
     
     private init() {}
     

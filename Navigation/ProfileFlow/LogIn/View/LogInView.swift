@@ -71,10 +71,23 @@ final class LogInView: UIView {
         return button
     }()
     
+    lazy var generateButton: CustomButton = {
+        var button = CustomButton(title: "Подобрать пароль", titleColor: .systemBlue, backgroundColor: .clear)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        var indicator = UIActivityIndicatorView(style: .medium)
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setViews()
+        setConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -83,18 +96,21 @@ final class LogInView: UIView {
     
     private func setViews() {
         backgroundColor = .white
+        
         addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(logo)
         contentView.addSubview(loginPasswordView)
         contentView.addSubview(loginButton)
+        contentView.addSubview(generateButton)
+        contentView.addSubview(activityIndicator)
+        
         loginPasswordView.addSubview(login)
         loginPasswordView.addSubview(password)
         loginPasswordView.addSubview(separator)
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
-        setConstraints()
     }
 }
 
@@ -127,7 +143,13 @@ extension LogInView {
             loginButton.heightAnchor.constraint(equalToConstant: 50),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            
+            generateButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30),
+            generateButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            activityIndicator.topAnchor.constraint(equalTo: generateButton.bottomAnchor, constant: 16),
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            activityIndicator.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
             
             login.topAnchor.constraint(equalTo: loginPasswordView.topAnchor),
             login.trailingAnchor.constraint(equalTo: loginPasswordView.trailingAnchor),

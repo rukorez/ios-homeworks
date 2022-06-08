@@ -28,5 +28,10 @@ final class ProfileModuleFactory: ModuleFactory {
     func makePhotosCollectionModule() -> PhotosViewController {
         return PhotosViewController()
     }
+    
+    func makeFullScreenModule(indexPath: IndexPath) -> FullScreenViewController {
+        let fullScreenModule = FullScreenViewController(indexPath: indexPath)
+        return fullScreenModule
+    }
    
 }

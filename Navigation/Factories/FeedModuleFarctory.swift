@@ -37,7 +37,10 @@ final class FeedModuleFactory: ModuleFactory {
     
     func makeInfoAlert() -> UIAlertController {
         let alertVC = UIAlertController(title: "Удаление", message: "Удалить всю информацию?", preferredStyle: .alert)
-        let actionYes = UIAlertAction(title: "Да", style: .default) { _ in print ("Да")}
+        let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
+            alertVC.dismiss(animated: true)
+            print ("Да")
+        }
         alertVC.addAction(actionYes)
         let actionNo = UIAlertAction(title: "Нет", style: .default) { _ in print("Нет")}
         alertVC.addAction(actionNo)

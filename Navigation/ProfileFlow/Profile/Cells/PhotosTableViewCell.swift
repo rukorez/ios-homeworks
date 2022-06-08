@@ -10,6 +10,8 @@ import StorageDevice
 import SnapKit
 
 class PhotosTableViewCell: UITableViewCell {
+    
+    var coordinator: ProfileCoordinator?
 
     private var photo = "photo"
     
@@ -100,6 +102,10 @@ extension PhotosTableViewCell: UICollectionViewDataSource, UICollectionViewDeleg
         
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collectionView.bounds.width - 44) / 4, height: (collectionView.bounds.width - 44) / 4)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showFullScreenModule(indexPath: indexPath)
     }
     
 }

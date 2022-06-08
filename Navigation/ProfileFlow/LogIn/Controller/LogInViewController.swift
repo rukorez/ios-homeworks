@@ -15,6 +15,8 @@ final class LogInViewController: UIViewController {
     
     var delegate: LoginViewControllerDelegate?
     
+    var bruteForce = BruteForce()
+    
     var currentUser: CurrentUserService = {
         var user = CurrentUserService()
         user.user.fullName = "Ivan Ivanov"
@@ -31,7 +33,7 @@ final class LogInViewController: UIViewController {
         setView()
         setDelegatesForViews()
         hideKeyboardInViewController()
-        setTardetButton()
+        setTargetButton()
     }
     
     private func setView() {
@@ -87,8 +89,18 @@ extension LogInViewController {
 
 extension LogInViewController {
     
-    private func setTardetButton() {
+    private func setTargetButton() {
         loginView.loginButton.onTap = self.loginTapped
+        loginView.generateButton.onTap = { [ weak self ] in
+            self?.loginView.activityIndicator.startAnimating()
+            let queue = DispatchQueue(label: "secondQueue", qos: .userInitiated)
+            queue.async {
+                self?.bruteForce.bruteForce(passwordToUnlock: LoginChecker.shared.password)
+                self?.loginView.activityIndicator.stopAnimating()
+                self?.loginView.login.isSecureTextEntry = false
+                self?.loginView.password.text = self?.bruteForce.password
+            }
+        }
     }
     
     private func loginTapped() {

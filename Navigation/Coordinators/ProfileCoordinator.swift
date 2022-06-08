@@ -47,4 +47,10 @@ final class ProfileCoordinator: Coordinator {
         navigationController.pushViewController(photosCollectionModule, animated: true)
     }
     
+    func showFullScreenModule(indexPath: IndexPath) {
+        let fullScreenModule = FullScreenViewController(indexPath: indexPath)
+        fullScreenModule.coordinator = self
+        navigationController.pushViewController(fullScreenModule, animated: true)
+    }
+    
 }

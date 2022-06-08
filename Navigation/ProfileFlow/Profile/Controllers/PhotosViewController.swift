@@ -13,7 +13,7 @@ final class PhotosViewController: UIViewController {
     
     weak var coordinator: ProfileCoordinator?
             
-    private var images: [UIImage] = [] {
+    private var images: [UIImage] = photos {
         didSet {
             self.collection.reloadData()
         }
@@ -36,10 +36,10 @@ final class PhotosViewController: UIViewController {
         super.viewDidLoad()
         
         setViews()
-        setImagePublisherFacade()
-        benchmarkBackgrpundQOS()
-        benchmarkDefaultQOS()
-        benchmarkUserInteractiveQOS()
+//        setImagePublisherFacade()
+//        benchmarkBackgrpundQOS()
+//        benchmarkDefaultQOS()
+//        benchmarkUserInteractiveQOS()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -90,6 +90,11 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: (collection.bounds.width - 32)/3, height: (collection.bounds.width - 32)/3)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        coordinator?.showFullScreenModule(indexPath: indexPath)
+    }
+    
 }
 
 extension PhotosViewController: UICollectionViewDataSource {
@@ -100,7 +105,8 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.photoID, for: indexPath) as! PhotosCollectionViewCell
-        cell.image = images[indexPath.item]
+//        print("indexpath \(indexPath)")
+        cell.image = images[indexPath.row]
         return cell
     }
     

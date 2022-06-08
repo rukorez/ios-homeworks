@@ -135,8 +135,9 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identificators.cellID2, for: indexPath) as! PhotosTableViewCell
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhotosCollectionVC))
-            cell.photoCollection.addGestureRecognizer(gesture)
+//            let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhotosCollectionVC))
+//            cell.photoCollection.addGestureRecognizer(gesture)
+            cell.coordinator = self.coordinator
             return cell
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identificators.cellID, for: indexPath) as! PostTableViewCell
