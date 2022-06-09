@@ -96,9 +96,11 @@ extension LogInViewController {
             let queue = DispatchQueue(label: "secondQueue", qos: .userInitiated)
             queue.async {
                 self?.bruteForce.bruteForce(passwordToUnlock: LoginChecker.shared.password)
-                self?.loginView.activityIndicator.stopAnimating()
-                self?.loginView.login.isSecureTextEntry = false
-                self?.loginView.password.text = self?.bruteForce.password
+                DispatchQueue.main.async {
+                    self?.loginView.activityIndicator.stopAnimating()
+                    self?.loginView.password.isSecureTextEntry = false
+                    self?.loginView.password.text = self?.bruteForce.password
+                }
             }
         }
     }

@@ -44,7 +44,7 @@ final class LogInView: UIView {
         password.placeholder = "Password"
         password.isSecureTextEntry = true
         password.clearButtonMode = .whileEditing
-        password.clearsOnBeginEditing = true
+//        password.clearsOnBeginEditing = true
         return password
     }()
     
