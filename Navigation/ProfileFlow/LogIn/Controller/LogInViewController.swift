@@ -93,14 +93,19 @@ extension LogInViewController {
         loginView.loginButton.onTap = self.loginTapped
         loginView.generateButton.onTap = { [ weak self ] in
             self?.loginView.activityIndicator.startAnimating()
+            
             let queue = DispatchQueue(label: "secondQueue", qos: .userInitiated)
-            queue.async {
+            
+            let workItem = DispatchWorkItem {
                 self?.bruteForce.bruteForce(passwordToUnlock: LoginChecker.shared.password)
-                DispatchQueue.main.async {
-                    self?.loginView.activityIndicator.stopAnimating()
-                    self?.loginView.password.isSecureTextEntry = false
-                    self?.loginView.password.text = self?.bruteForce.password
-                }
+            }
+            
+            queue.async(execute: workItem)
+            
+            workItem.notify(queue: DispatchQueue.main) {
+                self?.loginView.activityIndicator.stopAnimating()
+                self?.loginView.password.isSecureTextEntry = false
+                self?.loginView.password.text = self?.bruteForce.password
             }
         }
     }
