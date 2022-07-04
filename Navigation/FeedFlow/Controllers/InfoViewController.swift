@@ -11,12 +11,12 @@ final class InfoViewController: UIViewController {
     
     weak var coordinator: FeedCoordinator?
     
-     var buttonDelete: CustomButton = {
+    private var buttonDelete: CustomButton = {
         let button = CustomButton(title: "Удалить все", titleColor: .white, backgroundColor: .clear)
         button.frame = CGRect(x: 100, y: 350, width: 200, height: 50)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -31,9 +31,9 @@ final class InfoViewController: UIViewController {
         }
     }
     
-     func tap() {
-         coordinator?.showAlertModule(controller: self)
-     }
+    private func tap() {
+        coordinator?.showAlertModule(controller: self)
+    }
 
 
 }

@@ -12,7 +12,7 @@ final class BruteForce {
     var password: String = ""
     
     func bruteForce(passwordToUnlock: String) {
-        let ALLOWED_CHARACTERS:   [String] = String().printable.map { String($0) }
+        let ALLOWED_CHARACTERS:[String] = String().printable.map { String($0) }
 
         while password != passwordToUnlock {
             password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
@@ -23,12 +23,12 @@ final class BruteForce {
     }
     
     private func indexOf(character: Character, _ array: [String]) -> Int {
-        return array.firstIndex(of: String(character))!
+        guard let index = array.firstIndex(of: String(character)) else { return 0 }
+        return index
     }
 
     private func characterAt(index: Int, _ array: [String]) -> Character {
-        return index < array.count ? Character(array[index])
-                                   : Character("")
+        index < array.count ? Character(array[index]) : Character("")
     }
 
     private func generateBruteForce(_ string: String, fromArray array: [String]) -> String {
@@ -36,16 +36,14 @@ final class BruteForce {
 
         if str.count <= 0 {
             str.append(characterAt(index: 0, array))
-        }
-        else {
+        } else {
             str.replace(at: str.count - 1,
-                        with: characterAt(index: (indexOf(character: str.last!, array) + 1) % array.count, array))
+                        with: characterAt(index: (indexOf(character: str.last! , array) + 1) % array.count, array))
 
             if indexOf(character: str.last!, array) == 0 {
                 str = String(generateBruteForce(String(str.dropLast()), fromArray: array)) + String(str.last!)
             }
         }
-
         return str
     }
     

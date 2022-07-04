@@ -8,6 +8,14 @@
 import Foundation
 import UIKit
 
+// MARK: - Протокол Coordinator
+
+protocol Coordinator {
+    func start()
+}
+
+// MARK: - Класс главного координатора, отвечающего за главный контроллер с Таббаром
+
 class MainCoordinator: Coordinator {
     
     var rootVC: UIViewController {

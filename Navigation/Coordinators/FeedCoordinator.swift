@@ -8,6 +8,8 @@
 import Foundation
 import UIKit
 
+// MARK: - класс координаторов для контроллеров потока Feed
+
 final class FeedCoordinator: Coordinator {
     
     var rootVC: UIViewController {

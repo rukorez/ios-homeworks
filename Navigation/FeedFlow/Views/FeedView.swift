@@ -29,7 +29,7 @@ final class FeedView: UIView {
         return textField
     }()
     
-    lazy var customButton: CustomButton = {
+    private lazy var customButton: CustomButton = {
         var button = CustomButton(title: "Check password", titleColor: .black, backgroundColor: .clear)
         button.onTap = { [ weak self ] in
             self?.tapCheckPass?(self?.customTextField.text)
@@ -37,7 +37,7 @@ final class FeedView: UIView {
         return button
     }()
     
-    lazy var passwordStatus = UILabel()
+    private lazy var passwordStatus = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

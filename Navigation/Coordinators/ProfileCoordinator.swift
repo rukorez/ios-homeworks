@@ -7,6 +7,8 @@
 
 import UIKit
 
+// MARK: - класс координаторов для контроллеров потока Profile
+
 final class ProfileCoordinator: Coordinator {
     
     var rootVC: UIViewController {

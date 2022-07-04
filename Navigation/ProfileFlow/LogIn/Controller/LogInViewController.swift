@@ -11,13 +11,13 @@ final class LogInViewController: UIViewController {
     
     weak var coordinator: ProfileCoordinator?
     
-    var loginView = LogInView()
+    private var loginView = LogInView()
     
     var delegate: LoginViewControllerDelegate?
     
-    var bruteForce = BruteForce()
+    private var bruteForce = BruteForce()
     
-    var currentUser: CurrentUserService = {
+    private var currentUser: CurrentUserService = {
         var user = CurrentUserService()
         user.user.fullName = "Ivan Ivanov"
         user.user.avatar = UIImage(systemName: "person.fill")
@@ -25,7 +25,7 @@ final class LogInViewController: UIViewController {
         return user
     }()
     
-    var testUser = TestUserService()
+    private var testUser = TestUserService()
     
     override func viewDidLoad() {
         super.viewDidLoad()

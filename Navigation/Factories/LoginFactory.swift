@@ -8,9 +8,7 @@
 import Foundation
 
 protocol LoginFactory {
-    
     func create() -> LoginInspector
-    
 }
 
 final class MyLoginFactory: LoginFactory {

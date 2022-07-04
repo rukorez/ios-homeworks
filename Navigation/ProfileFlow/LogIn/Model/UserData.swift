@@ -9,19 +9,13 @@ import Foundation
 import UIKit
 
 class User {
-    
     var fullName: String?
-    
     var avatar: UIImage?
-    
     var status: String?
-    
 }
 
 protocol UserService {
-    
     func userName(name: String) -> User
-    
 }
 
 class CurrentUserService: UserService {
