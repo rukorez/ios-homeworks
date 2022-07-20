@@ -115,12 +115,17 @@ extension LogInViewController {
               let correctPassword = loginView.password.text?.hash,
               let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword)
         else { return }
-        if checkLogin {
+        if checkLogin.0 {
             #if DEBUG
             coordinator?.showProfileModule(userService: testUser, name: testUser.user.fullName ?? "")
             #else
             coordinator?.showProfileModule(userService: currentUser, name: currentUser.user.fullName ?? "")
             #endif
+        } else {
+            let alertVC = UIAlertController(title: "Ошибка", message: checkLogin.1, preferredStyle: .alert)
+            let okButton = UIAlertAction(title: "OK", style: .default)
+            alertVC.addAction(okButton)
+            present(alertVC, animated: true)
         }
     }
 }

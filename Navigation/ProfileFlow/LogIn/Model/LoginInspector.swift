@@ -18,11 +18,15 @@ class LoginChecker {
     
     private init() {}
     
-    func check(login: Int, password: Int) -> Bool {
+    func check(login: Int, password: Int) -> (Bool, String?) {
         if login == self.login.hash && password == self.password.hash {
-            return true
+            return (true, nil)
+        } else if login != self.login.hash {
+            return (false, LoginError.wrongLogin.localizedDescription)
+        } else if password != self.password.hash {
+            return (false, LoginError.wrongPassword.localizedDescription)
         } else {
-            return false
+            return (false, nil)
         }
     }
 }
@@ -30,17 +34,17 @@ class LoginChecker {
 
 protocol LoginViewControllerDelegate {
     
-    func checkLogin(login: Int, password: Int) -> Bool
+    func checkLogin(login: Int, password: Int) -> (Bool, String?)
     
 }
 
 class LoginInspector: LoginViewControllerDelegate {
     
-    func checkLogin(login: Int, password: Int) -> Bool {
-        if LoginChecker.shared.check(login: login, password: password) {
-            return true
+    func checkLogin(login: Int, password: Int) -> (Bool, String?) {
+        if LoginChecker.shared.check(login: login, password: password).0 {
+            return (true, nil)
         } else {
-            return false
+            return (false, LoginChecker.shared.check(login: login, password: password).1)
         }
     }
     
