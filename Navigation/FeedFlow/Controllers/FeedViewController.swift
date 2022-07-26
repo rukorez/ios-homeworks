@@ -40,13 +40,18 @@ final class FeedViewController: UIViewController {
     }
     
     func addTargetButton() {
-        feedView.tapCheckPass = { [ weak self ]password in
+        feedView.tapCheckPass = { [ weak self ] password in
             self?.output.passData(data: password)
         }
     }
     
-    func correctPass(bool: Bool) {
+    func correctPass(bool: Bool, completion: (Result<Bool, LoginError>) -> Void) {
         feedView.checkPassword(correct: bool)
+        if bool {
+            completion(.success(true))
+        } else {
+            completion(.failure(.wrongPassword))
+        }
     }
     
     override func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -60,7 +65,12 @@ final class FeedViewController: UIViewController {
 extension FeedViewController: PresenterControllerInput {
     
     func updateData(data: Bool) {
-        self.correctPass(bool: data)
+        self.correctPass(bool: data, completion: { result in
+            switch result {
+            case .success: print("Верный пароль")
+            case .failure(let error): print("\(error.localizedDescription)")
+            }
+        })
     }
     
     func showNextModule(goTo: @escaping ()->Void) {

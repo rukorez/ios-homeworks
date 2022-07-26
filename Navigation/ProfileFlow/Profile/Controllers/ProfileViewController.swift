@@ -60,11 +60,18 @@ final class ProfileViewController: UIViewController {
     
     var userService: UserService
     
-    var user: User
+    var user: User?
     
     init(userService: UserService, name: String, statusBarFrame: CGRect) {
         self.userService = userService
-        self.user = userService.userName(name: name)
+        do {
+            let user = try userService.userName(name: name)
+            self.user = user
+        } catch LoginError.wrongUser {
+            print(LoginError.wrongUser.localizedDescription)
+        } catch {
+            print("Неизвестная ошибка")
+        }
         self.statusBarFrame = statusBarFrame
         super.init(nibName: nil, bundle: nil)
     }

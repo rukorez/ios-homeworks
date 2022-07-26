@@ -20,7 +20,7 @@ class User {
 
 protocol UserService {
     
-    func userName(name: String) -> User
+    func userName(name: String) throws -> User
     
 }
 
@@ -28,8 +28,8 @@ class CurrentUserService: UserService {
     
     var user = User()
     
-    func userName(name: String) -> User {
-        guard name == user.fullName else { return User() }
+    func userName(name: String) throws -> User {
+        guard name == user.fullName else { throw LoginError.wrongUser }
         return user
     }
     
@@ -45,8 +45,8 @@ class TestUserService: UserService {
         return user
     }()
     
-    func userName(name: String) -> User {
-        guard name == user.fullName else { return User() }
+    func userName(name: String) throws -> User {
+        guard name == user.fullName else { throw LoginError.wrongUser }
         return user
     }
 }

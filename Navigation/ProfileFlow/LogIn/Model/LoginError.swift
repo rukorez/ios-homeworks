@@ -11,6 +11,7 @@ import UIKit
 enum LoginError: Error {
     case wrongLogin
     case wrongPassword
+    case wrongUser
     
     var localizedDescription: String {
         switch self {
@@ -18,6 +19,8 @@ enum LoginError: Error {
             return "Неверный логин"
         case .wrongPassword:
             return "Неверный пароль"
+        case .wrongUser:
+            return " Неизвестный пользователь"
         }
     }
 }
