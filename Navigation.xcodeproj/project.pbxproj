@@ -34,6 +34,14 @@
 		771B750826E7ABE400B6F44F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771B750726E7ABE400B6F44F /* LogInView.swift */; };
 		771C784026D7E3D7007FA02C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */; };
 		774069582770CC1E00892E49 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774069572770CC1E00892E49 /* UserData.swift */; };
+		7745F4AE28A02EBA003ECE74 /* Pump It.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4A928A02EB9003ECE74 /* Pump It.mp3 */; };
+		7745F4AF28A02EBA003ECE74 /* I need a dollar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AA28A02EB9003ECE74 /* I need a dollar.mp3 */; };
+		7745F4B028A02EBA003ECE74 /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AB28A02EB9003ECE74 /* Queen.mp3 */; };
+		7745F4B128A02EBA003ECE74 /* TNT.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AC28A02EB9003ECE74 /* TNT.mp3 */; };
+		7745F4B228A02EBA003ECE74 /* Memories.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AD28A02EBA003ECE74 /* Memories.mp3 */; };
+		7745F4B428A02FDF003ECE74 /* PlayerModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B328A02FDF003ECE74 /* PlayerModuleFactory.swift */; };
+		7745F4B628A03088003ECE74 /* PlayerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B528A03088003ECE74 /* PlayerCoordinator.swift */; };
+		7745F4BA28A03CD1003ECE74 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B928A03CD1003ECE74 /* PlayerViewController.swift */; };
 		7795D5F927A30A8800B1A758 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795D5F827A30A8800B1A758 /* LoginInspector.swift */; };
 		7795D5FC27A5BBDD00B1A758 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795D5FB27A5BBDD00B1A758 /* LoginFactory.swift */; };
 		77A4342A2850CF4F00FDAAC5 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A434292850CF4F00FDAAC5 /* BruteForce.swift */; };
@@ -126,6 +134,14 @@
 		771B750726E7ABE400B6F44F /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		774069572770CC1E00892E49 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		7745F4A928A02EB9003ECE74 /* Pump It.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pump It.mp3"; sourceTree = "<group>"; };
+		7745F4AA28A02EB9003ECE74 /* I need a dollar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "I need a dollar.mp3"; sourceTree = "<group>"; };
+		7745F4AB28A02EB9003ECE74 /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
+		7745F4AC28A02EB9003ECE74 /* TNT.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = TNT.mp3; sourceTree = "<group>"; };
+		7745F4AD28A02EBA003ECE74 /* Memories.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Memories.mp3; sourceTree = "<group>"; };
+		7745F4B328A02FDF003ECE74 /* PlayerModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModuleFactory.swift; sourceTree = "<group>"; };
+		7745F4B528A03088003ECE74 /* PlayerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCoordinator.swift; sourceTree = "<group>"; };
+		7745F4B928A03CD1003ECE74 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		7795D5F827A30A8800B1A758 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		7795D5FB27A5BBDD00B1A758 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		77A434292850CF4F00FDAAC5 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
@@ -209,6 +225,7 @@
 				770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */,
 				7723F218281F96610056BB6C /* Coordinators */,
 				7723F216281F964B0056BB6C /* Factories */,
+				7745F4A128A02BD1003ECE74 /* PlayerFlow */,
 				77BFC0BC282E8ADE009A6C3B /* FeedFlow */,
 				77BFC0BD282E8AF6009A6C3B /* ProfileFlow */,
 				77169453282EFA8B00EC4E61 /* Exstensions */,
@@ -281,6 +298,7 @@
 				77BFC0BA282E8303009A6C3B /* ModuleFactoryProtocol.swift */,
 				77B9F4D8281F981E0009BF09 /* FeedModuleFarctory.swift */,
 				77B9F4DE281FD8B80009BF09 /* ProfileModuleFactory.swift */,
+				7745F4B328A02FDF003ECE74 /* PlayerModuleFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -292,8 +310,30 @@
 				77B9F4DC281FD7630009BF09 /* MainCoordinator.swift */,
 				77B9F4E0281FE67C0009BF09 /* FeedCoordinator.swift */,
 				77BFC0B8282E7DA6009A6C3B /* ProfileCoordinator.swift */,
+				7745F4B528A03088003ECE74 /* PlayerCoordinator.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		7745F4A128A02BD1003ECE74 /* PlayerFlow */ = {
+			isa = PBXGroup;
+			children = (
+				7745F4B928A03CD1003ECE74 /* PlayerViewController.swift */,
+				7745F4A828A02EA3003ECE74 /* Songs */,
+			);
+			path = PlayerFlow;
+			sourceTree = "<group>";
+		};
+		7745F4A828A02EA3003ECE74 /* Songs */ = {
+			isa = PBXGroup;
+			children = (
+				7745F4AA28A02EB9003ECE74 /* I need a dollar.mp3 */,
+				7745F4AD28A02EBA003ECE74 /* Memories.mp3 */,
+				7745F4A928A02EB9003ECE74 /* Pump It.mp3 */,
+				7745F4AB28A02EB9003ECE74 /* Queen.mp3 */,
+				7745F4AC28A02EB9003ECE74 /* TNT.mp3 */,
+			);
+			path = Songs;
 			sourceTree = "<group>";
 		};
 		7795D5FA27A315D200B1A758 /* LogIn */ = {
@@ -566,6 +606,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7745F4AF28A02EBA003ECE74 /* I need a dollar.mp3 in Resources */,
+				7745F4AE28A02EBA003ECE74 /* Pump It.mp3 in Resources */,
+				7745F4B128A02EBA003ECE74 /* TNT.mp3 in Resources */,
+				7745F4B228A02EBA003ECE74 /* Memories.mp3 in Resources */,
+				7745F4B028A02EBA003ECE74 /* Queen.mp3 in Resources */,
 				770CAC7626B6DC620070BB62 /* LaunchScreen.storyboard in Resources */,
 				770CAC7326B6DC620070BB62 /* Assets.xcassets in Resources */,
 			);
@@ -681,8 +726,10 @@
 				77DD121226F90297009DFCAE /* PhotosTableViewCell.swift in Sources */,
 				77A4342A2850CF4F00FDAAC5 /* BruteForce.swift in Sources */,
 				77BFC0BB282E8303009A6C3B /* ModuleFactoryProtocol.swift in Sources */,
+				7745F4B428A02FDF003ECE74 /* PlayerModuleFactory.swift in Sources */,
 				77C1B14427F0F24F00CCF120 /* CustomButton.swift in Sources */,
 				77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */,
+				7745F4B628A03088003ECE74 /* PlayerCoordinator.swift in Sources */,
 				774069582770CC1E00892E49 /* UserData.swift in Sources */,
 				77B9F4DF281FD8B80009BF09 /* ProfileModuleFactory.swift in Sources */,
 				770CACA626B866100070BB62 /* PostViewController.swift in Sources */,
@@ -696,6 +743,7 @@
 				771C784026D7E3D7007FA02C /* ProfileHeaderView.swift in Sources */,
 				770CAC7E26B6E9E60070BB62 /* FeedViewController.swift in Sources */,
 				77169450282EC44D00EC4E61 /* PresenterProtocols.swift in Sources */,
+				7745F4BA28A03CD1003ECE74 /* PlayerViewController.swift in Sources */,
 				771AE966274CED0100F8F432 /* CustomTextField.swift in Sources */,
 				77B9F4E1281FE67C0009BF09 /* FeedCoordinator.swift in Sources */,
 				7795D5F927A30A8800B1A758 /* LoginInspector.swift in Sources */,

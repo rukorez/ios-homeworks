@@ -15,7 +15,7 @@ class MainCoordinator: Coordinator {
     }
     
     var childCoordinators: [Coordinator] {
-        return [feedCoordinator, profileCoordinator]
+        return [feedCoordinator, profileCoordinator, playerCoordinator]
     }
     
     var statusBarFrame: CGRect
@@ -25,6 +25,8 @@ class MainCoordinator: Coordinator {
     var feedCoordinator: FeedCoordinator
     
     var profileCoordinator: ProfileCoordinator
+    
+    var playerCoordinator: PlayerCoordinator
     
     var tabBarController: UITabBarController
     
@@ -39,6 +41,10 @@ class MainCoordinator: Coordinator {
         let profileController = profileCoordinator.rootVC
         profileController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
         controllers.append(profileController)
+        playerCoordinator = PlayerCoordinator(factory: PlayerModuleFactory())
+        let playerController = playerCoordinator.rootVC
+        playerController.tabBarItem = UITabBarItem(title: "Player", image: UIImage(systemName: "play.fill"), tag: 2)
+        controllers.append(playerController)
     }
     
     func start() {
