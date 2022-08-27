@@ -42,6 +42,7 @@
 		7745F4B428A02FDF003ECE74 /* PlayerModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B328A02FDF003ECE74 /* PlayerModuleFactory.swift */; };
 		7745F4B628A03088003ECE74 /* PlayerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B528A03088003ECE74 /* PlayerCoordinator.swift */; };
 		7745F4BA28A03CD1003ECE74 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745F4B928A03CD1003ECE74 /* PlayerViewController.swift */; };
+		7752D8AE28B7EA13009C97D4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752D8AD28B7EA13009C97D4 /* NetworkService.swift */; };
 		7795D5F927A30A8800B1A758 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795D5F827A30A8800B1A758 /* LoginInspector.swift */; };
 		7795D5FC27A5BBDD00B1A758 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7795D5FB27A5BBDD00B1A758 /* LoginFactory.swift */; };
 		77A4342A2850CF4F00FDAAC5 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A434292850CF4F00FDAAC5 /* BruteForce.swift */; };
@@ -142,6 +143,7 @@
 		7745F4B328A02FDF003ECE74 /* PlayerModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModuleFactory.swift; sourceTree = "<group>"; };
 		7745F4B528A03088003ECE74 /* PlayerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCoordinator.swift; sourceTree = "<group>"; };
 		7745F4B928A03CD1003ECE74 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
+		7752D8AD28B7EA13009C97D4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		7795D5F827A30A8800B1A758 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		7795D5FB27A5BBDD00B1A758 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		77A434292850CF4F00FDAAC5 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
@@ -233,6 +235,7 @@
 				770CAC7226B6DC620070BB62 /* Assets.xcassets */,
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
+				7752D8AD28B7EA13009C97D4 /* NetworkService.swift */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -733,6 +736,7 @@
 				774069582770CC1E00892E49 /* UserData.swift in Sources */,
 				77B9F4DF281FD8B80009BF09 /* ProfileModuleFactory.swift in Sources */,
 				770CACA626B866100070BB62 /* PostViewController.swift in Sources */,
+				7752D8AE28B7EA13009C97D4 /* NetworkService.swift in Sources */,
 				770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */,
 				77B9F4DB281F988C0009BF09 /* CoordinatorProtocol.swift in Sources */,
 				77169452282EC55900EC4E61 /* FeedPresenter.swift in Sources */,

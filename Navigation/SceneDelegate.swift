@@ -35,6 +35,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = tabBarController
         window?.makeKeyAndVisible()
         coordinator?.start()
+        
+        let appConfigurator = AppConfiguration.starships
+        NetworkService.request(for: appConfigurator)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
