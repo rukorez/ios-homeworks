@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7700A57828BD283500825293 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57728BD283500825293 /* UserModel.swift */; };
+		7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57A28BD6B0200825293 /* PlanetInstance.swift */; };
 		770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6926B6DC610070BB62 /* AppDelegate.swift */; };
 		770CAC6C26B6DC610070BB62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */; };
 		770CAC7326B6DC620070BB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770CAC7226B6DC620070BB62 /* Assets.xcassets */; };
@@ -111,6 +112,7 @@
 		43A77D084E80FE2725290DAE /* Pods-StorageDevice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice.release.xcconfig"; path = "Target Support Files/Pods-StorageDevice/Pods-StorageDevice.release.xcconfig"; sourceTree = "<group>"; };
 		59058BA8AC539420EF7D4098 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		7700A57728BD283500825293 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		7700A57A28BD6B0200825293 /* PlanetInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetInstance.swift; sourceTree = "<group>"; };
 		770CAC6626B6DC610070BB62 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		770CAC6926B6DC610070BB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -203,6 +205,8 @@
 		7700A57928BD284A00825293 /* JSONModels */ = {
 			isa = PBXGroup;
 			children = (
+				7700A57728BD283500825293 /* UserModel.swift */,
+				7700A57A28BD6B0200825293 /* PlanetInstance.swift */,
 			);
 			path = JSONModels;
 			sourceTree = "<group>";
@@ -244,8 +248,6 @@
 				770CAC7226B6DC620070BB62 /* Assets.xcassets */,
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
-				7700A57928BD284A00825293 /* JSONModels */,
-				7700A57728BD283500825293 /* UserModel.swift */,
 				7752D8AD28B7EA13009C97D4 /* NetworkService.swift */,
 			);
 			path = Navigation;
@@ -459,6 +461,7 @@
 		77BFC0C7282E8E5D009A6C3B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7700A57928BD284A00825293 /* JSONModels */,
 				770CACA726B882240070BB62 /* Post.swift */,
 				77C1B14727F229DE00CCF120 /* Model.swift */,
 			);
@@ -769,6 +772,7 @@
 				77BFC0C6282E8C52009A6C3B /* Post.swift in Sources */,
 				77B9F4D9281F981E0009BF09 /* FeedModuleFarctory.swift in Sources */,
 				77BE688D28735EE70055874C /* LoginError.swift in Sources */,
+				7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */,
 				7716944C282E97B800EC4E61 /* FeedView.swift in Sources */,
 				771B750826E7ABE400B6F44F /* LogInView.swift in Sources */,
 				77DD121626FBAA42009DFCAE /* PhotosCollectionViewCell.swift in Sources */,
