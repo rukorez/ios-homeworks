@@ -8,6 +8,9 @@ target 'Navigation' do
   use_frameworks!
 
   pod 'SnapKit'
+  pod 'FirebaseAnalytics'
+  pod 'FirebaseAuth'
+  pod 'FirebaseCore'
   # Pods for Navigation
 
 end

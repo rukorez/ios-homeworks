@@ -44,7 +44,6 @@ final class LogInView: UIView {
         password.placeholder = "Password"
         password.isSecureTextEntry = true
         password.clearButtonMode = .whileEditing
-//        password.clearsOnBeginEditing = true
         return password
     }()
     
@@ -60,7 +59,7 @@ final class LogInView: UIView {
     }()
     
     lazy var loginButton: CustomButton = {
-        var button = CustomButton(title: "Log In", titleColor: .white, backgroundColor: .clear)
+        var button = CustomButton(title: "Войти", titleColor: .white, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -68,12 +67,20 @@ final class LogInView: UIView {
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .selected)
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .highlighted)
         button.setBackgroundImage(UIImage(named: "BluePix")?.copy(alpha: 0.8), for: .disabled)
+        button.isEnabled = false
+        return button
+    }()
+    
+    lazy var registerButton: CustomButton = {
+        var button = CustomButton(title: "Регистрация", titleColor: UIColor(named: "VKBlue") ?? UIColor.systemBlue, backgroundColor: .clear)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var generateButton: CustomButton = {
         var button = CustomButton(title: "Подобрать пароль", titleColor: .systemBlue, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.isHidden = true
         return button
     }()
     
@@ -81,6 +88,13 @@ final class LogInView: UIView {
         var indicator = UIActivityIndicatorView(style: .medium)
         indicator.translatesAutoresizingMaskIntoConstraints = false
         return indicator
+    }()
+    
+    lazy var secretButton: CustomButton = {
+        var button = CustomButton(title: "", titleColor: .clear, backgroundColor: .clear)
+        button.setBackgroundImage(UIImage(systemName: "lock"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     override init(frame: CGRect) {
@@ -102,8 +116,10 @@ final class LogInView: UIView {
         contentView.addSubview(logo)
         contentView.addSubview(loginPasswordView)
         contentView.addSubview(loginButton)
+        contentView.addSubview(registerButton)
         contentView.addSubview(generateButton)
         contentView.addSubview(activityIndicator)
+        contentView.addSubview(secretButton)
         
         loginPasswordView.addSubview(login)
         loginPasswordView.addSubview(password)
@@ -144,8 +160,17 @@ extension LogInView {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
-            generateButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 30),
+            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 16),
+            registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 50),
+            registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -50),
+            
+            generateButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 150),
             generateButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            
+            secretButton.topAnchor.constraint(equalTo: generateButton.topAnchor),
+            secretButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            secretButton.widthAnchor.constraint(equalToConstant: 30),
+            secretButton.heightAnchor.constraint(equalToConstant: 30),
             
             activityIndicator.topAnchor.constraint(equalTo: generateButton.bottomAnchor, constant: 16),
             activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

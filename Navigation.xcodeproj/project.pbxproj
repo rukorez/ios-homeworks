@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1A960D91BF6BA287B03844E2 /* Pods_StorageDevice_StorageDeviceTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FE229FF34FDCEA0C5F713448 /* Pods_StorageDevice_StorageDeviceTests.framework */; };
+		6545EE127F31A23305342CA3 /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B3CC6E5FBCB1B2621EB65B8 /* Pods_Navigation.framework */; };
 		7700A57828BD283500825293 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57728BD283500825293 /* UserModel.swift */; };
 		7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57A28BD6B0200825293 /* PlanetInstance.swift */; };
 		770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6926B6DC610070BB62 /* AppDelegate.swift */; };
@@ -59,6 +61,11 @@
 		77BFC0B9282E7DA6009A6C3B /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC0B8282E7DA6009A6C3B /* ProfileCoordinator.swift */; };
 		77BFC0BB282E8303009A6C3B /* ModuleFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BFC0BA282E8303009A6C3B /* ModuleFactoryProtocol.swift */; };
 		77BFC0C6282E8C52009A6C3B /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CACA726B882240070BB62 /* Post.swift */; };
+		77C0309828C13F5200C11EF2 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C0309728C13F5200C11EF2 /* CheckerService.swift */; };
+		77C0309A28C2857300C11EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77C0309928C2857200C11EF2 /* GoogleService-Info.plist */; };
+		77C0309B28C2857300C11EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77C0309928C2857200C11EF2 /* GoogleService-Info.plist */; };
+		77C0309C28C2857300C11EF2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 77C0309928C2857200C11EF2 /* GoogleService-Info.plist */; };
+		77C030A428C294AA00C11EF2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C030A328C294AA00C11EF2 /* RegisterViewController.swift */; };
 		77C1B14427F0F24F00CCF120 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1B14327F0F24F00CCF120 /* CustomButton.swift */; };
 		77C1B14827F229DE00CCF120 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1B14727F229DE00CCF120 /* Model.swift */; };
 		77C858F1284A9E5C00CA9FE1 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C858F0284A9E5C00CA9FE1 /* FullScreenViewController.swift */; };
@@ -66,6 +73,7 @@
 		77DD121226F90297009DFCAE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121126F90297009DFCAE /* PhotosTableViewCell.swift */; };
 		77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121326FB9575009DFCAE /* PhotosViewController.swift */; };
 		77DD121626FBAA42009DFCAE /* PhotosCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121526FBAA42009DFCAE /* PhotosCollectionViewCell.swift */; };
+		E852CA0990894BC21182E155 /* Pods_StorageDevice.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D90442047B2FE4CAE1B66930 /* Pods_StorageDevice.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -162,6 +170,9 @@
 		77BE688C28735EE70055874C /* LoginError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginError.swift; sourceTree = "<group>"; };
 		77BFC0B8282E7DA6009A6C3B /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		77BFC0BA282E8303009A6C3B /* ModuleFactoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModuleFactoryProtocol.swift; sourceTree = "<group>"; };
+		77C0309728C13F5200C11EF2 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
+		77C0309928C2857200C11EF2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		77C030A328C294AA00C11EF2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		77C1B14327F0F24F00CCF120 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		77C1B14727F229DE00CCF120 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		77C858F0284A9E5C00CA9FE1 /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
@@ -170,8 +181,11 @@
 		77DD121326FB9575009DFCAE /* PhotosViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosViewController.swift; sourceTree = "<group>"; };
 		77DD121526FBAA42009DFCAE /* PhotosCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosCollectionViewCell.swift; sourceTree = "<group>"; };
 		77DD121726FBAA89009DFCAE /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		7B3CC6E5FBCB1B2621EB65B8 /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		86BD0F4CC4EE3417203EC9F6 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		A87D827C6F0C44A84EE3D410 /* Pods-StorageDevice-StorageDeviceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice-StorageDeviceTests.debug.xcconfig"; path = "Target Support Files/Pods-StorageDevice-StorageDeviceTests/Pods-StorageDevice-StorageDeviceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		D90442047B2FE4CAE1B66930 /* Pods_StorageDevice.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageDevice.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FE229FF34FDCEA0C5F713448 /* Pods_StorageDevice_StorageDeviceTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StorageDevice_StorageDeviceTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +195,7 @@
 			files = (
 				771AE99427526B8A00F8F432 /* iOSIntPackage in Frameworks */,
 				771AE983274CFF4300F8F432 /* StorageDevice.framework in Frameworks */,
+				6545EE127F31A23305342CA3 /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E852CA0990894BC21182E155 /* Pods_StorageDevice.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -196,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				771AE977274CFF4300F8F432 /* StorageDevice.framework in Frameworks */,
+				1A960D91BF6BA287B03844E2 /* Pods_StorageDevice_StorageDeviceTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +264,7 @@
 				77C1B14627F0FB7400CCF120 /* Custom */,
 				770CAC7226B6DC620070BB62 /* Assets.xcassets */,
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
+				77C0309928C2857200C11EF2 /* GoogleService-Info.plist */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
 				7752D8AD28B7EA13009C97D4 /* NetworkService.swift */,
 			);
@@ -435,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				771B750526E692B100B6F44F /* LogInViewController.swift */,
+				77C030A328C294AA00C11EF2 /* RegisterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -454,6 +473,7 @@
 				774069572770CC1E00892E49 /* UserData.swift */,
 				77A434292850CF4F00FDAAC5 /* BruteForce.swift */,
 				77BE688C28735EE70055874C /* LoginError.swift */,
+				77C0309728C13F5200C11EF2 /* CheckerService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -493,6 +513,9 @@
 		F251B1259178AA60A859372C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B3CC6E5FBCB1B2621EB65B8 /* Pods_Navigation.framework */,
+				D90442047B2FE4CAE1B66930 /* Pods_StorageDevice.framework */,
+				FE229FF34FDCEA0C5F713448 /* Pods_StorageDevice_StorageDeviceTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -606,6 +629,7 @@
 			mainGroup = 770CAC5D26B6DC610070BB62;
 			packageReferences = (
 				771AE99227526B8A00F8F432 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+				77C0309228C1041A00C11EF2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 			);
 			productRefGroup = 770CAC6726B6DC610070BB62 /* Products */;
 			projectDirPath = "";
@@ -624,6 +648,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7745F4AF28A02EBA003ECE74 /* I need a dollar.mp3 in Resources */,
+				77C0309A28C2857300C11EF2 /* GoogleService-Info.plist in Resources */,
 				7745F4AE28A02EBA003ECE74 /* Pump It.mp3 in Resources */,
 				7745F4B128A02EBA003ECE74 /* TNT.mp3 in Resources */,
 				7745F4B228A02EBA003ECE74 /* Memories.mp3 in Resources */,
@@ -637,6 +662,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C0309B28C2857300C11EF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -644,6 +670,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C0309C28C2857300C11EF2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -755,6 +782,7 @@
 				770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */,
 				77B9F4DB281F988C0009BF09 /* CoordinatorProtocol.swift in Sources */,
 				77169452282EC55900EC4E61 /* FeedPresenter.swift in Sources */,
+				77C0309828C13F5200C11EF2 /* CheckerService.swift in Sources */,
 				77BFC0B9282E7DA6009A6C3B /* ProfileCoordinator.swift in Sources */,
 				770CAC8026B6E9F60070BB62 /* ProfileViewController.swift in Sources */,
 				77B9F4DD281FD7630009BF09 /* MainCoordinator.swift in Sources */,
@@ -762,6 +790,7 @@
 				771C784026D7E3D7007FA02C /* ProfileHeaderView.swift in Sources */,
 				770CAC7E26B6E9E60070BB62 /* FeedViewController.swift in Sources */,
 				77169450282EC44D00EC4E61 /* PresenterProtocols.swift in Sources */,
+				77C030A428C294AA00C11EF2 /* RegisterViewController.swift in Sources */,
 				7745F4BA28A03CD1003ECE74 /* PlayerViewController.swift in Sources */,
 				771AE966274CED0100F8F432 /* CustomTextField.swift in Sources */,
 				77B9F4E1281FE67C0009BF09 /* FeedCoordinator.swift in Sources */,
@@ -960,6 +989,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Navigation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -980,6 +1010,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Navigation/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1133,6 +1164,14 @@
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage";
 			requirement = {
 				branch = imagepublisher;
+				kind = branch;
+			};
+		};
+		77C0309228C1041A00C11EF2 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				branch = master;
 				kind = branch;
 			};
 		};
