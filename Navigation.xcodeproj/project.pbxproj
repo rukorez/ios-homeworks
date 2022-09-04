@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7700A57828BD283500825293 /* UserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57728BD283500825293 /* UserModel.swift */; };
+		7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7700A57A28BD6B0200825293 /* PlanetInstance.swift */; };
 		770CAC6A26B6DC610070BB62 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6926B6DC610070BB62 /* AppDelegate.swift */; };
 		770CAC6C26B6DC610070BB62 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */; };
 		770CAC7326B6DC620070BB62 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 770CAC7226B6DC620070BB62 /* Assets.xcassets */; };
@@ -109,6 +111,8 @@
 		36B6AEDC7F1D18E249D9DC70 /* Pods-StorageDevice-StorageDeviceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice-StorageDeviceTests.release.xcconfig"; path = "Target Support Files/Pods-StorageDevice-StorageDeviceTests/Pods-StorageDevice-StorageDeviceTests.release.xcconfig"; sourceTree = "<group>"; };
 		43A77D084E80FE2725290DAE /* Pods-StorageDevice.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-StorageDevice.release.xcconfig"; path = "Target Support Files/Pods-StorageDevice/Pods-StorageDevice.release.xcconfig"; sourceTree = "<group>"; };
 		59058BA8AC539420EF7D4098 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
+		7700A57728BD283500825293 /* UserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
+		7700A57A28BD6B0200825293 /* PlanetInstance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanetInstance.swift; sourceTree = "<group>"; };
 		770CAC6626B6DC610070BB62 /* Navigation.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Navigation.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		770CAC6926B6DC610070BB62 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -198,6 +202,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7700A57928BD284A00825293 /* JSONModels */ = {
+			isa = PBXGroup;
+			children = (
+				7700A57728BD283500825293 /* UserModel.swift */,
+				7700A57A28BD6B0200825293 /* PlanetInstance.swift */,
+			);
+			path = JSONModels;
+			sourceTree = "<group>";
+		};
 		770CAC5D26B6DC610070BB62 = {
 			isa = PBXGroup;
 			children = (
@@ -225,11 +238,11 @@
 			children = (
 				770CAC6926B6DC610070BB62 /* AppDelegate.swift */,
 				770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */,
-				7723F218281F96610056BB6C /* Coordinators */,
 				7723F216281F964B0056BB6C /* Factories */,
-				7745F4A128A02BD1003ECE74 /* PlayerFlow */,
+				7723F218281F96610056BB6C /* Coordinators */,
 				77BFC0BC282E8ADE009A6C3B /* FeedFlow */,
 				77BFC0BD282E8AF6009A6C3B /* ProfileFlow */,
+				7745F4A128A02BD1003ECE74 /* PlayerFlow */,
 				77169453282EFA8B00EC4E61 /* Exstensions */,
 				77C1B14627F0FB7400CCF120 /* Custom */,
 				770CAC7226B6DC620070BB62 /* Assets.xcassets */,
@@ -448,6 +461,7 @@
 		77BFC0C7282E8E5D009A6C3B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				7700A57928BD284A00825293 /* JSONModels */,
 				770CACA726B882240070BB62 /* Post.swift */,
 				77C1B14727F229DE00CCF120 /* Model.swift */,
 			);
@@ -733,6 +747,7 @@
 				77C1B14427F0F24F00CCF120 /* CustomButton.swift in Sources */,
 				77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */,
 				7745F4B628A03088003ECE74 /* PlayerCoordinator.swift in Sources */,
+				7700A57828BD283500825293 /* UserModel.swift in Sources */,
 				774069582770CC1E00892E49 /* UserData.swift in Sources */,
 				77B9F4DF281FD8B80009BF09 /* ProfileModuleFactory.swift in Sources */,
 				770CACA626B866100070BB62 /* PostViewController.swift in Sources */,
@@ -757,6 +772,7 @@
 				77BFC0C6282E8C52009A6C3B /* Post.swift in Sources */,
 				77B9F4D9281F981E0009BF09 /* FeedModuleFarctory.swift in Sources */,
 				77BE688D28735EE70055874C /* LoginError.swift in Sources */,
+				7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */,
 				7716944C282E97B800EC4E61 /* FeedView.swift in Sources */,
 				771B750826E7ABE400B6F44F /* LogInView.swift in Sources */,
 				77DD121626FBAA42009DFCAE /* PhotosCollectionViewCell.swift in Sources */,
