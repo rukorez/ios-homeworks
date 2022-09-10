@@ -35,6 +35,17 @@ final class ProfileCoordinator: Coordinator {
         navigationController.pushViewController(loginVC, animated: true)
     }
     
+    func showLoginAlertModule(message: String, viewController: UIViewController) {
+        let alertVC = factory.makeLoginAlertModule(message: message)
+        viewController.present(alertVC, animated: true)
+    }
+    
+    func showRegisterModule(controller: UIViewController) {
+        let registerVC = factory.makeRegisterModule()
+        registerVC.coordinator = self
+        controller.present(registerVC, animated: true)
+    }
+    
     func showProfileModule(userService: UserService, name: String) {
         let profileModule = factory.makeProfileModule(userService: userService, name: name, statusBarFrame: statusBarFrame)
         profileModule.coordinator = self

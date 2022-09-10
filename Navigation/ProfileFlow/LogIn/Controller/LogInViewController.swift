@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 final class LogInViewController: UIViewController {
     
@@ -50,6 +51,14 @@ final class LogInViewController: UIViewController {
         textField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if loginView.login.text == "" && loginView.password.text == "" {
+            loginView.loginButton.isEnabled = false
+        } else {
+            loginView.loginButton.isEnabled = true
+        }
+    }
 
 }
 
@@ -90,6 +99,18 @@ extension LogInViewController {
 extension LogInViewController {
     
     private func setTargetButton() {
+        loginView.secretButton.onTap = {
+            if self.loginView.generateButton.isHidden {
+                self.loginView.generateButton.isHidden = false
+            } else {
+                self.loginView.generateButton.isHidden = true
+            }
+        }
+        
+        loginView.registerButton.onTap = {
+            self.coordinator?.showRegisterModule(controller: self)
+        }
+        
         loginView.loginButton.onTap = self.loginTapped
         loginView.generateButton.onTap = { [ weak self ] in
             self?.loginView.activityIndicator.startAnimating()
@@ -111,21 +132,39 @@ extension LogInViewController {
     }
     
     private func loginTapped() {
-        guard let correctLogin = loginView.login.text?.hash,
-              let correctPassword = loginView.password.text?.hash,
-              let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword)
-        else { return }
-        if checkLogin.0 {
-            #if DEBUG
-            coordinator?.showProfileModule(userService: testUser, name: testUser.user.fullName ?? "")
-            #else
-            coordinator?.showProfileModule(userService: currentUser, name: currentUser.user.fullName ?? "")
-            #endif
-        } else {
-            let alertVC = UIAlertController(title: "Ошибка", message: checkLogin.1, preferredStyle: .alert)
-            let okButton = UIAlertAction(title: "OK", style: .default)
-            alertVC.addAction(okButton)
-            present(alertVC, animated: true)
+//        guard let correctLogin = loginView.login.text?.hash,
+//              let correctPassword = loginView.password.text?.hash,
+//              let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword)
+//        else { return }
+//        if checkLogin.0 {
+//            #if DEBUG
+//            coordinator?.showProfileModule(userService: testUser, name: testUser.user.fullName ?? "")
+//            #else
+//            coordinator?.showProfileModule(userService: currentUser, name: currentUser.user.fullName ?? "")
+//            #endif
+//        } else {
+//            guard let message = checkLogin.1 else { return }
+//            coordinator?.showLoginAlertModule(message: message, viewController: self)
+//        }
+        guard let loginInspector = (delegate as? LoginInspector) else { return }
+        loginInspector.checker.error = nil
+        loginInspector.checker.isRegister = false
+        guard let login = loginView.login.text,
+              let password = loginView.password.text else { return }
+        guard let check = delegate?.checkLogin(login: login, password: password) else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if loginInspector.checker.isRegister {
+                print(check)
+                #if DEBUG
+                self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+                #else
+                self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+                #endif
+            } else {
+                guard let message = loginInspector.checker.error?.localizedDescription else { return }
+                self.coordinator?.showLoginAlertModule(message: message, viewController: self)
+            }
         }
+        
     }
 }

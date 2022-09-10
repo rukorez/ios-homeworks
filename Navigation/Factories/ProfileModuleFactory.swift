@@ -21,6 +21,20 @@ final class ProfileModuleFactory: ModuleFactory {
         return logInVC
     }
     
+    func makeLoginAlertModule(message: String) -> UIAlertController {
+        let alertVC = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: "OK", style: .default)
+        alertVC.addAction(okButton)
+        return alertVC
+    }
+    
+    func makeRegisterModule() -> RegisterViewController {
+        let registerVC = RegisterViewController()
+        let factory = MyLoginFactory()
+        registerVC.delegate = factory.create()
+        return registerVC
+    }
+    
     func makeProfileModule(userService: UserService, name: String, statusBarFrame: CGRect) -> ProfileViewController {
         return ProfileViewController(userService: userService, name: name, statusBarFrame: statusBarFrame)
     }
