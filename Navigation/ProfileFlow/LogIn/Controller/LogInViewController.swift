@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
 
 final class LogInViewController: UIViewController {
     
@@ -17,6 +18,8 @@ final class LogInViewController: UIViewController {
     var delegate: LoginViewControllerDelegate?
     
     var bruteForce = BruteForce()
+    
+    let model = RealmUserModel()
     
     var currentUser: CurrentUserService = {
         var user = CurrentUserService()
@@ -35,6 +38,7 @@ final class LogInViewController: UIViewController {
         setDelegatesForViews()
         hideKeyboardInViewController()
         setTargetButton()
+        authWithRealm()
     }
     
     private func setView() {
@@ -146,6 +150,39 @@ extension LogInViewController {
 //            guard let message = checkLogin.1 else { return }
 //            coordinator?.showLoginAlertModule(message: message, viewController: self)
 //        }
+        
+//        authWithFireBase()
+        
+        authWithRealm()
+    }
+    
+    func authWithRealm() {
+        
+        if !model.users.isEmpty {
+#if DEBUG
+            self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+#else
+            self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+#endif
+        } else {
+            guard let login = loginView.login.text, login != "",
+                  let password = loginView.password.text, password != "" else { return }
+            if !model.checkUser(login: login) {
+                let alert = UIAlertController(title: "Пройдите регистрацию", message: "", preferredStyle: .alert)
+                let alertOK = UIAlertAction(title: "OK", style: .default)
+                alert.addAction(alertOK)
+                present(alert, animated: true)
+            } else {
+#if DEBUG
+            self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+#else
+            self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+#endif
+            }
+        }
+    }
+    
+    func authWithFireBase() {
         guard let loginInspector = (delegate as? LoginInspector) else { return }
         loginInspector.checker.error = nil
         loginInspector.checker.isRegister = false
@@ -155,11 +192,11 @@ extension LogInViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if loginInspector.checker.isRegister {
                 print(check)
-                #if DEBUG
+#if DEBUG
                 self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
-                #else
+#else
                 self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
-                #endif
+#endif
             } else {
                 guard let message = loginInspector.checker.error?.localizedDescription else { return }
                 self.coordinator?.showLoginAlertModule(message: message, viewController: self)
