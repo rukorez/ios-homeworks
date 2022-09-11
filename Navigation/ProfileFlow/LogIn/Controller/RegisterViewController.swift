@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol RegisterViewControllerDelegate {
+    
+}
+
 class RegisterViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
     
     var delegate: LoginViewControllerDelegate?
+    
+    var loginVC: LogInViewController?
     
     lazy var login: UITextField = {
         let login = UITextField()
@@ -102,21 +108,34 @@ class RegisterViewController: UIViewController {
     
     private func setTarget() {
         loginButton.onTap = {
-            (self.delegate as? LoginInspector)?.checker.error = nil
             guard let login = self.login.text, let password = self.password.text else { return }
-            self.delegate?.register(login: login, password: password)
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                if let error = (self.delegate as? LoginInspector)?.checker.error {
-                    self.coordinator?.showLoginAlertModule(message: error.localizedDescription, viewController: self)
-                } else {
-                    let alertVC = UIAlertController(title: "Отлично", message: "Регистрация прошла успешно.", preferredStyle: .alert)
-                    alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
-                        self.dismiss(animated: true)
-                    }))
-                    self.present(alertVC, animated: true)
-                }
-            }
+            RealmUserModel.defaultModel.addUser(login: login, password: password)
+            let alertVC = UIAlertController(title: "Отлично", message: "Регистрация прошла успешно.", preferredStyle: .alert)
+            alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+                self.dismiss(animated: true)
+                self.loginVC?.loginView.login.text = login
+                self.loginVC?.loginView.password.text = password
+                self.loginVC?.authWithRealm()
+            }))
+            self.present(alertVC, animated: true)
         }
+        
+//        loginButton.onTap = {
+//            (self.delegate as? LoginInspector)?.checker.error = nil
+//            guard let login = self.login.text, let password = self.password.text else { return }
+//            self.delegate?.register(login: login, password: password)
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+//                if let error = (self.delegate as? LoginInspector)?.checker.error {
+//                    self.coordinator?.showLoginAlertModule(message: error.localizedDescription, viewController: self)
+//                } else {
+//                    let alertVC = UIAlertController(title: "Отлично", message: "Регистрация прошла успешно.", preferredStyle: .alert)
+//                    alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
+//                        self.dismiss(animated: true)
+//                    }))
+//                    self.present(alertVC, animated: true)
+//                }
+//            }
+//        }
     }
     
 }
