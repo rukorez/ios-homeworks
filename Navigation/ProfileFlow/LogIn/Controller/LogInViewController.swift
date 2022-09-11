@@ -9,7 +9,7 @@ import UIKit
 import FirebaseAuth
 import RealmSwift
 
-final class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController, RegisterViewControllerDelegate {
     
     weak var coordinator: ProfileCoordinator?
     
@@ -19,7 +19,7 @@ final class LogInViewController: UIViewController {
     
     var bruteForce = BruteForce()
     
-    let model = RealmUserModel()
+    var model = RealmUserModel()
     
     var currentUser: CurrentUserService = {
         var user = CurrentUserService()
@@ -39,6 +39,8 @@ final class LogInViewController: UIViewController {
         hideKeyboardInViewController()
         setTargetButton()
         authWithRealm()
+        print(RealmUserModel.defaultModel.users)
+//        RealmUserModel.defaultModel.deleteUser(login: "Filipp")
     }
     
     private func setView() {
@@ -157,7 +159,7 @@ extension LogInViewController {
     }
     
     func authWithRealm() {
-        
+        model = RealmUserModel()
         if !model.users.isEmpty {
 #if DEBUG
             self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")

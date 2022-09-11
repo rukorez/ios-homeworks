@@ -43,6 +43,7 @@ final class ProfileCoordinator: Coordinator {
     func showRegisterModule(controller: UIViewController) {
         let registerVC = factory.makeRegisterModule()
         registerVC.coordinator = self
+        registerVC.loginVC = (controller as? LogInViewController)
         controller.present(registerVC, animated: true)
     }
     

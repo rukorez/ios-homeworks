@@ -7,11 +7,17 @@
 
 import UIKit
 
+protocol RegisterViewControllerDelegate {
+    
+}
+
 class RegisterViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
     
     var delegate: LoginViewControllerDelegate?
+    
+    var loginVC: LogInViewController?
     
     lazy var login: UITextField = {
         let login = UITextField()
@@ -107,6 +113,9 @@ class RegisterViewController: UIViewController {
             let alertVC = UIAlertController(title: "Отлично", message: "Регистрация прошла успешно.", preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.dismiss(animated: true)
+                self.loginVC?.loginView.login.text = login
+                self.loginVC?.loginView.password.text = password
+                self.loginVC?.authWithRealm()
             }))
             self.present(alertVC, animated: true)
         }
