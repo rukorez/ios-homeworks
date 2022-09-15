@@ -33,6 +33,9 @@ final class ProfileViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: Identificators.cellID)
         tableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: Identificators.cellID2)
         tableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: Identificators.header)
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(doupleTap(_:)))
+        gesture.numberOfTapsRequired = 2
+        tableView.addGestureRecognizer(gesture)
         return tableView
     }()
     
@@ -50,6 +53,16 @@ final class ProfileViewController: UIViewController {
         button.setBackgroundImage(UIImage(systemName: "multiply"), for: .normal)
         button.addTarget(self, action: #selector(closeAvatar), for: .touchUpInside)
         return button
+    }()
+    
+    private lazy var likeImage: UIImageView = {
+        var image = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 90))
+        image.clipsToBounds = true
+        image.layer.cornerRadius = 10
+        image.backgroundColor = .systemGray6
+        image.tintColor = .systemBlue
+        image.alpha = 0
+        return image
     }()
     
     private enum Identificators {
@@ -92,6 +105,7 @@ final class ProfileViewController: UIViewController {
         view.addSubview(tableView)
         setConstraintsPVC()
         view.addSubview(statusBarView)
+        view.addSubview(likeImage)
     }
     
 }
@@ -142,8 +156,6 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: Identificators.cellID2, for: indexPath) as! PhotosTableViewCell
-//            let gesture = UITapGestureRecognizer(target: self, action: #selector(openPhotosCollectionVC))
-//            cell.photoCollection.addGestureRecognizer(gesture)
             cell.coordinator = self.coordinator
             return cell
         } else {
@@ -151,6 +163,23 @@ extension ProfileViewController: UITableViewDataSource {
             cell.post = posts[indexPath.row]
             return cell
         }
+    }
+    
+    @objc private func doupleTap(_ gesture: UITapGestureRecognizer) {
+        let position = gesture.location(in: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: position) else { return }
+        let post = posts[indexPath.row]
+        guard !CoreDataPostModel.defaultModel.posts.isEmpty else {
+            CoreDataPostModel.defaultModel.addPost(post: post)
+            likeAnimation()
+            return
+        }
+        guard CoreDataPostModel.defaultModel.deletePost(post: post) else {
+            CoreDataPostModel.defaultModel.addPost(post: post)
+            likeAnimation()
+            return
+        }
+        unLikeAnimation()
     }
     
     @objc private func openPhotosCollectionVC() {
@@ -237,5 +266,29 @@ extension ProfileViewController {
         whiteView.removeFromSuperview()
         headerView.contentView.addSubview(headerView.avatarImageView)
         closeButton.removeFromSuperview()
+    }
+    
+    private func likeAnimation() {
+        likeImage.center = view.center
+        UIView.animate(withDuration: 1) {
+            self.likeImage.image = UIImage(systemName: "heart.fill")
+            self.likeImage.alpha = 0.8
+        } completion: { bool in
+            UIView.animate(withDuration: 1) {
+                self.likeImage.alpha = 0
+            }
+        }
+    }
+    
+    private func unLikeAnimation() {
+        likeImage.center = view.center
+        UIView.animate(withDuration: 1) {
+            self.likeImage.image = UIImage(systemName: "heart.slash.fill")
+            self.likeImage.alpha = 0.8
+        } completion: { bool in
+            UIView.animate(withDuration: 1) {
+                self.likeImage.alpha = 0
+            }
+        }
     }
 }

@@ -39,8 +39,6 @@ final class LogInViewController: UIViewController, RegisterViewControllerDelegat
         hideKeyboardInViewController()
         setTargetButton()
         authWithRealm()
-        print(RealmUserModel.defaultModel.users)
-//        RealmUserModel.defaultModel.deleteUser(login: "Filipp")
     }
     
     private func setView() {
