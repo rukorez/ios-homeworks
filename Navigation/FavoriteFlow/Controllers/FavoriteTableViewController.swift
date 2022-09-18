@@ -12,6 +12,12 @@ class FavoriteTableViewController: UITableViewController {
     
     var coordinator: Coordinator?
     
+    var favoritePosts: [CoreDataPost] = CoreDataPostModel.defaultModel.posts {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
     private lazy var likeImage: UIImageView = {
         var image = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 90))
         image.clipsToBounds = true
@@ -27,6 +33,7 @@ class FavoriteTableViewController: UITableViewController {
 
         setTableViewSettings()
         setDTGR()
+        setBarButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -50,7 +57,7 @@ class FavoriteTableViewController: UITableViewController {
             tableView.reloadData()
             return
         }
-        let post = CoreDataPostModel.defaultModel.posts[indexPath.row]
+        let post = favoritePosts[indexPath.row]
         unLikeAnimation()
         CoreDataPostModel.defaultModel.deletePost(post: post)
         tableView.reloadData()
@@ -68,18 +75,52 @@ class FavoriteTableViewController: UITableViewController {
             }
         }
     }
+    
+    private func setBarButtons() {
+        let filterButton = UIBarButtonItem(title: "Поиск", style: .plain, target: self, action: #selector(filterByAuthor))
+        let clearButton = UIBarButtonItem(title: "Сбросить", style: .done, target: self, action: #selector(clearFilter))
+//        navigationItem.setRightBarButton(filterButton, animated: true)
+        navigationItem.setRightBarButtonItems([clearButton, filterButton], animated: true)
+    }
+    
+    @objc func filterByAuthor() {
+        let searchAlert = UIAlertController(title: "Поиск по автору", message: nil, preferredStyle: .alert)
+        searchAlert.addTextField()
+        let actionOk = UIAlertAction(title: "Применить", style: .default) { action in
+            guard let text = searchAlert.textFields?[0].text, text != "" else { return }
+            self.favoritePosts = CoreDataPostModel.defaultModel.searchPost(author: text)
+        }
+        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        searchAlert.addAction(cancel)
+        searchAlert.addAction(actionOk)
+        present(searchAlert, animated: true)
+    }
+    
+    @objc func clearFilter() {
+        self.favoritePosts = CoreDataPostModel.defaultModel.posts
+    }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CoreDataPostModel.defaultModel.posts.count
+        return favoritePosts.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = CoreDataPostModel.defaultModel.posts[indexPath.row]
+        let post = favoritePosts[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FavoritePostTableViewCell
         cell.post = post
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let post = favoritePosts[indexPath.row]
+        let action = UIContextualAction(style: .destructive, title: "Удалить") { action, view, bool in
+            self.unLikeAnimation()
+            CoreDataPostModel.defaultModel.deletePost(post: post)
+            self.tableView.reloadData()
+        }
+        return UISwipeActionsConfiguration(actions: [action])
     }
 
 }

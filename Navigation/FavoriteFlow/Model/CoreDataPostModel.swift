@@ -8,7 +8,6 @@
 import Foundation
 import CoreData
 import StorageDevice
-//import UIKit
 
 final class CoreDataPostModel {
     
@@ -31,14 +30,36 @@ final class CoreDataPostModel {
         })
         return container
     }()
+    
+    private lazy var mainContext: NSManagedObjectContext = {
+        var context = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
+        return context
+    }()
+    
+    private lazy var backgroundContext: NSManagedObjectContext = {
+        var context = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        context.persistentStoreCoordinator = persistentContainer.persistentStoreCoordinator
+        return context
+    }()
 
     // MARK: - Core Data Saving support
 
-    private func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+    private func saveMainContext() {
+        if mainContext.hasChanges {
             do {
-                try context.save()
+                try mainContext.save()
+            } catch {
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
+    
+    private func saveBackgroundContext() {
+        if backgroundContext.hasChanges {
+            do {
+                try backgroundContext.save()
             } catch {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
@@ -50,14 +71,14 @@ final class CoreDataPostModel {
 extension CoreDataPostModel {
     
     func addPost(post: Posts) {
-        let newPost = CoreDataPost(context: persistentContainer.viewContext)
+        let newPost = CoreDataPost(context: backgroundContext)
         newPost.author = post.author
         newPost.postDescription = post.description
         newPost.likes = Int64(post.likes)
         newPost.views = Int64(post.views)
         newPost.added_at = Date()
         newPost.imageData = post.image.jpegData(compressionQuality: 1.0)
-        saveContext()
+        saveBackgroundContext()
         reloadPosts()
     }
     
@@ -65,8 +86,8 @@ extension CoreDataPostModel {
         var bool = false
         posts.forEach {
             if $0.postDescription == post.description {
-                persistentContainer.viewContext.delete($0)
-                saveContext()
+                backgroundContext.delete($0)
+                saveBackgroundContext()
                 reloadPosts()
                 bool = true
             }
@@ -75,8 +96,8 @@ extension CoreDataPostModel {
     }
     
     func deletePost(post: CoreDataPost) {
-        persistentContainer.viewContext.delete(post)
-        saveContext()
+        backgroundContext.delete(post)
+        saveBackgroundContext()
         reloadPosts()
     }
     
@@ -84,10 +105,23 @@ extension CoreDataPostModel {
         let request = CoreDataPost.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: "added_at", ascending: false)]
         do {
-            let posts = try persistentContainer.viewContext.fetch(request)
+            let posts = try backgroundContext.fetch(request)
             self.posts = posts
         } catch {
             print(error.localizedDescription)
+        }
+    }
+    
+    func searchPost(author text: String) -> [CoreDataPost] {
+        let request = CoreDataPost.fetchRequest()
+        request.predicate = NSPredicate(format: "author contains[c] %@", text)
+        request.sortDescriptors = [NSSortDescriptor(key: "added_at", ascending: false)]
+        do {
+            let posts = try backgroundContext.fetch(request)
+            return posts
+        } catch {
+            print(error.localizedDescription)
+            return []
         }
     }
     
