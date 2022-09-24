@@ -169,17 +169,18 @@ extension ProfileViewController: UITableViewDataSource {
         let position = gesture.location(in: tableView)
         guard let indexPath = tableView.indexPathForRow(at: position) else { return }
         let post = posts[indexPath.row]
-        guard !CoreDataPostModel.defaultModel.posts.isEmpty else {
+        guard let isFavorite = CoreDataPostModel.defaultModel.checkPost(post: post) else {
             CoreDataPostModel.defaultModel.addPost(post: post)
             likeAnimation()
             return
         }
-        guard CoreDataPostModel.defaultModel.deletePost(post: post) else {
+        if !isFavorite {
             CoreDataPostModel.defaultModel.addPost(post: post)
             likeAnimation()
-            return
+        } else {
+            CoreDataPostModel.defaultModel.deletePost(post: post)
+            unLikeAnimation()
         }
-        unLikeAnimation()
     }
     
     @objc private func openPhotosCollectionVC() {
