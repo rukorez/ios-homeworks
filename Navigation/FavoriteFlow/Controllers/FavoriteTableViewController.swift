@@ -7,17 +7,14 @@
 
 import UIKit
 import StorageDevice
+import CoreData
 
-class FavoriteTableViewController: UITableViewController {
+class FavoriteTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var coordinator: Coordinator?
     
-    var favoritePosts: [CoreDataPost] = CoreDataPostModel.defaultModel.posts {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    
+    var fetchedResultsController: NSFetchedResultsController<CoreDataPost>?
+        
     private lazy var likeImage: UIImageView = {
         var image = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 90))
         image.clipsToBounds = true
@@ -32,6 +29,7 @@ class FavoriteTableViewController: UITableViewController {
         super.viewDidLoad()
 
         setTableViewSettings()
+        initFetchedResultsController(text: nil)
         setDTGR()
         setBarButtons()
     }
@@ -43,6 +41,24 @@ class FavoriteTableViewController: UITableViewController {
     private func setTableViewSettings() {
         tableView.register(FavoritePostTableViewCell.self, forCellReuseIdentifier: "postCell")
         view.addSubview(likeImage)
+    }
+    
+    private func initFetchedResultsController(text forPredicate: String?) {
+        let request = CoreDataPost.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "added_at", ascending: false)]
+        if let text = forPredicate {
+            request.predicate = NSPredicate(format: "author contains[c] %@", text)
+        }
+        let context = CoreDataPostModel.defaultModel.persistentContainer.viewContext
+        let frc = NSFetchedResultsController(fetchRequest: request, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        do {
+            try frc.performFetch()
+        } catch {
+            print(error)
+        }
+        fetchedResultsController = frc
+        fetchedResultsController?.delegate = self
+        tableView.reloadData()
     }
     
     private func setDTGR() {
@@ -57,7 +73,7 @@ class FavoriteTableViewController: UITableViewController {
             tableView.reloadData()
             return
         }
-        let post = favoritePosts[indexPath.row]
+        guard let post = fetchedResultsController?.object(at: indexPath) else { return }
         unLikeAnimation()
         CoreDataPostModel.defaultModel.deletePost(post: post)
         tableView.reloadData()
@@ -79,7 +95,6 @@ class FavoriteTableViewController: UITableViewController {
     private func setBarButtons() {
         let filterButton = UIBarButtonItem(title: "Поиск", style: .plain, target: self, action: #selector(filterByAuthor))
         let clearButton = UIBarButtonItem(title: "Сбросить", style: .done, target: self, action: #selector(clearFilter))
-//        navigationItem.setRightBarButton(filterButton, animated: true)
         navigationItem.setRightBarButtonItems([clearButton, filterButton], animated: true)
     }
     
@@ -88,7 +103,7 @@ class FavoriteTableViewController: UITableViewController {
         searchAlert.addTextField()
         let actionOk = UIAlertAction(title: "Применить", style: .default) { action in
             guard let text = searchAlert.textFields?[0].text, text != "" else { return }
-            self.favoritePosts = CoreDataPostModel.defaultModel.searchPost(author: text)
+            self.initFetchedResultsController(text: text)
         }
         let cancel = UIAlertAction(title: "Отмена", style: .cancel)
         searchAlert.addAction(cancel)
@@ -97,28 +112,48 @@ class FavoriteTableViewController: UITableViewController {
     }
     
     @objc func clearFilter() {
-        self.favoritePosts = CoreDataPostModel.defaultModel.posts
+        initFetchedResultsController(text: nil)
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { return }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { return }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .update:
+            guard let indexPath = indexPath else { return }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let indexPath = indexPath, let newIndexPath = newIndexPath else { return }
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        @unknown default:
+            print("Fatal Error")
+        }
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoritePosts.count
+        return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = favoritePosts[indexPath.row]
+        let post = fetchedResultsController?.object(at: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: "postCell", for: indexPath) as! FavoritePostTableViewCell
         cell.post = post
         return cell
     }
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let post = favoritePosts[indexPath.row]
+        let post = fetchedResultsController?.object(at: indexPath)
         let action = UIContextualAction(style: .destructive, title: "Удалить") { action, view, bool in
+            guard let post = post else { return }
             self.unLikeAnimation()
             CoreDataPostModel.defaultModel.deletePost(post: post)
-            self.tableView.reloadData()
         }
         return UISwipeActionsConfiguration(actions: [action])
     }
