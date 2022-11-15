@@ -16,33 +16,63 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate, MKMa
     private var mapView = MKMapView()
     
     private let manager = CLLocationManager()
+    
+    private let deleteButton: UIButton = {
+        var button = UIButton()
+        button.setImage(UIImage(systemName: "multiply"), for: .normal)
+        button.backgroundColor = .systemGray5
+        button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(removeAnnotation), for: .touchUpInside)
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.addSubview(mapView)
+        view.addSubview(deleteButton)
         mapView.frame = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        deleteButton.frame = CGRect(x: view.bounds.width - 50, y: view.bounds.height - 150, width: 35, height: 35)
         manager.delegate = self
         requestLoationAuthtorisation()
-        addAnnotations()
-        addRoute()
+        addGestureForAddAnnotations()
     }
     
-    private func addAnnotations() {
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        removeAnnotation()
+    }
+    
+    private func addGestureForAddAnnotations() {
+        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(foundTap(_ :)))
+        mapView.addGestureRecognizer(gesture)
+    }
+    
+    @objc private func foundTap(_ recognizer: UILongPressGestureRecognizer) {
+        removeAnnotation()
+        let point: CGPoint = recognizer.location(in: mapView)
+        let tapCoordinate: CLLocationCoordinate2D = mapView.convert(point, toCoordinateFrom: view)
         let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: 55.760852, longitude: 37.619118)
-        annotation.title = "Большой театр"
+        annotation.coordinate = tapCoordinate
+        annotation.title = "Новая метка"
         mapView.addAnnotation(annotation)
+        addRoute(destination: tapCoordinate)
     }
     
-    private func addRoute() {
+    @objc private func removeAnnotation() {
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.removeOverlays(mapView.overlays)
+    }
+    
+    private func addRoute(destination location: CLLocationCoordinate2D) {
         let directionRequest = MKDirections.Request()
         
         guard let myLocation = manager.location?.coordinate else { return }
         let sourcePlaceMark = MKPlacemark(coordinate: myLocation)
         directionRequest.source = MKMapItem(placemark: sourcePlaceMark)
         
-        let destinationPlaceMark = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: 55.760852, longitude: 37.619118))
+        let destinationPlaceMark = MKPlacemark(coordinate: location)
         directionRequest.destination = MKMapItem(placemark: destinationPlaceMark)
         
         directionRequest.transportType = .automobile
@@ -59,7 +89,6 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate, MKMa
             self.mapView.delegate = self
             self.mapView.addOverlay(route.polyline, level: .aboveRoads)
         }
-        
     }
     
     private func requestLoationAuthtorisation() {
@@ -71,7 +100,6 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate, MKMa
             mapView.showsScale = true
             mapView.showsUserLocation = true
             mapView.showsCompass = true
-//            mapView.delegate = self
             manager.startUpdatingLocation()
         case .denied, .restricted:
             print("Использование геолокации запрещено пользователем")
@@ -96,5 +124,7 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate, MKMa
         renderer.strokeColor = .red
         return renderer
     }
+    
 
+    
 }
