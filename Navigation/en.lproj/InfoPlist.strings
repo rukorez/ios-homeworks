@@ -1,0 +1,9 @@
+/* 
+  InfoPlist.strings
+  Navigation
+
+  Created by Филипп Степанов on 22.11.2022.
+  
+*/
+
+NSLocationWhenInUseUsageDescription = "Please, allow us to use your geolocation";

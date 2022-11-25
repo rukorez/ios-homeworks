@@ -14,7 +14,7 @@ final class InfoViewController: UIViewController {
     private var residentNames: [String] = []
     
     private var buttonDelete: CustomButton = {
-        let button = CustomButton(title: "Удалить все", titleColor: .white, backgroundColor: .clear)
+        let button = CustomButton(title: NSLocalizedString("infoViewDeleteButtonTitle", comment: ""), titleColor: .white, backgroundColor: .clear)
         button.frame = CGRect(x: 100, y: 350, width: 200, height: 50)
         return button
     }()

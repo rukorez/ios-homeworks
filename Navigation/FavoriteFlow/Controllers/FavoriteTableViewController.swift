@@ -93,19 +93,19 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     private func setBarButtons() {
-        let filterButton = UIBarButtonItem(title: "Поиск", style: .plain, target: self, action: #selector(filterByAuthor))
-        let clearButton = UIBarButtonItem(title: "Сбросить", style: .done, target: self, action: #selector(clearFilter))
+        let filterButton = UIBarButtonItem(title: NSLocalizedString("favoriteViewFilterButtonTitle", comment: ""), style: .plain, target: self, action: #selector(filterByAuthor))
+        let clearButton = UIBarButtonItem(title: NSLocalizedString("favoriteViewClearButtonTitle", comment: ""), style: .done, target: self, action: #selector(clearFilter))
         navigationItem.setRightBarButtonItems([clearButton, filterButton], animated: true)
     }
     
     @objc func filterByAuthor() {
-        let searchAlert = UIAlertController(title: "Поиск по автору", message: nil, preferredStyle: .alert)
+        let searchAlert = UIAlertController(title: NSLocalizedString("favoriteViewFilterAlertTitle", comment: ""), message: nil, preferredStyle: .alert)
         searchAlert.addTextField()
-        let actionOk = UIAlertAction(title: "Применить", style: .default) { action in
+        let actionOk = UIAlertAction(title: NSLocalizedString("favoriteViewFilterAlertActionYes", comment: ""), style: .default) { action in
             guard let text = searchAlert.textFields?[0].text, text != "" else { return }
             self.initFetchedResultsController(text: text)
         }
-        let cancel = UIAlertAction(title: "Отмена", style: .cancel)
+        let cancel = UIAlertAction(title: NSLocalizedString("favoriteViewFilterAlertActionNo", comment: ""), style: .cancel)
         searchAlert.addAction(cancel)
         searchAlert.addAction(actionOk)
         present(searchAlert, animated: true)
@@ -150,7 +150,7 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let post = fetchedResultsController?.object(at: indexPath)
-        let action = UIContextualAction(style: .destructive, title: "Удалить") { action, view, bool in
+        let action = UIContextualAction(style: .destructive, title: NSLocalizedString("favoriteViewDeleteButtonTitle", comment: "")) { action, view, bool in
             guard let post = post else { return }
             self.unLikeAnimation()
             CoreDataPostModel.defaultModel.deletePost(post: post)

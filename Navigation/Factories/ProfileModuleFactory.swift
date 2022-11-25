@@ -22,8 +22,8 @@ final class ProfileModuleFactory: ModuleFactory {
     }
     
     func makeLoginAlertModule(message: String) -> UIAlertController {
-        let alertVC = UIAlertController(title: "Ошибка", message: message, preferredStyle: .alert)
-        let okButton = UIAlertAction(title: "OK", style: .default)
+        let alertVC = UIAlertController(title: NSLocalizedString("loginAlertTitle", comment: ""), message: message, preferredStyle: .alert)
+        let okButton = UIAlertAction(title: NSLocalizedString("loginAlertActionOk", comment: ""), style: .default)
         alertVC.addAction(okButton)
         return alertVC
     }

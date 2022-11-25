@@ -55,7 +55,7 @@ final class MapViewController: UIViewController, CLLocationManagerDelegate, MKMa
         let tapCoordinate: CLLocationCoordinate2D = mapView.convert(point, toCoordinateFrom: view)
         let annotation = MKPointAnnotation()
         annotation.coordinate = tapCoordinate
-        annotation.title = "Новая метка"
+        annotation.title = NSLocalizedString("mapViewNewAnnotation", comment: "")
         mapView.addAnnotation(annotation)
         addRoute(destination: tapCoordinate)
     }

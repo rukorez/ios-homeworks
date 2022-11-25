@@ -56,7 +56,7 @@ final class PhotosViewController: UIViewController {
     }
     
     private func setViews() {
-        navigationItem.title = "Photo Gallery"
+        navigationItem.title = NSLocalizedString("photoViewNavigationTitle", comment: "")
         view.addSubview(collection)
         setConstraints()
         collection.dataSource = self
@@ -105,7 +105,6 @@ extension PhotosViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collection.dequeueReusableCell(withReuseIdentifier: PhotosCollectionViewCell.photoID, for: indexPath) as! PhotosCollectionViewCell
-//        print("indexpath \(indexPath)")
         cell.image = images[indexPath.row]
         return cell
     }

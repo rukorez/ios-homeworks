@@ -24,7 +24,7 @@ final class LogInView: UIView {
         login.translatesAutoresizingMaskIntoConstraints = false
         login.textColor = .black
         login.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        login.placeholder = "Email or phone"
+        login.placeholder = NSLocalizedString("loginViewLoginTextFieldPlaceholder", comment: "")
         login.tintColor = UIColor(named: "AccentColor")
         login.autocapitalizationType = .none
         login.clearButtonMode = .whileEditing
@@ -41,7 +41,7 @@ final class LogInView: UIView {
     lazy var password: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.placeholder = "Password"
+        password.placeholder = NSLocalizedString("loginViewPasswordTextFieldPlaceholder", comment: "")
         password.isSecureTextEntry = true
         password.clearButtonMode = .whileEditing
         return password
@@ -59,7 +59,7 @@ final class LogInView: UIView {
     }()
     
     lazy var loginButton: CustomButton = {
-        var button = CustomButton(title: "Войти", titleColor: .white, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("loginViewLogInButtonTitle", comment: ""), titleColor: .white, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -72,13 +72,13 @@ final class LogInView: UIView {
     }()
     
     lazy var registerButton: CustomButton = {
-        var button = CustomButton(title: "Регистрация", titleColor: UIColor(named: "VKBlue") ?? UIColor.systemBlue, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("loginViewRegisterButtonTitle", comment: ""), titleColor: UIColor(named: "VKBlue") ?? UIColor.systemBlue, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var generateButton: CustomButton = {
-        var button = CustomButton(title: "Подобрать пароль", titleColor: .systemBlue, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("loginViewGenerateButtonTitle", comment: ""), titleColor: .systemBlue, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.isHidden = true
         return button

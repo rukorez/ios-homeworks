@@ -168,7 +168,7 @@ extension LogInViewController {
             guard let login = loginView.login.text, login != "",
                   let password = loginView.password.text, password != "" else { return }
             if !model.checkUser(login: login) {
-                let alert = UIAlertController(title: "Пройдите регистрацию", message: "", preferredStyle: .alert)
+                let alert = UIAlertController(title: NSLocalizedString("loginViewRegistrationAlertTitle", comment: ""), message: "", preferredStyle: .alert)
                 let alertOK = UIAlertAction(title: "OK", style: .default)
                 alert.addAction(alertOK)
                 present(alert, animated: true)

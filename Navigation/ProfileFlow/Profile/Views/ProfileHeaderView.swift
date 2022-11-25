@@ -50,7 +50,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }()
     
     lazy var setStatusButton: CustomButton = {
-        let statusButton = CustomButton(title: "Show Status", titleColor: .white, backgroundColor: .systemBlue)
+        let statusButton = CustomButton(title: NSLocalizedString("profileHeaderViewSetButtonTitle", comment: ""), titleColor: .white, backgroundColor: .systemBlue)
         return statusButton
     }()
         

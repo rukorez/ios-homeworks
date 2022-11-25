@@ -55,7 +55,7 @@ final class FullScreenViewController: UIViewController {
     }
     
     private func setupUI() {
-        title = "Photo"
+        title = NSLocalizedString("fullScreenViewNavigationTitle", comment: "")
         view.backgroundColor = .white
     }
     

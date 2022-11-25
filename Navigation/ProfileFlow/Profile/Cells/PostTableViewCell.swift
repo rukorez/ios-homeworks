@@ -22,10 +22,10 @@ class PostTableViewCell: UITableViewCell {
             }
             text.text = post?.description
             if let stingLikes = post?.likes {
-                likes.text = "Likes: \(stingLikes)"
+                likes.text = "\(NSLocalizedString("postTableViewCellLikes", comment: "")): \(stingLikes)"
             }
             if let stringViews = post?.views {
-                views.text = "Views: \(stringViews)"
+                views.text = "\(NSLocalizedString("postTableViewCellViews", comment: "")): \(stringViews)"
             }
         }
     }
