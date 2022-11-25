@@ -15,7 +15,7 @@ class MainCoordinator: Coordinator {
     }
     
     var childCoordinators: [Coordinator] {
-        return [feedCoordinator, profileCoordinator, favoriteCoordinator, playerCoordinator]
+        return [feedCoordinator, profileCoordinator, favoriteCoordinator, playerCoordinator, mapCoordinator]
     }
     
     var statusBarFrame: CGRect
@@ -29,6 +29,8 @@ class MainCoordinator: Coordinator {
     var playerCoordinator: PlayerCoordinator
     
     var favoriteCoordinator: FavoriteCoordinator
+    
+    var mapCoordinator: MapCoordinator
     
     var tabBarController: UITabBarController
     
@@ -51,7 +53,10 @@ class MainCoordinator: Coordinator {
         let playerController = playerCoordinator.rootVC
         playerController.tabBarItem = UITabBarItem(title: "Плеер", image: UIImage(systemName: "play"), tag: 3)
         controllers.append(playerController)
-        
+        mapCoordinator = MapCoordinator(factory: MapModuleFactory())
+        let mapController = mapCoordinator.rootVC
+        mapController.tabBarItem = UITabBarItem(title: "Карта", image: UIImage(systemName: "map"), tag: 4)
+        controllers.append(mapController)
     }
     
     func start() {
