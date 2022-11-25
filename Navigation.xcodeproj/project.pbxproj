@@ -82,6 +82,7 @@
 		77C030A428C294AA00C11EF2 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C030A328C294AA00C11EF2 /* RegisterViewController.swift */; };
 		77C1B14427F0F24F00CCF120 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1B14327F0F24F00CCF120 /* CustomButton.swift */; };
 		77C1B14827F229DE00CCF120 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C1B14727F229DE00CCF120 /* Model.swift */; };
+		77C65967293162910095E069 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = 77C65969293162910095E069 /* Localizable.stringsdict */; };
 		77C858F1284A9E5C00CA9FE1 /* FullScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C858F0284A9E5C00CA9FE1 /* FullScreenViewController.swift */; };
 		77C858F3284A9FD000CA9FE1 /* FullScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C858F2284A9FD000CA9FE1 /* FullScreenCollectionViewCell.swift */; };
 		77DD121226F90297009DFCAE /* PhotosTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DD121126F90297009DFCAE /* PhotosTableViewCell.swift */; };
@@ -204,6 +205,8 @@
 		77C030A328C294AA00C11EF2 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		77C1B14327F0F24F00CCF120 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
 		77C1B14727F229DE00CCF120 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		77C65968293162910095E069 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
+		77C6596A293162970095E069 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = ru; path = ru.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		77C858F0284A9E5C00CA9FE1 /* FullScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenViewController.swift; sourceTree = "<group>"; };
 		77C858F2284A9FD000CA9FE1 /* FullScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		77DD121126F90297009DFCAE /* PhotosTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotosTableViewCell.swift; sourceTree = "<group>"; };
@@ -299,6 +302,7 @@
 				770CAC7426B6DC620070BB62 /* LaunchScreen.storyboard */,
 				77C0309928C2857200C11EF2 /* GoogleService-Info.plist */,
 				770CAC7726B6DC620070BB62 /* Info.plist */,
+				77C65969293162910095E069 /* Localizable.stringsdict */,
 				7751AFC1292D78470047F5DE /* Localizable.strings */,
 				7751AFC5292D78500047F5DE /* InfoPlist.strings */,
 				7752D8AD28B7EA13009C97D4 /* NetworkService.swift */,
@@ -737,6 +741,7 @@
 				7745F4AF28A02EBA003ECE74 /* I need a dollar.mp3 in Resources */,
 				77C0309A28C2857300C11EF2 /* GoogleService-Info.plist in Resources */,
 				7745F4AE28A02EBA003ECE74 /* Pump It.mp3 in Resources */,
+				77C65967293162910095E069 /* Localizable.stringsdict in Resources */,
 				7745F4B128A02EBA003ECE74 /* TNT.mp3 in Resources */,
 				7751AFBF292D78470047F5DE /* Localizable.strings in Resources */,
 				7745F4B228A02EBA003ECE74 /* Memories.mp3 in Resources */,
@@ -978,6 +983,15 @@
 				7751AFC6292D78550047F5DE /* ru */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		77C65969293162910095E069 /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				77C65968293162910095E069 /* en */,
+				77C6596A293162970095E069 /* ru */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
