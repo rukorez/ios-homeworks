@@ -10,6 +10,8 @@ import StorageDevice
 import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
+    
+    private lazy var colors = ProfileViewColors()
 
     var post: Posts? {
         didSet {
@@ -35,7 +37,7 @@ class PostTableViewCell: UITableViewCell {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        author.textColor = .black
+        author.textColor = colors.labelsTextColor
         author.numberOfLines = 2
         return author
     }()
@@ -61,7 +63,7 @@ class PostTableViewCell: UITableViewCell {
         var likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        likes.textColor = .black
+        likes.textColor = colors.labelsTextColor
         return likes
     }()
     
@@ -69,7 +71,7 @@ class PostTableViewCell: UITableViewCell {
         var views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        views.textColor = .black
+        views.textColor = colors.labelsTextColor
         return views
     }()
     

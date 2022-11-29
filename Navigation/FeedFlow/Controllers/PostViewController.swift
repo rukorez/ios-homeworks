@@ -11,13 +11,15 @@ final class PostViewController: UIViewController {
     
     weak var coordinator: FeedCoordinator?
     
+    private lazy var colors = FeedFlowColors()
+    
     private var durationTimer = 5
     private var timer = Timer()
     
     lazy var timerLabel: UILabel = {
         var label = UILabel(frame: CGRect(x: 0, y: 0, width: 250, height: 100))
         label.text = ""
-        label.textColor = .black
+        label.textColor = colors.postViewTimerTextColor
         label.textAlignment = .center
         label.font = .systemFont(ofSize: 24, weight: .semibold)
         return label
@@ -33,7 +35,7 @@ final class PostViewController: UIViewController {
     }
     
     private func setView() {
-        view.backgroundColor = .cyan
+        view.backgroundColor = colors.postViewBackgroundColor
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("postViewNavigationItem", comment: ""), style: .done, target: self, action: #selector(tap))
         view.addSubview(timerLabel)
         timerLabel.center = view.center

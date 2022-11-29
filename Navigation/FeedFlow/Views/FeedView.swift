@@ -10,10 +10,12 @@ import UIKit
 
 final class FeedView: UIView {
     
+    private lazy var colors = FeedFlowColors()
+    
     var tapCheckPass: ((String?)->Void)?
     
     lazy var button1: CustomButton = {
-        var button = CustomButton(title: NSLocalizedString("feedViewButton1Title", comment: ""), titleColor: .black, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("feedViewButton1Title", comment: ""), titleColor: colors.feedViewButtonsTextColor, backgroundColor: .clear)
         return button
     }()
     
@@ -30,7 +32,7 @@ final class FeedView: UIView {
     }()
     
     lazy var customButton: CustomButton = {
-        var button = CustomButton(title: NSLocalizedString("feedViewCheckPasswordButtonTitle", comment: ""), titleColor: .black, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("feedViewCheckPasswordButtonTitle", comment: ""), titleColor: colors.feedViewButtonsTextColor, backgroundColor: .clear)
         button.onTap = { [ weak self ] in
             self?.tapCheckPass?(self?.customTextField.text)
         }
@@ -61,7 +63,7 @@ final class FeedView: UIView {
     }
     
     private func setViews() {
-        backgroundColor = .systemBlue
+        backgroundColor = colors.feedViewBackgroundColor
         let stackView = UIStackView(arrangedSubviews: [
             button1,
             button2,

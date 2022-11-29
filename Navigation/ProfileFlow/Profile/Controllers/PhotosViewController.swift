@@ -12,6 +12,8 @@ import iOSIntPackage
 final class PhotosViewController: UIViewController {
     
     weak var coordinator: ProfileCoordinator?
+    
+    private lazy var colors = ProfileViewColors()
             
     private var images: [UIImage] = photos {
         didSet {
@@ -23,12 +25,12 @@ final class PhotosViewController: UIViewController {
     
     var imageProcessor = ImageProcessor()
     
-    private var collection: UICollectionView = {
+    private lazy var collection: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.translatesAutoresizingMaskIntoConstraints = false
-        collection.backgroundColor = .white
+        collection.backgroundColor = colors.tableViewBackgroundColor
         return collection
     }()
 

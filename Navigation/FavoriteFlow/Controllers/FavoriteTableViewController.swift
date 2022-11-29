@@ -13,6 +13,8 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
     
     var coordinator: Coordinator?
     
+    private lazy var colors = ProfileViewColors()
+    
     var fetchedResultsController: NSFetchedResultsController<CoreDataPost>?
         
     private lazy var likeImage: UIImageView = {
@@ -39,6 +41,7 @@ class FavoriteTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     private func setTableViewSettings() {
+        tableView.backgroundColor = colors.tableViewBackgroundColor
         tableView.register(FavoritePostTableViewCell.self, forCellReuseIdentifier: "postCell")
         view.addSubview(likeImage)
     }
