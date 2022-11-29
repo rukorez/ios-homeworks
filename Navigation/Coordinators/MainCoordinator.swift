@@ -39,23 +39,23 @@ class MainCoordinator: Coordinator {
         self.tabBarController = tabBarController
         feedCoordinator = FeedCoordinator(factory: FeedModuleFactory())
         let feedController = feedCoordinator.rootVC
-        feedController.tabBarItem = UITabBarItem(title: "Лента", image: UIImage(systemName: "scroll"), tag: 0)
+        feedController.tabBarItem = UITabBarItem(title: NSLocalizedString("feedControllerTabTitle", comment: ""), image: UIImage(systemName: "scroll"), tag: 0)
         controllers.append(feedController)
         profileCoordinator = ProfileCoordinator(factory: ProfileModuleFactory(), statusBarFrame: statusBarFrame)
         let profileController = profileCoordinator.rootVC
-        profileController.tabBarItem = UITabBarItem(title: "Профиль", image: UIImage(systemName: "person"), tag: 1)
+        profileController.tabBarItem = UITabBarItem(title: NSLocalizedString("profileControllerTabTitle", comment: ""), image: UIImage(systemName: "person"), tag: 1)
         controllers.append(profileController)
         favoriteCoordinator = FavoriteCoordinator(factory: FavoriteModuleFactory())
         let favoriteController = favoriteCoordinator.rootVC
-        favoriteController.tabBarItem = UITabBarItem(title: "Избранное", image: UIImage(systemName: "star"), tag: 2)
+        favoriteController.tabBarItem = UITabBarItem(title: NSLocalizedString("favoriteControllerTabTitle", comment: ""), image: UIImage(systemName: "star"), tag: 2)
         controllers.append(favoriteController)
         playerCoordinator = PlayerCoordinator(factory: PlayerModuleFactory())
         let playerController = playerCoordinator.rootVC
-        playerController.tabBarItem = UITabBarItem(title: "Плеер", image: UIImage(systemName: "play"), tag: 3)
+        playerController.tabBarItem = UITabBarItem(title: NSLocalizedString("playerControllerTabTitle", comment: ""), image: UIImage(systemName: "play"), tag: 3)
         controllers.append(playerController)
         mapCoordinator = MapCoordinator(factory: MapModuleFactory())
         let mapController = mapCoordinator.rootVC
-        mapController.tabBarItem = UITabBarItem(title: "Карта", image: UIImage(systemName: "map"), tag: 4)
+        mapController.tabBarItem = UITabBarItem(title: NSLocalizedString("mapControllerTabTitle", comment: ""), image: UIImage(systemName: "map"), tag: 4)
         controllers.append(mapController)
     }
     

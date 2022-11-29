@@ -1,0 +1,73 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Филипп Степанов on 22.11.2022.
+  
+*/
+
+"feedControllerTabTitle" = "Лента";
+"profileControllerTabTitle" = "Профиль";
+"favoriteControllerTabTitle" = "Избранное";
+"playerControllerTabTitle" = "Плейер";
+"mapControllerTabTitle" = "Карта";
+
+"feedViewNavigationTitle" = "Лента";
+"feedViewButton1Title" = "Кнопка 1";
+"feedViewButton2Title" = "Кнопка 2";
+"feedViewCheckPasswordButtonTitle" = "Проверка пароля";
+"feedViewPasswordStatusLabelTextCorrect" = "Верный пароль!";
+"feedViewPasswordStatusLabelTextUncorrect" = "Неверный пароль";
+"feedViewPostTitle" = "Пост 1";
+
+"postViewNavigationItem" = "Информация";
+
+"infoAlertTitle" = "Удаление";
+"infoAlertMessage" = "Удалить всю информацию?";
+"infoAlertActionYes" = "Да";
+"infoAlertActionNo" = "Нет";
+"infoViewDeleteButtonTitle" = "Удалить все";
+
+"loginAlertTitle" = "Ошибка";
+"loginAlertActionOk" = "Хорошо";
+"loginViewLoginTextFieldPlaceholder" = "Электронная почта или номер телефона";
+"loginViewPasswordTextFieldPlaceholder" = "Пароль";
+"loginViewLogInButtonTitle" = "Войти";
+"loginViewRegisterButtonTitle" = "Регистрация";
+"loginViewGenerateButtonTitle" = "Подобрать пароль";
+"loginViewRegistrationAlertTitle" = "Пройдите регистрацию";
+
+"loginErrorWrongLogin" = "Некорректный email.";
+"loginErrorWrongPassword" = "Неверный пароль";
+"loginErrorWrongUser" = "Такой пользователь не зарегистрирован.";
+"loginErrorServerError" = "Отсутствует подключение к сети. Проверьте настройки интернета и попробуйте еще раз.";
+
+"registerViewButtonTitle" = "Зарегистрироваться";
+"registerViewAlertTitle" = "Отлично!";
+"registerViewAlertMessage" = "Регистрация прошла успешно";
+
+"registerErrorWrongLogin" = "Некорректный email.";
+"registerErrorShortPassword" = "Пароль слишком короткий. Пароль должен содержать не менее 6 символов.";
+"registerErrorDoubleUser" = "Пользователь с таким email-адресом уже существует.";
+"registerErrorServerError" = "Отсутствует подключение к сети. Проверьте настройки интернета и попробуйте еще раз.";
+
+"profileHeaderViewSetButtonTitle" = "Обновить статус";
+
+"photoViewNavigationTitle" = "Галерея";
+
+"fullScreenViewNavigationTitle" = "Фото";
+
+"postTableViewCellLikes" = "Понравилось";
+"postTableViewCellViews" = "Просмотры";
+
+"photosTableViewCellSectionLabelText" = "Фотографии";
+
+"favoriteViewNavigationTitle" = "Избранное";
+"favoriteViewFilterButtonTitle" = "Поиск";
+"favoriteViewClearButtonTitle" = "Сбросить";
+"favoriteViewFilterAlertTitle" = "Поиск по автору";
+"favoriteViewFilterAlertActionYes" = "Применить";
+"favoriteViewFilterAlertActionNo" = "Отмена";
+"favoriteViewDeleteButtonTitle" = "Удалить";
+
+"mapViewNewAnnotation" = "Новая метка";

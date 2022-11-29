@@ -29,7 +29,7 @@ final class FavoriteCoordinator: Coordinator {
     func showFavoritePostsModule() {
         let favoriteVC = factory.makeFavoritePostsModule()
         favoriteVC.coordinator = self
-        favoriteVC.title = "Избранное"
+        favoriteVC.title = NSLocalizedString("favoriteViewNavigationTitle", comment: "")
         navigationController.pushViewController(favoriteVC, animated: true)
     }
     

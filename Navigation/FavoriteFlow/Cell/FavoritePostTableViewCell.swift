@@ -23,10 +23,11 @@ class FavoritePostTableViewCell: UITableViewCell {
             }
             text.text = post?.postDescription
             if let stingLikes = post?.likes {
-                likes.text = "Likes: \(stingLikes)"
+                let formatted = String(format: NSLocalizedString("postTableViewCellLikes", comment: ""), stingLikes)
+                likes.text = formatted
             }
             if let stringViews = post?.views {
-                views.text = "Views: \(stringViews)"
+                views.text = "\(NSLocalizedString("postTableViewCellViews", comment: "")): \(stringViews)"
             }
         }
     }

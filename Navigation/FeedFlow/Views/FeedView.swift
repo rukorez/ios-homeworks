@@ -13,12 +13,12 @@ final class FeedView: UIView {
     var tapCheckPass: ((String?)->Void)?
     
     lazy var button1: CustomButton = {
-        var button = CustomButton(title: "Кнопка 1", titleColor: .black, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("feedViewButton1Title", comment: ""), titleColor: .black, backgroundColor: .clear)
         return button
     }()
     
     lazy var button2: CustomButton = {
-        var button = CustomButton(title: "Кнопка 2", titleColor: .white, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("feedViewButton2Title", comment: ""), titleColor: .white, backgroundColor: .clear)
         return button
     }()
     
@@ -30,7 +30,7 @@ final class FeedView: UIView {
     }()
     
     lazy var customButton: CustomButton = {
-        var button = CustomButton(title: "Check password", titleColor: .black, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("feedViewCheckPasswordButtonTitle", comment: ""), titleColor: .black, backgroundColor: .clear)
         button.onTap = { [ weak self ] in
             self?.tapCheckPass?(self?.customTextField.text)
         }
@@ -52,10 +52,10 @@ final class FeedView: UIView {
     func checkPassword(correct: Bool) {
         switch correct {
         case true:
-            passwordStatus.text = "Correct Password!"
+            passwordStatus.text = NSLocalizedString("feedViewPasswordStatusLabelTextCorrect", comment: "")
             passwordStatus.textColor = .systemGreen
         case false:
-            passwordStatus.text = "Password wrong"
+            passwordStatus.text = NSLocalizedString("feedViewPasswordStatusLabelTextUncorrect", comment: "")
             passwordStatus.textColor = .systemRed
         }
     }

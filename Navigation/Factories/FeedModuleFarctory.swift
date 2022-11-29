@@ -17,7 +17,7 @@ final class FeedModuleFactory: ModuleFactory {
     func makeFeedModule() -> (presenter: FeedPresenter, view: FeedViewController) {
         let presenter = FeedPresenter()
         let feedVC = FeedViewController(output: presenter)
-        feedVC.title = "Лента"
+        feedVC.title = NSLocalizedString("feedViewNavigationTitle", comment: "")
         presenter.input = feedVC
         presenter.sendData()
         return (presenter, feedVC)
@@ -36,13 +36,13 @@ final class FeedModuleFactory: ModuleFactory {
     }
     
     func makeInfoAlert() -> UIAlertController {
-        let alertVC = UIAlertController(title: "Удаление", message: "Удалить всю информацию?", preferredStyle: .alert)
-        let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
+        let alertVC = UIAlertController(title: NSLocalizedString("infoAlertTitle", comment: ""), message: NSLocalizedString("infoAlertMessage", comment: ""), preferredStyle: .alert)
+        let actionYes = UIAlertAction(title: NSLocalizedString("infoAlertActionYes", comment: ""), style: .default) { _ in
             alertVC.dismiss(animated: true)
-            print ("Да")
+            print (NSLocalizedString("infoAlertActionYes", comment: ""))
         }
         alertVC.addAction(actionYes)
-        let actionNo = UIAlertAction(title: "Нет", style: .default) { _ in print("Нет")}
+        let actionNo = UIAlertAction(title: NSLocalizedString("infoAlertActionNo", comment: ""), style: .default) { _ in print(NSLocalizedString("infoAlertActionNo", comment: ""))}
         alertVC.addAction(actionNo)
         return alertVC
     }

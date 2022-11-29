@@ -34,7 +34,7 @@ final class PostViewController: UIViewController {
     
     private func setView() {
         view.backgroundColor = .cyan
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Информация", style: .done, target: self, action: #selector(tap))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("postViewNavigationItem", comment: ""), style: .done, target: self, action: #selector(tap))
         view.addSubview(timerLabel)
         timerLabel.center = view.center
     }

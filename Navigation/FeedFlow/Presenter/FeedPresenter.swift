@@ -13,7 +13,7 @@ final class FeedPresenter: PresenterControllerOutput {
     
     weak var input: PresenterControllerInput?
     
-    var post1: Post = Post(title: "Пост 1")
+    var post1: Post = Post(title: NSLocalizedString("feedViewPostTitle", comment: ""))
     
     init() {
         notifications()

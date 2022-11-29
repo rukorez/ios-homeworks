@@ -64,6 +64,6 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Пожалуйста, подтвердите использование приложением вашей геопозиции.</string>
 </dict>
 </plist>

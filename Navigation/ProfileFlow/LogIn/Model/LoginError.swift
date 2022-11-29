@@ -21,13 +21,13 @@ enum LoginError: LoginErrorProtocol {
     var localizedDescription: String {
         switch self {
         case .wrongLogin:
-            return "Некорректный email."
+            return NSLocalizedString("loginErrorWrongLogin", comment: "")
         case .wrongPassword:
-            return "Неверный пароль"
+            return NSLocalizedString("loginErrorWrongPassword", comment: "")
         case .wrongUser:
-            return "Такой пользователь не зарегистрирован."
+            return NSLocalizedString("loginErrorWrongUser", comment: "")
         case .serverError:
-            return "Отсутствует подключение к сети. Проверьте настройки интернета и попробуйте еще раз."
+            return NSLocalizedString("loginErrorServerError", comment: "")
         }
     }
 }
@@ -42,13 +42,13 @@ enum RegisterError: LoginErrorProtocol {
     var localizedDescription: String {
         switch self {
         case .wrongEmail:
-            return "Некорректный email."
+            return NSLocalizedString("registerErrorWrongLogin", comment: "")
         case .shortPassword:
-            return "Пароль слишком короткий. Пароль должен содержать не менее 6 символов."
+            return NSLocalizedString("registerErrorShortPassword", comment: "")
         case .doubleUser:
-            return "Пользователь с таким email-адресом уже существует."
+            return NSLocalizedString("registerErrorDoubleUser", comment: "")
         case .serverError:
-            return "Отсутствует подключение к сети. Проверьте настройки интернета и попробуйте еще раз."
+            return NSLocalizedString("registerErrorServerError", comment: "")
         }
     }
 }

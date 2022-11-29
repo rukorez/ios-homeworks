@@ -67,7 +67,7 @@ extension FeedViewController: PresenterControllerInput {
     func updateData(data: Bool) {
         self.correctPass(bool: data, completion: { result in
             switch result {
-            case .success: print("Верный пароль")
+            case .success: print(NSLocalizedString("feedViewPasswordStatusLabelTextCorrect", comment: ""))
             case .failure(let error): print("\(error.localizedDescription)")
             }
         })

@@ -24,7 +24,7 @@ class RegisterViewController: UIViewController {
         login.translatesAutoresizingMaskIntoConstraints = false
         login.textColor = .black
         login.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        login.placeholder = "Email or phone"
+        login.placeholder = NSLocalizedString("loginViewLoginTextFieldPlaceholder", comment: "")
         login.tintColor = UIColor(named: "AccentColor")
         login.autocapitalizationType = .none
         login.clearButtonMode = .whileEditing
@@ -41,7 +41,7 @@ class RegisterViewController: UIViewController {
     lazy var password: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.placeholder = "Password"
+        password.placeholder = NSLocalizedString("loginViewPasswordTextFieldPlaceholder", comment: "")
         password.isSecureTextEntry = true
         password.clearButtonMode = .whileEditing
         return password
@@ -59,7 +59,7 @@ class RegisterViewController: UIViewController {
     }()
     
     lazy var loginButton: CustomButton = {
-        var button = CustomButton(title: "Зарегистрироваться", titleColor: .white, backgroundColor: .clear)
+        var button = CustomButton(title: NSLocalizedString("registerViewButtonTitle", comment: ""), titleColor: .white, backgroundColor: .clear)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
@@ -110,7 +110,7 @@ class RegisterViewController: UIViewController {
         loginButton.onTap = {
             guard let login = self.login.text, let password = self.password.text else { return }
             RealmUserModel.defaultModel.addUser(login: login, password: password)
-            let alertVC = UIAlertController(title: "Отлично", message: "Регистрация прошла успешно.", preferredStyle: .alert)
+            let alertVC = UIAlertController(title: NSLocalizedString("registerViewAlertTitle", comment: ""), message: NSLocalizedString("registerViewAlertMessage", comment: ""), preferredStyle: .alert)
             alertVC.addAction(UIAlertAction(title: "OK", style: .default, handler: { action in
                 self.dismiss(animated: true)
                 self.loginVC?.loginView.login.text = login
