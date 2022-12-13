@@ -1,0 +1,73 @@
+/* 
+  Localizable.strings
+  Navigation
+
+  Created by Филипп Степанов on 22.11.2022.
+  
+*/
+
+"feedControllerTabTitle" = "Feeds";
+"profileControllerTabTitle" = "Profile";
+"favoriteControllerTabTitle" = "Favorite";
+"playerControllerTabTitle" = "Player";
+"mapControllerTabTitle" = "Map";
+
+"feedViewNavigationTitle" = "Feeds";
+"feedViewButton1Title" = "Button 1";
+"feedViewButton2Title" = "Button 2";
+"feedViewCheckPasswordButtonTitle" = "Check password";
+"feedViewPasswordStatusLabelTextCorrect" = "Correct Password!";
+"feedViewPasswordStatusLabelTextUncorrect" = "Password wrong";
+"feedViewPostTitle" = "Post 1";
+
+"postViewNavigationItem" = "Information";
+
+"infoAlertTitle" = "Delete";
+"infoAlertMessage" = "Delete all?";
+"infoAlertActionYes" = "Yes";
+"infoAlertActionNo" = "No";
+"infoViewDeleteButtonTitle" = "Delete All";
+
+"loginAlertTitle" = "Error";
+"loginAlertActionOk" = "OK";
+"loginViewLoginTextFieldPlaceholder" = "Email or phone";
+"loginViewPasswordTextFieldPlaceholder" = "Password";
+"loginViewLogInButtonTitle" = "Enter";
+"loginViewRegisterButtonTitle" = "Registration";
+"loginViewGenerateButtonTitle" = "Generate Password";
+"loginViewRegistrationAlertTitle" = "Please, register";
+
+"loginErrorWrongLogin" = "Wrong Email";
+"loginErrorWrongPassword" = "Wrong Password";
+"loginErrorWrongUser" = "This user is not registered.";
+"loginErrorServerError" = "No network connection. Check your internet settings and try again.";
+
+"registerViewButtonTitle" = "Register";
+"registerViewAlertTitle" = "Done!";
+"registerViewAlertMessage" = "Success Registration";
+
+"registerErrorWrongLogin" = "Wrong Email";
+"registerErrorShortPassword" = "The password is too short. The password must contain at least 6 characters.";
+"registerErrorDoubleUser" = "User with this email address already exists.";
+"registerErrorServerError" = "No network connection. Check your internet settings and try again.";
+
+"profileHeaderViewSetButtonTitle" = "Show Status";
+
+"photoViewNavigationTitle" = "Photo Gallery";
+
+"fullScreenViewNavigationTitle" = "Photo";
+
+"postTableViewCellLikes" = "Likes";
+"postTableViewCellViews" = "Views";
+
+"photosTableViewCellSectionLabelText" = "Photos";
+
+"favoriteViewNavigationTitle" = "Favorite";
+"favoriteViewFilterButtonTitle" = "Search";
+"favoriteViewClearButtonTitle" = "Clear";
+"favoriteViewFilterAlertTitle" = "Search by author";
+"favoriteViewFilterAlertActionYes" = "Done";
+"favoriteViewFilterAlertActionNo" = "Cancel";
+"favoriteViewDeleteButtonTitle" = "Delete";
+
+"mapViewNewAnnotation" = "New Mark";
