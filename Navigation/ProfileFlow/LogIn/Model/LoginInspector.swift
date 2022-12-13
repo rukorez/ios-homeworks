@@ -34,30 +34,31 @@ class LoginChecker {
 
 protocol LoginViewControllerDelegate {
     
-//    func checkLogin(login: Int, password: Int) -> (Bool, String?)
-    func checkLogin(login: String, password: String)
-    func register(login: String, password: String)
+    func checkLogin(login: Int, password: Int) -> (Bool, String?)
+//    func checkLogin(login: String, password: String)
+//    func register(login: String, password: String)
     
 }
 
 class LoginInspector: LoginViewControllerDelegate {
     
-    let checker = CheckerService()
+//    let checker = CheckerService()
     
-//    func checkLogin(login: Int, password: Int) -> (Bool, String?) {
-//        if LoginChecker.shared.check(login: login, password: password).0 {
-//            return (true, nil)
-//        } else {
-//            return (false, LoginChecker.shared.check(login: login, password: password).1)
-//        }
+    func checkLogin(login: Int, password: Int) -> (Bool, String?) {
+        let loginCheckerResult = LoginChecker.shared.check(login: login, password: password)
+        if loginCheckerResult.0 {
+            return (true, nil)
+        } else {
+            return (false, loginCheckerResult.1)
+        }
+    }
+    
+//    func checkLogin(login: String, password: String) {
+//        checker.checkCredentials(login: login, password: password)
 //    }
-    
-    func checkLogin(login: String, password: String) {
-        checker.checkCredentials(login: login, password: password)
-    }
-    
-    func register(login: String, password: String) {
-        checker.signUp(login: login, password: password)
-    }
+//
+//    func register(login: String, password: String) {
+//        checker.signUp(login: login, password: password)
+//    }
     
 }
