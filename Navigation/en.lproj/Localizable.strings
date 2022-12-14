@@ -71,3 +71,7 @@
 "favoriteViewDeleteButtonTitle" = "Delete";
 
 "mapViewNewAnnotation" = "New Mark";
+
+"LocalAuthorizationServiceLocalizedReason" = "Get Authorized for Login";
+"LocalAuthorizationServiceLocalizedCancelTitle" = "Enter with Login and Password";
+"NonBiometricAlertMessage" = "Register your biometric data or enter with Login and Password";
