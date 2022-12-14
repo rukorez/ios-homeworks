@@ -15,6 +15,8 @@ class RegisterViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
     
+    var colors = LoginViewColors()
+    
     var delegate: LoginViewControllerDelegate?
     
     var loginVC: LogInViewController?
@@ -22,7 +24,7 @@ class RegisterViewController: UIViewController {
     lazy var login: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
-        login.textColor = .black
+        login.textColor = colors.loginTextColor
         login.font = UIFont.systemFont(ofSize: 16, weight: .regular)
         login.placeholder = NSLocalizedString("loginViewLoginTextFieldPlaceholder", comment: "")
         login.tintColor = UIColor(named: "AccentColor")
@@ -54,7 +56,7 @@ class RegisterViewController: UIViewController {
         loginview.layer.borderColor = UIColor.lightGray.cgColor
         loginview.layer.cornerRadius = 10
         loginview.clipsToBounds = true
-        loginview.backgroundColor = .systemGray6
+        loginview.backgroundColor = colors.loginViewBackgroundColor
         return loginview
     }()
     
@@ -83,7 +85,7 @@ class RegisterViewController: UIViewController {
     }
     
     private func setViews() {
-        view.backgroundColor = .white
+        view.backgroundColor = colors.backgroundColor
         
         view.addSubview(loginPasswordView)
         view.addSubview(loginButton)

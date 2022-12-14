@@ -12,12 +12,14 @@ import SnapKit
 class PhotosTableViewCell: UITableViewCell {
     
     var coordinator: ProfileCoordinator?
+    
+    private lazy var colors = ProfileViewColors()
 
     private var photo = "photo"
     
     lazy var sectionLabel:UILabel = {
         var label = UILabel()
-        label.textColor = .black
+        label.textColor = colors.labelsTextColor
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.text = NSLocalizedString("photosTableViewCellSectionLabelText", comment: "")
         return label

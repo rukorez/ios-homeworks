@@ -11,6 +11,8 @@ import iOSIntPackage
 
 class FavoritePostTableViewCell: UITableViewCell {
     
+    private lazy var colors = ProfileViewColors()
+    
     var post: CoreDataPost? {
         didSet {
             author.text = post?.author
@@ -36,7 +38,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         let author = UILabel()
         author.translatesAutoresizingMaskIntoConstraints = false
         author.font = UIFont.systemFont(ofSize: 20, weight: .bold)
-        author.textColor = .black
+        author.textColor = colors.labelsTextColor
         author.numberOfLines = 2
         return author
     }()
@@ -62,7 +64,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         var likes = UILabel()
         likes.translatesAutoresizingMaskIntoConstraints = false
         likes.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        likes.textColor = .black
+        likes.textColor = colors.labelsTextColor
         return likes
     }()
     
@@ -70,7 +72,7 @@ class FavoritePostTableViewCell: UITableViewCell {
         var views = UILabel()
         views.translatesAutoresizingMaskIntoConstraints = false
         views.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-        views.textColor = .black
+        views.textColor = colors.labelsTextColor
         return views
     }()
     
@@ -92,6 +94,7 @@ class FavoritePostTableViewCell: UITableViewCell {
 
 extension FavoritePostTableViewCell {
     private func setViews() {
+        backgroundColor = colors.tableViewCellsBackgroundColor
         contentView.addSubview(author)
         contentView.addSubview(image)
         contentView.addSubview(text)

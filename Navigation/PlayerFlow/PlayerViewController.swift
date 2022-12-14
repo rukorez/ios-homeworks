@@ -21,7 +21,7 @@ class PlayerViewController: UIViewController {
     var songName: UILabel = {
         var label = UILabel()
         label.textAlignment = .center
-        label.textColor = .black
+        label.textColor = UIColor.createColor(lightMode: .black, darkMode: .white)
         label.font = .systemFont(ofSize: 24)
         return label
     }()
@@ -87,7 +87,7 @@ class PlayerViewController: UIViewController {
         view.addSubview(stopButton)
         view.addSubview(backButton)
         view.addSubview(nextButton)
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor.createColor(lightMode: .white, darkMode: .black)
         songName.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         songName.center = view.center
         playButton.frame = CGRect(x: 100, y: 600, width: 30, height: 30)

@@ -12,10 +12,12 @@ final class ProfileViewController: UIViewController {
     
     weak var coordinator: ProfileCoordinator?
     
+    private lazy var colors = ProfileViewColors()
+    
     var statusBarFrame: CGRect
-    var statusBarView: UIView = {
+    lazy var statusBarView: UIView = {
         var statusBar = UIView()
-        statusBar.backgroundColor = .white
+        statusBar.backgroundColor = colors.statusBarColor
         statusBar.alpha = 0
         return statusBar
     }()
@@ -23,7 +25,7 @@ final class ProfileViewController: UIViewController {
     lazy var tableView: UITableView = {
         var tableView = UITableView(frame: .zero, style: .grouped)
         #if DEBUG
-        tableView.backgroundColor = .systemGray5
+        tableView.backgroundColor = colors.tableViewBackgroundColor
         #else
         tableView.backgroundColor = UIColor(named: "VKBlue")
         #endif
@@ -43,7 +45,7 @@ final class ProfileViewController: UIViewController {
     
     lazy var whiteView: UIView = {
         var whiteView = UIView(frame: CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height))
-        whiteView.backgroundColor = UIColor(white: 1, alpha: 0)
+        whiteView.backgroundColor = colors.setWhiteViewBackgroundColor(alpha: 0)
         return whiteView
     }()
     
@@ -246,7 +248,7 @@ extension ProfileViewController {
         whiteView.addSubview(headerView.avatarImageView)
         headerView.avatarImageView.layer.borderWidth = 0
         UIView.animate(withDuration: 0.8, delay: 0, options: .curveEaseOut) {
-            self.whiteView.backgroundColor = UIColor(white: 1, alpha: 0.9)
+            self.whiteView.backgroundColor = self.colors.setWhiteViewBackgroundColor(alpha: 0.9)
             self.headerView.avatarImageView.clipsToBounds = false
             self.headerView.avatarImageView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: self.view.bounds.width)
             self.headerView.avatarImageView.center = self.tableView.center

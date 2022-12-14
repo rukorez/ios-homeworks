@@ -12,6 +12,8 @@ final class FullScreenViewController: UIViewController {
     
     var coordinator: ProfileCoordinator?
     
+    private lazy var colors = ProfileViewColors()
+    
     var indexPath: IndexPath
     
     private var collection: UICollectionView = {
@@ -56,7 +58,7 @@ final class FullScreenViewController: UIViewController {
     
     private func setupUI() {
         title = NSLocalizedString("fullScreenViewNavigationTitle", comment: "")
-        view.backgroundColor = .white
+        view.backgroundColor = colors.tableViewBackgroundColor
     }
     
     private func setupCollectionView() {

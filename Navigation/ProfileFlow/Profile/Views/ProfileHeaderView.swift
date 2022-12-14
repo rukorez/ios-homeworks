@@ -9,6 +9,8 @@ import UIKit
 
 class ProfileHeaderView: UITableViewHeaderFooterView {
     
+    private lazy var colors = ProfileViewColors()
+    
     lazy var avatarImageView: UIImageView = {
         let avatar = UIImageView()
         avatar.image = UIImage(named: "Ava")
@@ -20,7 +22,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var fullNameLabel: UILabel = {
         let name = UILabel()
         name.text = "Happy Dog"
-        name.textColor = .black
+        name.textColor = colors.labelsTextColor
         name.font = UIFont.boldSystemFont(ofSize: 20)
         name.numberOfLines = 1
         return name

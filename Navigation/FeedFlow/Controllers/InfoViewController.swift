@@ -11,6 +11,8 @@ final class InfoViewController: UIViewController {
     
     weak var coordinator: FeedCoordinator?
     
+    private lazy var colors = FeedFlowColors()
+    
     private var residentNames: [String] = []
     
     private var buttonDelete: CustomButton = {
@@ -62,7 +64,7 @@ final class InfoViewController: UIViewController {
         planetLabel.frame = CGRect(x: 10, y: 20 + titleLabel.bounds.height + 20, width: view.bounds.width - 20, height: 60)
         tableView.frame = CGRect(x: 0, y: 350 + buttonDelete.bounds.height + 10, width: view.bounds.width,
                                  height: view.bounds.height - (350 + buttonDelete.bounds.height + 10))
-        view.backgroundColor = .systemGray
+        view.backgroundColor = colors.infoViewBackgroundColor
         buttonDelete.onTap = { [ weak self ] in
             self?.tap()
         }
