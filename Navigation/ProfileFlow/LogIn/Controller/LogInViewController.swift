@@ -13,13 +13,15 @@ final class LogInViewController: UIViewController, RegisterViewControllerDelegat
     
     weak var coordinator: ProfileCoordinator?
     
-    var loginView = LogInView()
+    lazy var loginView = LogInView()
     
     var delegate: LoginViewControllerDelegate?
     
     var bruteForce = BruteForce()
     
     var model = RealmUserModel()
+    
+    let authService = LocalAuthorizationService()
     
     var currentUser: CurrentUserService = {
         var user = CurrentUserService()
@@ -38,7 +40,9 @@ final class LogInViewController: UIViewController, RegisterViewControllerDelegat
         setDelegatesForViews()
         hideKeyboardInViewController()
         setTargetButton()
-        authWithRealm()
+
+        
+//        authWithRealm()
     }
     
     private func setView() {
@@ -108,6 +112,35 @@ extension LogInViewController {
                 self.loginView.generateButton.isHidden = false
             } else {
                 self.loginView.generateButton.isHidden = true
+            }
+        }
+        
+        switch authService.biometryType {
+        case .faceID:
+            loginView.faceIDButton.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+        case .touchID:
+            loginView.faceIDButton.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+        default:
+            loginView.faceIDButton.isHidden = true
+        }
+        
+        loginView.faceIDButton.onTap = {
+            self.authService.authorizeIfPossible { result, error in
+                if let error = error {
+                    let nonBiometricAlert = UIAlertController(title: error.localizedDescription,
+                                                              message: NSLocalizedString("NonBiometricAlertMessage", comment: ""),
+                                                              preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                    nonBiometricAlert.addAction(alertAction)
+                    self.present(nonBiometricAlert, animated: true)
+                }
+                if result {
+#if DEBUG
+                    self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+#else
+                    self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+#endif
+                }
             }
         }
         

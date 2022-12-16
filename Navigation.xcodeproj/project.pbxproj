@@ -49,6 +49,7 @@
 		7751AFBF292D78470047F5DE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7751AFC1292D78470047F5DE /* Localizable.strings */; };
 		7751AFC3292D78500047F5DE /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7751AFC5292D78500047F5DE /* InfoPlist.strings */; };
 		7752D8AE28B7EA13009C97D4 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7752D8AD28B7EA13009C97D4 /* NetworkService.swift */; };
+		776914B9294A7790009CDD4B /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776914B8294A7790009CDD4B /* LocalAuthorizationService.swift */; };
 		77944FF6291D519000F58460 /* MapCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77944FF5291D519000F58460 /* MapCoordinator.swift */; };
 		77944FF8291D521200F58460 /* MapModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77944FF7291D521200F58460 /* MapModuleFactory.swift */; };
 		77944FFB291D529200F58460 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77944FFA291D529200F58460 /* MapViewController.swift */; };
@@ -192,6 +193,7 @@
 		7751AFC4292D78500047F5DE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7751AFC6292D78550047F5DE /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7752D8AD28B7EA13009C97D4 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		776914B8294A7790009CDD4B /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		77944FF5291D519000F58460 /* MapCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapCoordinator.swift; sourceTree = "<group>"; };
 		77944FF7291D521200F58460 /* MapModuleFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapModuleFactory.swift; sourceTree = "<group>"; };
 		77944FFA291D529200F58460 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 			children = (
 				770CAC6926B6DC610070BB62 /* AppDelegate.swift */,
 				770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */,
+				776914B8294A7790009CDD4B /* LocalAuthorizationService.swift */,
 				7723F216281F964B0056BB6C /* Factories */,
 				7723F218281F96610056BB6C /* Coordinators */,
 				77BFC0BC282E8ADE009A6C3B /* FeedFlow */,
@@ -995,6 +998,7 @@
 				77A5D11928D1F5D100887AD1 /* FavoriteTableViewController.swift in Sources */,
 				77C1B14827F229DE00CCF120 /* Model.swift in Sources */,
 				77AED2B5283034F700D7BA08 /* Extensions.swift in Sources */,
+				776914B9294A7790009CDD4B /* LocalAuthorizationService.swift in Sources */,
 				77944FFB291D529200F58460 /* MapViewController.swift in Sources */,
 				77D2F3FE29367338005F7E65 /* ProfileViewColors.swift in Sources */,
 				7795D5FC27A5BBDD00B1A758 /* LoginFactory.swift in Sources */,

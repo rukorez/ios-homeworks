@@ -7,3 +7,4 @@
 */
 
 NSLocationWhenInUseUsageDescription = "Пожалуйста, подтвердите использование приложением вашей геопозиции";
+NSFaceIDUsageDescription = "Разрешите приложению использовать Ваш FaceID для авторизации";
