@@ -25,9 +25,6 @@ final class LocalAuthorizationService {
     
     func authorizeIfPossible(_ authorizationFinished: @escaping (Bool, Error?) -> Void) {
         
-//        var error: NSError?
-//        canUseBiometrics = context.canEvaluatePolicy(policy, error: &error)
-        
         if let error = error {
             authorizationFinished(false, error)
             return

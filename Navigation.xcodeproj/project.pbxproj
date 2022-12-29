@@ -38,6 +38,7 @@
 		771B750826E7ABE400B6F44F /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771B750726E7ABE400B6F44F /* LogInView.swift */; };
 		771C784026D7E3D7007FA02C /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */; };
 		774069582770CC1E00892E49 /* UserData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 774069572770CC1E00892E49 /* UserData.swift */; };
+		7745BF5B294CD03C00DE073F /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7745BF5A294CD03C00DE073F /* LocalNotificationsService.swift */; };
 		7745F4AE28A02EBA003ECE74 /* Pump It.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4A928A02EB9003ECE74 /* Pump It.mp3 */; };
 		7745F4AF28A02EBA003ECE74 /* I need a dollar.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AA28A02EB9003ECE74 /* I need a dollar.mp3 */; };
 		7745F4B028A02EBA003ECE74 /* Queen.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 7745F4AB28A02EB9003ECE74 /* Queen.mp3 */; };
@@ -179,6 +180,7 @@
 		771B750726E7ABE400B6F44F /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		771C783F26D7E3D7007FA02C /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		774069572770CC1E00892E49 /* UserData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserData.swift; sourceTree = "<group>"; };
+		7745BF5A294CD03C00DE073F /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		7745F4A928A02EB9003ECE74 /* Pump It.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Pump It.mp3"; sourceTree = "<group>"; };
 		7745F4AA28A02EB9003ECE74 /* I need a dollar.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "I need a dollar.mp3"; sourceTree = "<group>"; };
 		7745F4AB28A02EB9003ECE74 /* Queen.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Queen.mp3; sourceTree = "<group>"; };
@@ -327,6 +329,7 @@
 				770CAC6926B6DC610070BB62 /* AppDelegate.swift */,
 				770CAC6B26B6DC610070BB62 /* SceneDelegate.swift */,
 				776914B8294A7790009CDD4B /* LocalAuthorizationService.swift */,
+				7745BF5A294CD03C00DE073F /* LocalNotificationsService.swift */,
 				7723F216281F964B0056BB6C /* Factories */,
 				7723F218281F96610056BB6C /* Coordinators */,
 				77BFC0BC282E8ADE009A6C3B /* FeedFlow */,
@@ -951,6 +954,7 @@
 				77A4342A2850CF4F00FDAAC5 /* BruteForce.swift in Sources */,
 				77BFC0BB282E8303009A6C3B /* ModuleFactoryProtocol.swift in Sources */,
 				7745F4B428A02FDF003ECE74 /* PlayerModuleFactory.swift in Sources */,
+				7745BF5B294CD03C00DE073F /* LocalNotificationsService.swift in Sources */,
 				77C1B14427F0F24F00CCF120 /* CustomButton.swift in Sources */,
 				77DD121426FB9575009DFCAE /* PhotosViewController.swift in Sources */,
 				7745F4B628A03088003ECE74 /* PlayerCoordinator.swift in Sources */,
