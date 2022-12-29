@@ -68,6 +68,7 @@
 		77A5D11F28D1FC8B00887AD1 /* FavoriteModuleFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77A5D11E28D1FC8B00887AD1 /* FavoriteModuleFactory.swift */; };
 		77AED2B5283034F700D7BA08 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77AED2B4283034F700D7BA08 /* Extensions.swift */; };
 		77B0301526F111E300950011 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0301426F111E300950011 /* PostTableViewCell.swift */; };
+		77B43BF2295D77E4004822AE /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B0301226EE4BF300950011 /* Posts.swift */; };
 		77B9F4D9281F981E0009BF09 /* FeedModuleFarctory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9F4D8281F981E0009BF09 /* FeedModuleFarctory.swift */; };
 		77B9F4DB281F988C0009BF09 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9F4DA281F988B0009BF09 /* CoordinatorProtocol.swift */; };
 		77B9F4DD281FD7630009BF09 /* MainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B9F4DC281FD7630009BF09 /* MainCoordinator.swift */; };
@@ -997,6 +998,7 @@
 				77BE688D28735EE70055874C /* LoginError.swift in Sources */,
 				7700A57B28BD6B0200825293 /* PlanetInstance.swift in Sources */,
 				7716944C282E97B800EC4E61 /* FeedView.swift in Sources */,
+				77B43BF2295D77E4004822AE /* Posts.swift in Sources */,
 				771B750826E7ABE400B6F44F /* LogInView.swift in Sources */,
 				77DD121626FBAA42009DFCAE /* PhotosCollectionViewCell.swift in Sources */,
 				77A5D11928D1F5D100887AD1 /* FavoriteTableViewController.swift in Sources */,
