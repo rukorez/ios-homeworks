@@ -13,13 +13,15 @@ final class LogInViewController: UIViewController, RegisterViewControllerDelegat
     
     weak var coordinator: ProfileCoordinator?
     
-    var loginView = LogInView()
+    lazy var loginView = LogInView()
     
     var delegate: LoginViewControllerDelegate?
     
     var bruteForce = BruteForce()
     
     var model = RealmUserModel()
+    
+    let authService = LocalAuthorizationService()
     
     var currentUser: CurrentUserService = {
         var user = CurrentUserService()
@@ -38,7 +40,9 @@ final class LogInViewController: UIViewController, RegisterViewControllerDelegat
         setDelegatesForViews()
         hideKeyboardInViewController()
         setTargetButton()
-        authWithRealm()
+
+        
+//        authWithRealm()
     }
     
     private func setView() {
@@ -111,6 +115,35 @@ extension LogInViewController {
             }
         }
         
+        switch authService.biometryType {
+        case .faceID:
+            loginView.faceIDButton.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+        case .touchID:
+            loginView.faceIDButton.setBackgroundImage(UIImage(systemName: "touchid"), for: .normal)
+        default:
+            loginView.faceIDButton.isHidden = true
+        }
+        
+        loginView.faceIDButton.onTap = {
+            self.authService.authorizeIfPossible { result, error in
+                if let error = error {
+                    let nonBiometricAlert = UIAlertController(title: error.localizedDescription,
+                                                              message: NSLocalizedString("NonBiometricAlertMessage", comment: ""),
+                                                              preferredStyle: .alert)
+                    let alertAction = UIAlertAction(title: "OK", style: .cancel)
+                    nonBiometricAlert.addAction(alertAction)
+                    self.present(nonBiometricAlert, animated: true)
+                }
+                if result {
+#if DEBUG
+                    self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+#else
+                    self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+#endif
+                }
+            }
+        }
+        
         loginView.registerButton.onTap = {
             self.coordinator?.showRegisterModule(controller: self)
         }
@@ -136,24 +169,24 @@ extension LogInViewController {
     }
     
     private func loginTapped() {
-//        guard let correctLogin = loginView.login.text?.hash,
-//              let correctPassword = loginView.password.text?.hash,
-//              let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword)
-//        else { return }
-//        if checkLogin.0 {
-//            #if DEBUG
-//            coordinator?.showProfileModule(userService: testUser, name: testUser.user.fullName ?? "")
-//            #else
-//            coordinator?.showProfileModule(userService: currentUser, name: currentUser.user.fullName ?? "")
-//            #endif
-//        } else {
-//            guard let message = checkLogin.1 else { return }
-//            coordinator?.showLoginAlertModule(message: message, viewController: self)
-//        }
+        guard let correctLogin = loginView.login.text?.hash,
+              let correctPassword = loginView.password.text?.hash,
+              let checkLogin = delegate?.checkLogin(login: correctLogin, password: correctPassword)
+        else { return }
+        if checkLogin.0 {
+            #if DEBUG
+            coordinator?.showProfileModule(userService: testUser, name: testUser.user.fullName ?? "")
+            #else
+            coordinator?.showProfileModule(userService: currentUser, name: currentUser.user.fullName ?? "")
+            #endif
+        } else {
+            guard let message = checkLogin.1 else { return }
+            coordinator?.showLoginAlertModule(message: message, viewController: self)
+        }
         
 //        authWithFireBase()
         
-        authWithRealm()
+//        authWithRealm()
     }
     
     func authWithRealm() {
@@ -182,26 +215,26 @@ extension LogInViewController {
         }
     }
     
-    func authWithFireBase() {
-        guard let loginInspector = (delegate as? LoginInspector) else { return }
-        loginInspector.checker.error = nil
-        loginInspector.checker.isRegister = false
-        guard let login = loginView.login.text,
-              let password = loginView.password.text else { return }
-        guard let check = delegate?.checkLogin(login: login, password: password) else { return }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            if loginInspector.checker.isRegister {
-                print(check)
-#if DEBUG
-                self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
-#else
-                self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
-#endif
-            } else {
-                guard let message = loginInspector.checker.error?.localizedDescription else { return }
-                self.coordinator?.showLoginAlertModule(message: message, viewController: self)
-            }
-        }
-        
-    }
+//    func authWithFireBase() {
+//        guard let loginInspector = (delegate as? LoginInspector) else { return }
+//        loginInspector.checker.error = nil
+//        loginInspector.checker.isRegister = false
+//        guard let login = loginView.login.text,
+//              let password = loginView.password.text else { return }
+//        guard let check = delegate?.checkLogin(login: login, password: password) else { return }
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            if loginInspector.checker.isRegister {
+//                print(check)
+//#if DEBUG
+//                self.coordinator?.showProfileModule(userService: self.testUser, name: self.testUser.user.fullName ?? "")
+//#else
+//                self.coordinator?.showProfileModule(userService: self.currentUser, name: self.currentUser.user.fullName ?? "")
+//#endif
+//            } else {
+//                guard let message = loginInspector.checker.error?.localizedDescription else { return }
+//                self.coordinator?.showLoginAlertModule(message: message, viewController: self)
+//            }
+//        }
+//
+//    }
 }

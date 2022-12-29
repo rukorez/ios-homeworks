@@ -99,6 +99,13 @@ final class LogInView: UIView {
         return button
     }()
     
+    lazy var faceIDButton: CustomButton = {
+        var button = CustomButton(title: "", titleColor: .clear, backgroundColor: .clear)
+//        button.setBackgroundImage(UIImage(systemName: "faceid"), for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -122,6 +129,7 @@ final class LogInView: UIView {
         contentView.addSubview(generateButton)
         contentView.addSubview(activityIndicator)
         contentView.addSubview(secretButton)
+        contentView.addSubview(faceIDButton)
         
         loginPasswordView.addSubview(login)
         loginPasswordView.addSubview(password)
@@ -173,6 +181,11 @@ extension LogInView {
             secretButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             secretButton.widthAnchor.constraint(equalToConstant: 30),
             secretButton.heightAnchor.constraint(equalToConstant: 30),
+            
+            faceIDButton.topAnchor.constraint(equalTo: generateButton.topAnchor),
+            faceIDButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            faceIDButton.widthAnchor.constraint(equalToConstant: 30),
+            faceIDButton.heightAnchor.constraint(equalToConstant: 30),
             
             activityIndicator.topAnchor.constraint(equalTo: generateButton.bottomAnchor, constant: 16),
             activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),

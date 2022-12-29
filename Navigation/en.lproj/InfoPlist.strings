@@ -7,3 +7,4 @@
 */
 
 NSLocationWhenInUseUsageDescription = "Please, allow us to use your geolocation";
+NSFaceIDUsageDescription = "Please, allow us to use your FaceID for authorization";

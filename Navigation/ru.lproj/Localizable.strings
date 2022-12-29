@@ -71,3 +71,7 @@
 "favoriteViewDeleteButtonTitle" = "Удалить";
 
 "mapViewNewAnnotation" = "Новая метка";
+
+"LocalAuthorizationServiceLocalizedReason" = "Авторизируйтесь для входа в приложение";
+"LocalAuthorizationServiceLocalizedCancelTitle" = "Вход с помощью логина и пароля";
+"NonBiometricAlertMessage" = "Необходимо зарегистрировать биометрические данные или зайти с помощью логина и пароля";

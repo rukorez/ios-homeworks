@@ -9,7 +9,7 @@ import UIKit
 import FirebaseCore
 import FirebaseAuth
 
-class SceneDelegate: UIResponder, UIWindowSceneDelegate {
+class SceneDelegate: UIResponder, UIWindowSceneDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var coordinator: MainCoordinator?
@@ -18,6 +18,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         FirebaseApp.configure()
         guard let scene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: scene)
+        let notificationService = LocalNotificationsService()
+        notificationService.center.delegate = self
+        notificationService.registerForLatestUpdatesIfPossible()
         
         if #available(iOS 15, *) {
 
@@ -41,6 +44,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let appConfigurator = AppConfiguration.starships
         NetworkService.request(for: appConfigurator)
+    }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        switch response.actionIdentifier {
+        case UNNotificationDefaultActionIdentifier:
+            print("Pushed Notification")
+            completionHandler()
+        case "show":
+            print("Pushed Show Application")
+            completionHandler()
+        default:
+            completionHandler()
+            break
+        }
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {

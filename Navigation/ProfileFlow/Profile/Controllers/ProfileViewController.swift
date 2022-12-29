@@ -29,6 +29,9 @@ final class ProfileViewController: UIViewController {
         #else
         tableView.backgroundColor = UIColor(named: "VKBlue")
         #endif
+        tableView.dragInteractionEnabled = true
+        tableView.dragDelegate = self
+        tableView.dropDelegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         tableView.delegate = self
         tableView.dataSource = self
@@ -189,7 +192,73 @@ extension ProfileViewController: UITableViewDataSource {
         coordinator?.showPhotosCollectionModule()
     }
     
+}
+
+extension ProfileViewController: UITableViewDragDelegate, UITableViewDropDelegate {
+    
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        let post = posts[indexPath.row]
+        let itemProviderImage = NSItemProvider(object: post.image)
+        let firstUIDragItem = UIDragItem(itemProvider: itemProviderImage)
+        let itemProviderDescription = NSItemProvider(object: post.description as NSString)
+        let secondUIDragItem = UIDragItem(itemProvider: itemProviderDescription)
+        return [firstUIDragItem, secondUIDragItem]
+    }
+    
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+        return session.canLoadObjects(ofClass: NSString.self) && session.canLoadObjects(ofClass: UIImage.self)
+    }
+    
+    func tableView(_ tableView: UITableView, dropSessionDidUpdate session: UIDropSession, withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+        guard session.items.count == 2 else {
+            return UITableViewDropProposal(operation: .cancel)
+        }
+        return UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndex: Int
+        
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndex = indexPath.row
+        } else {
+            destinationIndex = posts.count
+        }
+        
+        var dropDescription: String?
+        var dropImage: UIImage?
+        
+        coordinator.session.loadObjects(ofClass: NSString.self) { items in
+            if let text = items.first as? String {
+                dropDescription = text
+            }
+        }
+        
+        coordinator.session.loadObjects(ofClass: UIImage.self) { items in
+            if let image = items.first as? UIImage {
+                dropImage = image
+            }
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            guard let description = dropDescription, let image = dropImage else { return }
+            
+            let newPost = Posts(author: "Drag&Drop",
+                                description: description,
+                                image: image,
+                                likes: 0,
+                                views: 0)
+            
+            posts.insert(newPost, at: destinationIndex)
+            tableView.reloadData()
+        }
+    }
+    
+}
+    
 // MARK: - Анимация StatusBar
+    
+extension ProfileViewController {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetY = -tableView.contentOffset.y
@@ -201,7 +270,6 @@ extension ProfileViewController: UITableViewDataSource {
             }
         }
     }
-    
 }
 
 // MARK: - Констрейнты
